@@ -22,6 +22,7 @@ import {
   MessageCirclePlus,
   MoreHorizontal,
   RefreshCw,
+  Sparkles,
 } from "lucide-react";
 import { Notice } from "obsidian";
 import React from "react";
