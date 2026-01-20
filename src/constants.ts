@@ -223,8 +223,8 @@ export interface ProviderMetadata {
   listModelURL: string;
 }
 
-// Unified provider information
-export const ProviderInfo: Record<Provider, ProviderMetadata> = {
+// Unified provider information for chat models
+export const ProviderInfo: Record<ChatModelProviders, ProviderMetadata> = {
   [ChatModelProviders.OLLAMA]: {
     label: "Ollama",
     host: "http://localhost:11434/v1/",
@@ -239,6 +239,10 @@ export const ProviderInfo: Record<Provider, ProviderMetadata> = {
     keyManagementURL: "",
     listModelURL: "",
   },
+};
+
+// Embedding model provider information (separate since EmbeddingModelProviders is different)
+export const EmbeddingProviderInfo: Record<EmbeddingModelProviders, ProviderMetadata> = {
   [EmbeddingModelProviders.OLLAMA]: {
     label: "Ollama",
     host: "http://localhost:11434/v1/",
@@ -395,6 +399,8 @@ export const DEFAULT_SETTINGS: CopilotSettings = {
   inlineEditCommands: [],
   projectList: [],
   lastDismissedVersion: null,
+  // Plus user status - always undefined in local-only mode
+  isPlusUser: undefined,
   passMarkdownImages: true,
   // Autonomous agent and memory features are now disabled for local-only mode
   enableAutonomousAgent: false,

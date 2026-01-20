@@ -2,7 +2,6 @@ import React from "react";
 import { CustomModel } from "@/aiParams";
 import { getProviderLabel } from "@/utils";
 import { Lightbulb, Eye, Globe } from "lucide-react";
-import { ModelCapability } from "@/constants";
 
 interface ModelDisplayProps {
   model: CustomModel;
@@ -10,7 +9,7 @@ interface ModelDisplayProps {
 }
 
 interface ModelCapabilityIconsProps {
-  capabilities?: ModelCapability[];
+  capabilities?: string[];
   iconSize?: number;
 }
 
@@ -24,7 +23,7 @@ export const ModelCapabilityIcons: React.FC<ModelCapabilityIconsProps> = ({
         .sort((a, b) => a.localeCompare(b))
         .map((cap, index) => {
           switch (cap) {
-            case ModelCapability.REASONING:
+            case "reasoning":
               return (
                 <Lightbulb
                   key={index}
@@ -32,7 +31,7 @@ export const ModelCapabilityIcons: React.FC<ModelCapabilityIconsProps> = ({
                   style={{ width: iconSize, height: iconSize }}
                 />
               );
-            case ModelCapability.VISION:
+            case "vision":
               return (
                 <Eye
                   key={index}
@@ -40,7 +39,7 @@ export const ModelCapabilityIcons: React.FC<ModelCapabilityIconsProps> = ({
                   style={{ width: iconSize, height: iconSize }}
                 />
               );
-            case ModelCapability.WEB_SEARCH:
+            case "web_search":
               return (
                 <Globe
                   key={index}
@@ -83,11 +82,11 @@ export const getModelDisplayWithIcons = (model: CustomModel): string => {
     model.capabilities
       ?.map((cap) => {
         switch (cap) {
-          case ModelCapability.REASONING:
+          case "reasoning":
             return "Reasoning";
-          case ModelCapability.VISION:
+          case "vision":
             return "Vision";
-          case ModelCapability.WEB_SEARCH:
+          case "web_search":
             return "Websearch";
           default:
             return "";

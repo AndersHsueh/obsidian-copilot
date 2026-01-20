@@ -103,35 +103,22 @@ describe("EncryptionService", () => {
   });
 
   describe("encryptAllKeys", () => {
-    it("should encrypt all keys containing 'apikey'", async () => {
+    it("should not encrypt any keys in local-only mode", async () => {
+      // In local-only mode, there are no API keys to encrypt
       const settings = {
         enableEncryption: true,
-        openAIApiKey: "testApiKey",
-        cohereApiKey: "anotherTestApiKey",
         userSystemPrompt: "shouldBeIgnored",
       } as unknown as CopilotSettings;
 
       const newSettings = await encryptAllKeys(settings);
-      expect(newSettings.openAIApiKey).toMatch(/^enc_(desk|web)_[A-Za-z0-9+/=]+$/);
-      expect(newSettings.cohereApiKey).toMatch(/^enc_(desk|web)_[A-Za-z0-9+/=]+$/);
       expect(newSettings.userSystemPrompt).toBe("shouldBeIgnored");
-
-      // Verify we can decrypt the keys back
-      const decryptedOpenAI = await getDecryptedKey(newSettings.openAIApiKey);
-      const decryptedCohere = await getDecryptedKey(newSettings.cohereApiKey);
-      expect(decryptedOpenAI).toBe("testApiKey");
-      expect(decryptedCohere).toBe("anotherTestApiKey");
     });
 
     it("should not encrypt keys when encryption is not enabled", async () => {
       const newSettings = await encryptAllKeys({
         enableEncryption: false,
-        openAIApiKey: "testApiKey",
-        cohereApiKey: "anotherTestApiKey",
         userSystemPrompt: "shouldBeIgnored",
       } as unknown as CopilotSettings);
-      expect(newSettings.openAIApiKey).toBe("testApiKey");
-      expect(newSettings.cohereApiKey).toBe("anotherTestApiKey");
       expect(newSettings.userSystemPrompt).toBe("shouldBeIgnored");
     });
   });

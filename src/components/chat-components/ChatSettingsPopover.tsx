@@ -25,12 +25,7 @@ import {
  * Optional model parameters that can be reset to global defaults
  * These are model-specific overrides that should be cleared on reset
  */
-const RESETTABLE_MODEL_PARAMS: (keyof CustomModel)[] = [
-  "topP",
-  "frequencyPenalty",
-  "reasoningEffort",
-  "verbosity",
-];
+const RESETTABLE_MODEL_PARAMS: (keyof CustomModel)[] = ["topP", "frequencyPenalty"];
 
 export function ChatSettingsPopover() {
   const settings = getSettings();
