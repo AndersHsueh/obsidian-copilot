@@ -54,15 +54,15 @@ This is the future we believe in. If you share this vision, please support this 
 ## Table of Contents
 
 - [Get Started](#get-started)
-  - [Install Obsidian Copilot](#install-obsidian-copilot)
+  - [Install Obsidian-Mate](#install-obsidian-mate)
   - [Set API Keys](#set-api-keys)
 - [Usage](#usage)
   - [Free User](#free-user)
-  - [Copilot Plus/Believer](#copilot-plusbeliever)
+  - [Obsidian-Mate Plus/Believer](#obsidian-mate-plusbeliever)
 - [Need Help?](#need-help)
 - [FAQ](#️faq)
 
-## Copilot V3 is a New Era 🔥
+## Obsidian-Mate V3 is a New Era 🔥
 
 After months of hard work, we have revamped the codebase and adopted a new paradigm for our agentic infrastructure. It opens the door for easier addition of agentic tools (MCP support coming). We will provide a new version of the documentation soon. Here is a couple of new things that you cannot miss!
 
@@ -80,24 +80,24 @@ Read the [Changelog](https://github.com/logancyang/obsidian-copilot/releases/tag
 
 ## Get Started
 
-### Install Obsidian Copilot
+### Install Obsidian-Mate
 
 1. Open **Obsidian → Settings → Community plugins**.
 2. Turn off **Safe mode** (if enabled).
-3. Click **Browse**, search for **“Copilot for Obsidian”**.
+3. Click **Browse**, search for **"Obsidian-Mate"**.
 4. Click **Install**, then **Enable**.
 
 ### Set API Keys
 
 **Free User**
 
-1. Go to **Obsidian → Settings → Copilot → Basic** and click **Set Keys**.
+1. Go to **Obsidian → Settings → Obsidian-Mate → Basic** and click **Set Keys**.
 2. Choose your AI provider(s) (e.g., **OpenRouter, Gemini, OpenAI, Anthropic, Cohere**) and paste your API key(s). **OpenRouter is recommended.**
 
-**Copilot Plus/Believer**
+### Obsidian-Mate Plus/Believer
 
-1. Copy your license key at your [dashboard](https://www.obsidiancopilot.com/en/dashboard). _Don’t forget to join our wonderful Discord community!_
-2. Go to **Obsidian → Settings → Copilot → Basic** and paste the key into in the **Copilot Plus** card.
+1. Copy your license key at your [dashboard](https://www.obsidiancopilot.com/en/dashboard). _Don't forget to join our wonderful Discord community!_
+2. Go to **Obsidian → Settings → Obsidian-Mate → Basic** and paste the key into in the **Obsidian-Mate Plus** card.
 
 ## Usage
 
@@ -107,19 +107,19 @@ Read the [Changelog](https://github.com/logancyang/obsidian-copilot/releases/tag
 - [The Why](#the-why)
 - [Key Features](#key-features)
 - [Table of Contents](#table-of-contents)
-- [Copilot V3 is a New Era 🔥](#copilot-v3-is-a-new-era-)
+- [Obsidian-Mate V3 is a New Era 🔥](#copilot-v3-is-a-new-era-)
 - [Why People Love It ❤️](#why-people-love-it-️)
-- [Get Started](#get-started)
-  - [Install Obsidian Copilot](#install-obsidian-copilot)
-  - [Set API Keys](#set-api-keys)
+  - [Get Started](#get-started)
+    - [Install Obsidian-Mate](#install-obsidian-mate)
+    - [Set API Keys](#set-api-keys)
 - [Usage](#usage)
   - [Table of Contents](#table-of-contents-1)
   - [Free User](#free-user)
-    - [**Chat Mode: reference notes and discuss ideas with Copilot**](#chat-mode-reference-notes-and-discuss-ideas-with-copilot)
+    - [****Chat Mode: reference notes and discuss ideas with Obsidian-Mate****](#chat-mode-reference-notes-and-discuss-ideas-with-copilot)
     - [**Vault QA Mode: chat with your entire vault**](#vault-qa-mode-chat-with-your-entire-vault)
-    - [Copilot's Command Palette](#copilots-command-palette)
+    - [Obsidian-Mate's Command Palette](#copilots-command-palette)
     - [**Relevant Notes: notes suggestions based on semantic similarity and links**](#relevant-notes-notes-suggestions-based-on-semantic-similarity-and-links)
-  - [Copilot Plus/Believer](#copilot-plusbeliever)
+  - [Obsidian-Mate Plus/Believer](#copilot-plusbeliever)
     - [**Get Precision Insights From a Specific Time Window**](#get-precision-insights-from-a-specific-time-window)
     - [**Agent Mode: Autonomous Tool Calling**](#agent-mode-autonomous-tool-calling)
     - [**Understand Images in Your Notes**](#understand-images-in-your-notes)
@@ -127,12 +127,12 @@ Read the [Changelog](https://github.com/logancyang/obsidian-copilot/releases/tag
 - [**Need Help?**](#need-help)
 - [**FAQ**](#faq)
 - [**🙏 Thank You**](#-thank-you)
-- [**Copilot Plus Disclosure**](#copilot-plus-disclosure)
+- [**Obsidian-Mate Plus Disclosure**](#copilot-plus-disclosure)
 - [**Authors**](#authors)
 
 ### Free User
 
-#### **Chat Mode: reference notes and discuss ideas with Copilot**
+#### ****Chat Mode: reference notes and discuss ideas with Obsidian-Mate****
 
 Use `@` to add context and chat with your note.
 
@@ -140,7 +140,7 @@ Use `@` to add context and chat with your note.
     <img src="./images/Add-Context.png" alt="Chat Mode" width="700">
 </p>
 
-Ask Copilot:
+Ask Obsidian-Mate:
 
 > _Summarize [[Q3 Retrospective]] and identify the top 3 action items for Q4 based on the notes in {01-Projects}._
 
@@ -150,7 +150,7 @@ Ask Copilot:
 
 #### **Vault QA Mode: chat with your entire vault**
 
-Ask Copilot:
+Ask Obsidian-Mate:
 
 > _What are the recurring themes in my research regarding the intersection of AI and SaaS?_
 
@@ -158,9 +158,9 @@ Ask Copilot:
     <img src="./images/Vault-Mode.png" alt="Vault Mode" width="700">
 </p>
 
-#### Copilot's Command Palette
+#### Obsidian-Mate's Command Palette
 
-Copilot's Command Palette puts powerful AI capabilities at your fingertips. Access all commands in chat window via `/` or via
+Obsidian-Mate's Command Palette puts powerful AI capabilities at your fingertips. Access all commands in chat window via `/` or via
 right-click menu on selected text.
 
 **Add selection to chat context**
@@ -189,7 +189,7 @@ Select text and edit with one RIGHT click.
 
 **Create your Command**
 
-Create commands and workflows in `Settings → Copilot → Command → Add Cmd`.
+Create commands and workflows in `Settings → Obsidian-Mate → Command → Add Cmd`.
 
 <p align="center">
     <img src="./images/Create-Command.png" alt="Create Command" width="700">
@@ -213,13 +213,13 @@ Use it to quickly reference past research, ideas, or decisions—no need to sear
     <img src="./images/Relevant-Notes.png" alt="Relevant Notes" width="700">
 </p>
 
-### Copilot Plus/Believer
+### Obsidian-Mate Plus/Believer
 
-Copilot Plus brings powerful AI agentic capabilities, context-aware actions and seamless tool integration—built to elevate your knowledge work in Obsidian.
+Obsidian-Mate Plus brings powerful AI agentic capabilities, context-aware actions and seamless tool integration—built to elevate your knowledge work in Obsidian.
 
 #### **Get Precision Insights From a Specific Time Window**
 
-In agent mode, ask copilot:
+In agent mode, ask Obsidian-Mate:
 
 > _What did I do last week?_
 
@@ -229,9 +229,9 @@ In agent mode, ask copilot:
 
 #### **Agent Mode: Autonomous Tool Calling**
 
-Copilot's agent automatically calls the right tools—no manual commands needed. Just ask, and it searches the web, queries your vault, and combines insights seamlessly.
+Obsidian-Mate's agent automatically calls the right tools—no manual commands needed. Just ask, and it searches the web, queries your vault, and combines insights seamlessly.
 
-Ask Copilot in agent mode:
+Ask Obsidian-Mate in agent mode:
 
 > _Research web and my vault and draft a note on AI SaaS onboarding best practices._
 
@@ -241,9 +241,9 @@ Ask Copilot in agent mode:
 
 #### **Understand Images in Your Notes**
 
-Copilot can analyze images embedded in your notes—from wireframes and diagrams to screenshots and photos. Get detailed feedback, suggestions, and insights based on visual content.
+Obsidian-Mate can analyze images embedded in your notes—from wireframes and diagrams to screenshots and photos. Get detailed feedback, suggestions, and insights based on visual content.
 
-Ask Copilot to analyze your wireframes:
+Ask Obsidian-Mate to analyze your wireframes:
 
 > _Analyze the wireframe in [[UX Design - Mobile App Wireframes]] and suggest improvements for the navigation flow._
 
@@ -253,7 +253,7 @@ Ask Copilot to analyze your wireframes:
 
 #### **One Prompt, Every Source—Instant Summaries from PDFs, Videos, and Web**
 
-In agent mode, ask Copilot
+In agent mode, ask Obsidian-Mate
 
 > \*Compare the information about [Agent Memory] from this youtube video: [URL], this PDF [file], and @web[search results]. Start with your
 
@@ -270,11 +270,11 @@ In agent mode, ask Copilot
 - If you're experiencing a bug or have a feature idea, please follow the steps below to help us help you faster:
   - 🐛 Bug Report Checklist
     - ☑️Use the [bug report template](https://github.com/logancyang/obsidian-copilot/issues/new?template=bug_report.md) when reporting an issue
-    - ☑️Enable Debug Mode in Copilot Settings → Advanced for more detailed logs
+    - ☑️Enable Debug Mode in Obsidian-Mate Settings → Advanced for more detailed logs
     - ☑️Open the dev console to collect error messages:
       - Mac: Cmd + Option + I
       - Windows: Ctrl + Shift + I
-    - ☑️Turn off all other plugins, keeping only Copilot enabled
+    - ☑️Turn off all other plugins, keeping only Obsidian-Mate enabled
     - ☑️Attach relevant console logs to your report
     - ☑️Submit your bug report [here](https://github.com/logancyang/obsidian-copilot/issues/new?template=bug_report.md)
   - 💡 Feature Request Checklist
@@ -290,7 +290,7 @@ In agent mode, ask Copilot
 If you're using the Vault QA mode (or the tool <code>@vault</code> in Plus), try the following:
 
 - Ensure you have a working embedding model from your AI model's provider (e.g. OpenAI). Watch this video: [AI Model Setup (API Key)](https://www.youtube.com/watch?v=mzMbiamzOqM)
-- Ensure your Copilot indexing is up-to-date. Watch this video: [Vault Mode](https://www.youtube.com/watch?v=hBLMWE8WRFU)
+- Ensure your Obsidian-Mate indexing is up-to-date. Watch this video: [Vault Mode](https://www.youtube.com/watch?v=hBLMWE8WRFU)
 - If issues persist, run <strong>Force Re-Index</strong> or use <strong>List Indexed Files</strong> from the Command Palette to inspect what's included in the index.
 - ⚠️ <strong>Don’t switch embedding models after indexing</strong>—it can break the results.
 </details>
@@ -314,23 +314,23 @@ If you’re using a different provider, please refer to their documentation and 
 
 Please refer to your model provider’s documentation for the context window size.
 
-⚠️ If you set a large <strong>max token limit</strong> in your Copilot settings, you may encounter this error.
+⚠️ If you set a large <strong>max token limit</strong> in your Obsidian-Mate settings, you may encounter this error.
 
 - <strong>Max tokens</strong> refers to <em>completion tokens</em>, not input tokens.
 - A higher output token limit means less room for input!
 
-🧠 Behind-the-scenes prompts for Copilot commands also consume tokens, so:
+🧠 Behind-the-scenes prompts for Obsidian-Mate commands also consume tokens, so:
 
 - Keep your message length short
 - Set a reasonable max token value to avoid hitting the cap
 
-💡 For QA with unlimited context, switch to the <strong>Vault QA</strong> mode in the dropdown (Copilot v2.1.0+ required).
+💡 For QA with unlimited context, switch to the <strong>Vault QA</strong> mode in the dropdown (Obsidian-Mate v2.1.0+ required).
 
 </details>
 
 ## **🙏 Thank You**
 
-If you share the vision of building the most powerful AI agent for our second brain, consider [sponsoring this project](https://github.com/sponsors/logancyang) or buying me a coffee. Help spread the word by sharing Copilot for Obsidian on Twitter/X, Reddit, or your favorite platform!
+If you share the vision of building the most powerful AI agent for our second brain, consider [sponsoring this project](https://github.com/sponsors/logancyang) or buying me a coffee. Help spread the word by sharing Obsidian-Mate for Obsidian on Twitter/X, Reddit, or your favorite platform!
 
 <p align="center">
   <img src="https://camo.githubusercontent.com/7b8f7343bfc6e3c65c7901846637b603fd812f1a5f768d8b0572558bde859eb9/68747470733a2f2f63646e2e6275796d6561636f666665652e636f6d2f627574746f6e732f76322f64656661756c742d79656c6c6f772e706e67" alt="BuyMeACoffee" width="200">
@@ -340,19 +340,19 @@ If you share the vision of building the most powerful AI agent for our second br
 
 Special thanks to our top sponsors: @mikelaaron, @pedramamini, @Arlorean, @dashinja, @azagore, @MTGMAD, @gpythomas, @emaynard, @scmarinelli, @borthwick, @adamhill, @gluecode, @rusi, @timgrote, @JiaruiYu-Consilium, @ddocta, @AMOz1, @chchwy, @pborenstein, @GitTom, @kazukgw, @mjluser1, @joesfer, @rwaal, @turnoutnow-harpreet, @dreznicek, @xrise-informatik, @jeremygentles, @ZhengRui, @bfoujols, @jsmith0475, @pagiaddlemon, @sebbyyyywebbyyy, @royschwartz2, @vikram11, @amiable-dev, @khalidhalim, @DrJsPBs, @chishaku, @Andrea18500, @shayonpal, @rhm2k, @snorcup, @JohnBub, @obstinatelark, @jonashaefele, @vishnu2kmohan
 
-## **Copilot Plus Disclosure**
+## **Obsidian-Mate Plus Disclosure**
 
-Copilot Plus is a premium product of Brevilabs LLC and it is not affiliated with Obsidian. It offers a powerful agentic AI integration into Obsidian. Please check out our website [obsidiancopilot.com](https://obsidiancopilot.com/) for more details!
+Obsidian-Mate Plus is a premium product of Brevilabs LLC and it is not affiliated with Obsidian. It offers a powerful agentic AI integration into Obsidian. Please check out our website [obsidiancopilot.com](https://obsidiancopilot.com/) for more details!
 
 - An account and payment are required for full access.
-- Copilot Plus requires network use to facilitate the AI agent.
+- Obsidian-Mate Plus requires network use to facilitate the AI agent.
 - **Privacy & Data Handling**:
   - **Free tier**: Your messages and notes are sent only to your configured LLM provider (OpenAI, Anthropic, Google, etc.). Nothing goes to Brevilabs servers.
   - **Plus tier**: Messages go to your configured LLM provider. File conversions (PDF, DOCX, EPUB, images, etc.) are processed by Brevilabs servers only when you explicitly trigger these features via `@` commands.
   - **Processing vs. Retention**: We process your data to deliver the feature you requested, then discard it. No message content, file uploads, or documents are retained on our servers after processing.
   - **User ID**: A randomly generated UUID is sent with Plus API requests for service delivery (license abuse prevention, rate limiting) but is not used for user tracking, profiling, or analytics.
 - Please see the privacy policy on the website for more details.
-- The frontend code of Copilot plugin is fully open-source. However, the backend code facilitating the AI agents is close-sourced and proprietary.
+- The frontend code of Obsidian-Mate plugin is fully open-source. However, the backend code facilitating the AI agents is close-sourced and proprietary.
 - We offer a full refund if you are not satisfied with the product within 14 days of your purchase, no questions asked.
 
 ## **Authors**
