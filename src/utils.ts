@@ -45,7 +45,7 @@ interface APIError extends Error {
 // Error message constants
 export const ERROR_MESSAGES = {
   INVALID_LICENSE_KEY_USER:
-    "Invalid Copilot Plus license key. Please check your license key in settings.",
+    "Invalid Obsidian-Mate Plus license key. Please check your license key in settings.",
   UNKNOWN_ERROR: "An unknown error occurred",
   REQUEST_FAILED: (status: number) => `Request failed, status ${status}`,
 } as const;
@@ -158,10 +158,7 @@ export interface StripFrontmatterOptions {
  * @param options - Options controlling how leading whitespace is handled.
  * @returns The content without the frontmatter block.
  */
-export function stripFrontmatter(
-  content: string,
-  options: StripFrontmatterOptions = {}
-): string {
+export function stripFrontmatter(content: string, options: StripFrontmatterOptions = {}): string {
   const { trimStart = true } = options;
 
   if (content.startsWith("---")) {
@@ -394,7 +391,7 @@ export function isAllowedFileForNoteContext(file: TFile | null): boolean {
 }
 
 /**
- * Checks if a chain type is a Plus mode chain (Copilot Plus or Project Chain).
+ * Checks if a chain type is a Plus mode chain (Obsidian-Mate Plus or Project Chain).
  * Plus mode chains have access to premium features like PDF processing and URL processing.
  * @param chainType The chain type to check
  * @returns true if this is a Plus mode chain, false otherwise
@@ -906,7 +903,9 @@ export function getProviderInfo(provider: string): ProviderMetadata {
 
 export function getProviderLabel(provider: string, model?: CustomModel): string {
   const baseLabel = ProviderInfo[provider as Provider]?.label || provider;
-  return baseLabel + (model?.believerExclusive && baseLabel === "Copilot Plus" ? "(Believer)" : "");
+  return (
+    baseLabel + (model?.believerExclusive && baseLabel === "Obsidian-Mate Plus" ? "(Believer)" : "")
+  );
 }
 
 export function getProviderHost(provider: string): string {

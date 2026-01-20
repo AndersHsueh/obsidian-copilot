@@ -1,0 +1,408 @@
+{
+  "appName": "Obsidian-Mate",
+  "settings": {
+    "title": "Obsidian-Mate 設定",
+    "version": "v{{version}}",
+    "upToDate": "（最新）",
+    "updateAvailable": "（v{{version}}に更新）",
+    "resetSettings": "設定リセット",
+    "tabs": {
+      "basic": "基本",
+      "model": "モデル",
+      "qa": "検索",
+      "command": "コマンド",
+      "plus": "プラス",
+      "advanced": "詳細"
+    },
+    "general": {
+      "sectionTitle": "一般",
+      "apiKeys": {
+        "title": "API キー",
+        "description": "異なる AI プロバイダーの API キーを設定",
+        "helpTitle": "チャットと検索機能には API キーが必要です",
+        "helpContent": "チャットと検索機能を有効にするには、選択したプロバイダーから API キーを提供してください。",
+        "setKeys": "キーを設定"
+      },
+      "defaultModel": {
+        "title": "デフォルトチャットモデル",
+        "description": "使用するチャットモデルを選択",
+        "helpTitle": "デフォルトモデルは OpenRouter Gemini 2.5 Flash です",
+        "helpContent": "このモデルを使用するには「API キー」で OpenRouter API キーを設定するか、別のプロバイダーからモデルを選択してください。",
+        "selectModel": "モデルを選択"
+      },
+      "defaultMode": {
+        "title": "デフォルトモード",
+        "description": "デフォルトのチャットモードを選択",
+        "helpTitle": "チャットモード",
+        "helpContent": {
+          "chat": "<strong>チャット：</strong>日常的な会話やタスクのための通常のチャットモード。<i>独自の API キーで無料で使用可能。</i>",
+          "vaultQA": "<strong>Vault QA（基本）：</strong>セマンティック検索でボールトの内容について質問する。<i>独自の API キーで無料で使用可能。</i>",
+          "copilotPlus": "<strong>Obsidian-Mate Plus：</strong>2つの無料モードのすべての機能に加え、チャットコンテキストメニュー、高度な検索、AI エージェントなどの高度な有料機能が含まれます。詳細は <a href=\"{{url}}\" target=\"_blank\" rel=\"noopener noreferrer\">obsidiancopilot.com</a> をご覧ください。"
+        }
+      },
+      "openPluginIn": {
+        "title": "プラグインを開く位置",
+        "description": "プラグインを開く場所を選択",
+        "sidebarView": "サイドバー表示",
+        "editor": "エディター"
+      },
+      "sendShortcut": {
+        "title": "送信ショートカット",
+        "description": "メッセージを送信するキーボードショートカットを選択",
+        "helpTitle": "ショートカットが機能しませんか？",
+        "helpContent": "選択したショートカットが機能しない場合は、<strong>Obsidian の設定 → ホットキー</strong> で同じキーの組み合わせを使用している別のコマンドがないか確認してください。最初に競合するホットキーを削除または変更する必要があるかもしれません。",
+        "enter": "エンター",
+        "shiftEnter": "Shift + エンター"
+      },
+      "autoAddActiveContent": {
+        "title": "アクティブコンテンツをコンテキストに自動追加",
+        "description": "メッセージ送信時にアクティブノートまたは Web ビューアタブ（デスクトップのみ）をチャットコンテキストに自動追加します。"
+      },
+      "autoAddSelection": {
+        "title": "選択範囲をコンテキストに自動追加",
+        "description": "ノートまたは Web ビューア（デスクトップのみ）から選択したテキストをチャットコンテキストに自動追加します。無効にすると手動コマンドを使用します。"
+      },
+      "imagesInMarkdown": {
+        "title": "Markdown 内の画像",
+        "description": "マルチモーダルモデルでのみ機能します。テキストとともに埋め込まれた画像を AI に渡します。"
+      },
+      "suggestedPrompts": {
+        "title": "提案プロンプト",
+        "description": "チャットビューに提案プロンプトを表示"
+      },
+      "relevantNotes": {
+        "title": "関連ノート",
+        "description": "チャットビューに他の関連ノートを表示"
+      }
+    },
+    "savingConversations": {
+      "sectionTitle": "会話の保存",
+      "autosaveChat": {
+        "title": "チャットを自動保存",
+        "description": "ユーザーのメッセージと AI の応答のたびにチャットを自動保存します。"
+      },
+      "generateAIChatTitle": {
+        "title": "保存時に AI でチャットタイトルを生成",
+        "description": "有効にすると、AI モデルを使用して保存されたチャットノートに簡潔なタイトルを生成します。無効にすると、最初のユーザーのメッセージの最初の10語を使用します。"
+      },
+      "defaultConversationFolder": {
+        "title": "デフォルト会話フォルダー名",
+        "description": "チャット会話が保存されるデフォルトのフォルダー名。デフォルトは 'copilot/copilot-conversations' です",
+        "placeholder": "copilot/copilot-conversations"
+      },
+      "defaultConversationTag": {
+        "title": "デフォルト会話タグ",
+        "description": "会話の保存時に使用されるデフォルトのタグ。デフォルトは 'ai-conversations' です",
+        "placeholder": "ai-conversations"
+      },
+      "conversationFilenameTemplate": {
+        "title": "会話ファイル名テンプレート",
+        "description": "保存される会話ノート名の形式をカスタマイズします。",
+        "helpTitle": "注意：以下の変数はすべてテンプレートに含める必要があります。",
+        "helpContent": "利用可能な変数：",
+        "variableDate": "<strong>{$date}</strong>：YYYYMMDD 形式の日付",
+        "variableTime": "<strong>{$time}</strong>：HHMMSS 形式の時刻",
+        "variableTopic": "<strong>{$topic}</strong>：チャット会話のトピック",
+        "example": "例：{$date}_{$time}__{$topic} → 20250114_153232__polish_this_article_[[Readme]]",
+        "apply": "適用"
+      }
+    },
+    "sorting": {
+      "sectionTitle": "並べ替え",
+      "chatHistorySort": {
+        "title": "チャット履歴の並べ替え戦略",
+        "description": "チャット履歴リストの並べ替え順序"
+      },
+      "projectListSort": {
+        "title": "プロジェクトリストの並べ替え戦略",
+        "description": "プロジェクトリストの並べ替え順序"
+      },
+      "sortOptions": {
+        "recency": "更新日時",
+        "created": "作成日時",
+        "alphabetical": "名前順"
+      }
+    },
+    "language": {
+      "title": "言語",
+      "description": "Obsidian-Mate インターフェースの言語を選択",
+      "auto": "システム言語に従う",
+      "en": "English",
+      "zh": "简体中文",
+      "ja": "日本語",
+      "ko": "한국어",
+      "fr": "Français",
+      "es": "Español"
+    }
+  },
+  "chat": {
+    "newChat": "新規チャット",
+    "saveAsNote": "ノートとして保存",
+    "loadHistory": "チャット履歴を読み込む",
+    "sendMessage": "メッセージを送信",
+    "stopGenerating": "生成を停止",
+    "regenerate": "再生成",
+    "edit": "編集",
+    "delete": "削除",
+    "copy": "コピー",
+    "copied": "コピーしました！",
+    "failedToSend": "メッセージの送信に失敗しました。再試行してください。",
+    "failedToSave": "チャットをノートとして保存できませんでした。コンソールで詳細を確認してください。",
+    "failedToEdit": "メッセージの編集に失敗しました。再試行してください。",
+    "failedToDelete": "メッセージの削除に失敗しました。再試行してください。",
+    "cannotRegenerateFirst": "最初のメッセージを再生成することはできません。",
+    "messageNotFound": "メッセージが見つかりません。",
+    "failedToLoadHistory": "チャット履歴の読み込みに失敗しました。",
+    "failedToUpdateTitle": "チャットタイトルの更新に失敗しました。",
+    "failedToOpenSource": "ソースファイルを開けませんでした。",
+    "chatDeleted": "チャットを削除しました。",
+    "chatTitleUpdated": "チャットタイトルを更新しました。",
+    "dropFilesHere": "ファイルをここにドロップ...",
+    "includeActiveNote": "アクティブノートを含める",
+    "includeActiveWebTab": "アクティブ Web タブを含める",
+    "tokenCount": "トークン数：{{count}}"
+  },
+  "models": {
+    "selectModel": "モデルを選択",
+    "model": "モデル",
+    "enabled": "有効",
+    "disabled": "無効",
+    "addModel": "モデルを追加",
+    "editModel": "モデルを編集",
+    "deleteModel": "モデルを削除",
+    "importModels": "モデルをインポート",
+    "builtInModels": "組み込みモデル",
+    "customModels": "カスタムモデル",
+    "noApiKey": "API キーが設定されていません",
+    "apiKeyRequired": "このモデルには API キーが必要です",
+    "addCustomModel": "カスタム{{type}}モデルを追加",
+    "addNewModelDescription": "新しいモデルをモデルコレクションに追加します。",
+    "openRouterPaid": "OpenRouter-Paid:Ds-r1",
+    "copyCurlCommand": "テスト用の curl コマンドをコピー",
+    "optionalTestApi": "オプション：API 呼び出しをテスト"
+  },
+  "qa": {
+    "sectionTitle": "検索設定",
+    "indexVault": "ボールトを索引付け",
+    "forceReindex": "強制再索引付け",
+    "clearIndex": "索引をクリア",
+    "indexing": "索引付け中...",
+    "indexComplete": "索引付け完了",
+    "indexFailed": "索引付け失敗",
+    "semanticSearch": "セマンティック検索",
+    "lexicalSearch": "語彙検索",
+    "enableSemanticSearch": "セマンティック検索を有効化",
+    "enableSemanticSearchDescription": "意味ベースのドキュメント検索を有効にします。無効にすると高速な語彙検索のみを使用します。「ボールト索引を更新」または「強制再索引付け」を使用して埋め込み索引を構築してください。",
+    "enableInlineCitations": "インライン引用を有効化（実験的）",
+    "enableInlineCitationsDescription": "有効にすると、AI 応答にはテキスト内の脚注スタイルの引用と末尾の番号付きソースが含まれます。これは実験的な機能であり、すべてのモデルで期待通りに動作しない場合があります。",
+    "embeddingModel": "埋め込みモデル",
+    "embeddingModelDescription": "セマンティックボールト検索と関連ノートを有効にします。セマンティック検索を有効にすると使用できます。",
+    "embeddingModelHelp": "このモデルはテキストをベクトル表現に変換します。セマンティック検索と質問回答（QA）機能に不可欠です。埋め込みモデルを変更すると：",
+    "embeddingModelHelpItems": [
+      "ボールトのベクトル索引の再構築が必要です",
+      "セマンティック検索の質に影響します",
+      "質問回答機能のパフォーマンスに影響します"
+    ],
+    "autoIndexStrategy": "自動索引付け戦略",
+    "autoIndexStrategyDescription": "ボールトを索引付けするタイミングを決定します。",
+    "autoIndexNever": " never ",
+    "autoIndexNeverDesc": "コマンドまたは手動更新によるのみ索引付け",
+    "autoIndexOnStartup": "ON STARTUP",
+    "autoIndexOnStartupDesc": "プラグインの読み込みまたは再読み込み時に索引を更新",
+    "autoIndexOnModeSwitch": "ON MODE SWITCH",
+    "autoIndexOnModeSwitchDesc": "QA モードに入ると更新（推奨）",
+    "autoIndexWarning": "警告：大型ボールトで有料モデルを使用する場合の費用に関する注意",
+    "maxSources": "最大ソース数",
+    "maxSourcesDescription": "Obsidian-Mate はボールトを調べて関連ノートを見つけ、上位 N を LLM に渡します。N のデフォルト値は 15 です。答案生成ステップにより多くのノートを含める場合は、增加してください。",
+    "requestsPerMinute": "一分あたりのリクエスト数",
+    "requestsPerMinuteDescription": "デフォルトは 60 です。埋め込みプロバイダーによってレート制限を受けている場合は减少してください。",
+    "embeddingBatchSize": "埋め込みバッチサイズ",
+    "embeddingBatchSizeDescription": "デフォルトは 16 です。埋め込みプロバイダーによってレート制限を受けている場合は增加してください。",
+    "numPartitions": "パーティション数",
+    "numPartitionsDescription": "Obsidian-Mate 索引のパーティション数。デフォルトは 1 です。大型ボールトの索引付けに問題がある場合は增加してください。警告：変更には索引のクリアと再構築が必要です！",
+    "lexicalSearchRamLimit": "語彙検索 RAM 制限",
+    "lexicalSearchRamLimitDescription": "全文検索インデックスの最大 RAM 使用量。值を下げるとメモリ使用量は少なくなりますが、大型ボールトでは検索性能が制限される可能性があります。デフォルトは 100 MB です。",
+    "enableFolderGraphBoosts": "フォルダーとグラフのブーストを有効化",
+    "enableFolderGraphBoostsDescription": "語彙検索結果に対するフォルダーとグラフベース関連性ブーストを有効にします。無効にすると、フォルダーや接続性に基づいた調整なしで純粋なキーワードベース関連性スコアリングを提供します。",
+    "exclusions": "除外項目",
+    "exclusionsDescription": "インデックスから除外するフォルダー、タグ、ノートタイトル、またはファイル拡張子。以前にインデックスされたファイルは、強制再索引付けが実行されるまで残ります。",
+    "manageExclusions": "除外项目管理",
+    "inclusions": "含める項目",
+    "inclusionsDescription": "指定されたパス、タグ、またはノートタイトルのみをインデックスします。除外項目は含める項目よりも優先されます。以前にインデックスされたファイルは、強制再索引付けが実行されるまで残ります。",
+    "manageInclusions": "含める项目管理",
+    "enableObsidianSync": "Obsidian-Mate インデックスに Obsidian 同期を有効化",
+    "disableIndexOnMobileDescription": "有効にすると、Obsidian-Mate インデックスはモバイルデバイスで読み込まれず、リソースが節約されます。チャットのりのみが利用可能です。デスクトップ同期からの既存のインデックスは保持されます。 QA モードをモバイルで有効にするにはチェックを外してください。",
+    "embeddingModelSaved": "埋め込みモデルが保存されました。セマンティック検索を有効にしてインデックスを構築してください。",
+    "manage": "管理"
+  },
+  "plus": {
+    "sectionTitle": "Obsidian-Mate Plus",
+    "notPlusUser": "Obsidian-Mate Plus ユーザーではありません。",
+    "licenseKey": "ライセンスキー",
+    "enterLicenseKey": "ライセンスキーを入力",
+    "activate": "アクティブ化",
+    "manageSubscription": "サブスクリプションを管理",
+    "features": {
+      "autonomousAgent": "自律エージェント",
+      "webSearch": "ウェブ検索",
+      "youtubeTranscription": "YouTube 文字起こし",
+      "memory": "長期メモリ",
+      "advancedContext": "高度なコンテキスト処理"
+    }
+  },
+  "commands": {
+    "sectionTitle": "コマンド設定",
+    "customCommands": "カスタムコマンド",
+    "addCommand": "新規コマンドを追加",
+    "commandName": "コマンド名",
+    "commandPrompt": "コマンドプロンプト",
+    "commandDescription": "説明"
+  },
+  "advanced": {
+    "sectionTitle": "詳細設定",
+    "debugMode": "デバッグモード",
+    "debugModeDescription": "コンソールへのデバッグログを有効化",
+    "encryption": "暗号化",
+    "encryptionDescription": "API キーと機密データを暗号化"
+  },
+  "modals": {
+    "confirm": {
+      "title": "確認",
+      "cancel": "キャンセル",
+      "confirm": "確認",
+      "yes": "はい",
+      "no": "いいえ"
+    },
+    "newChatConfirm": {
+      "title": "新規チャットを開始？",
+      "description": "これにより現在の会話がクリアされます。続行しますか？"
+    },
+    "resetSettingsConfirm": {
+      "title": "すべての設定をリセット？",
+      "description": "これによりすべての Obsidian-Mate 設定がデフォルトにリセットされます。この操作は取り消せません。"
+    },
+    "loadChatHistory": {
+      "title": "チャット履歴を読み込む",
+      "noChats": "チャット履歴が見つかりません。"
+    },
+    "addContextNote": {
+      "title": "コンテキストノートを追加",
+      "searchNotes": "ノートを検索...",
+      "noResults": "結果が見つかりません。"
+    },
+    "folderSearch": {
+      "title": "フォルダーを選択",
+      "searchFolders": "フォルダーを検索..."
+    },
+    "customPattern": {
+      "title": "カスタムパターン",
+      "addPattern": "パターンを追加"
+    }
+  },
+  "restrictions": {
+    "nonMarkdownFiles": "非マークダウンプファイルは Obsidian-Mate Plus モードでのみ利用可能です。このファイルタイプにアクセスするにはアップグレードしてください。",
+    "urlProcessing": "URL 処理は Obsidian-Mate Plus モードでのみ利用可能です。URL はコンテキスト用に処理されません。",
+    "unsupportedFile": "{{extension}} ファイルは現在のモードではサポートされていません。"
+  },
+  "loading": {
+    "default": "",
+    "readingFiles": "ファイルを読み込み中",
+    "searchingWeb": "ウェブを検索中",
+    "readingFileTree": "ファイルツリーを読み込み中",
+    "compacting": "圧縮中"
+  },
+  "projects": {
+    "sectionTitle": "プロジェクト",
+    "newProject": "新規プロジェクト",
+    "projectName": "プロジェクト名",
+    "selectFolder": "フォルダーを選択",
+    "includeSubfolders": "サブフォルダーを含む",
+    "contextNotes": "コンテキストノート",
+    "addNote": "ノートを追加",
+    "noProjects": "まだプロジェクトがありません",
+    "createFirst": "始めるために最初のプロジェクトを作成してください",
+    "loadingContext": "プロジェクトコンテキストを読み込み中...",
+    "contextLoaded": "プロジェクトコンテキストが読み込まれました",
+    "contextLoadFailed": "プロジェクトコンテキストの読み込みに失敗しました",
+    "projectAdded": "{{name}} が正常に追加されました",
+    "projectUpdated": "{{name}} が正常に変更されました",
+    "projectRemoved": "{{name}} が削除されました"
+  },
+  "errors": {
+    "generic": "エラーが発生しました。再試行してください。",
+    "network": "ネットワークエラー。接続を確認してください。",
+    "apiKeyMissing": "API キーがありません。設定で設定してください。",
+    "rateLimit": "レート制限を超えました。しばらく待ってから再試行してください。",
+    "modelNotFound": "モデルが見つかりません。",
+    "fileNotFound": "ファイルが見つかりません。",
+    "invalidFormat": "無効な形式。"
+  },
+  "commandPalette": {
+    "searchCommands": "コマンドを検索...",
+    "noCommands": "コマンドが見つかりません。"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "削除",
+    "edit": "編集",
+    "add": "追加",
+    "addButton": "追加...",
+    "remove": "削除",
+    "close": "閉じる",
+    "open": "開く",
+    "search": "検索",
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "success": "成功",
+    "warning": "警告",
+    "confirm": "確認",
+    "back": "戻る",
+    "next": "次へ",
+    "previous": "前へ",
+    "first": "最初",
+    "last": "最後",
+    "more": "更多",
+    "less": "更少",
+    "all": "すべて",
+    "none": "なし",
+    "select": "選択",
+    "selected": "選択済み",
+    "enabled": "有効",
+    "disabled": "無効",
+    "optional": "オプション",
+    "required": "必須",
+    "name": "名前",
+    "description": "説明",
+    "settings": "設定",
+    "help": "ヘルプ",
+    "documentation": "ドキュメント",
+    "feedback": "フィードバック",
+    "about": "約",
+    "version": "バージョン",
+    "author": "作者",
+    "submit": "送信",
+    "copy": "コピー",
+    "active": "アクティブ",
+    "addToChat": "チャットに追加",
+    "refreshIndex": "インデックスを更新",
+    "chatSettings": "チャット設定",
+    "fileContext": "ファイルコンテキスト",
+    "selectModel": "モデルを選択",
+    "addImages": "画像を追加",
+    "updateAvailable": "利用可能な更新：",
+    "addContext": "コンテキストを追加",
+    "backlinks": "バックリンク",
+    "loadingError": "読み込みエラー：",
+    "invalidState": "無効な状態 - 変更がありません",
+    "loadingModels": "モデルを読み込み中...",
+    "openRouterPaid": "OpenRouter-Paid:Ds-r1",
+    "copyCurlCommand": "テスト用の curl コマンドをコピー",
+    "optionalTestApi": "オプション：API 呼び出しをテスト",
+    "editProject": "プロジェクトを編集",
+    "startChat": "チャットを開始",
+    "deleteProject": "プロジェクトを削除",
+    "closeCurrentProject": "現在のプロジェクトを閉じる",
+    "closeProjectMode": "プロジェクトモードを閉じる"
+  }
+}

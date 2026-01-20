@@ -169,7 +169,7 @@ export class IndexOperations {
 
           if (currentCheckpoint > previousCheckpoint) {
             await this.dbOps.saveDB();
-            console.log("Copilot index checkpoint save completed.");
+            console.log("Obsidian-Mate index checkpoint save completed.");
           }
         } catch (err) {
           this.handleError(err, {
@@ -191,7 +191,7 @@ export class IndexOperations {
         this.dbOps
           .saveDB()
           .then(() => {
-            logInfo("Copilot index final save completed.");
+            logInfo("Obsidian-Mate index final save completed.");
             this.dbOps.checkIndexIntegrity().catch((err) => {
               logError("Background integrity check failed:", err);
             });

@@ -222,7 +222,7 @@ const localSearchTool = createTool({
 // Note: indexTool behavior depends on which retriever is active
 const indexTool = createTool({
   name: "indexVault",
-  description: "Index the vault to the Copilot index",
+  description: "Index the vault to the Obsidian-Mate index",
   schema: z.void(), // No parameters
   handler: async () => {
     const settings = getSettings();

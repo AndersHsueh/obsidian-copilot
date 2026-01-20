@@ -91,7 +91,7 @@ export function applyPlusSettings(): void {
       .catch((error) => {
         logError("Failed to trigger indexing after Plus settings applied:", error);
         new Notice(
-          "Failed to update Copilot index. Please try force reindexing from the command palette."
+          "Failed to update Obsidian-Mate index. Please try force reindexing from the command palette."
         );
       });
   } else {

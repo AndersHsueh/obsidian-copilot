@@ -149,7 +149,8 @@ export abstract class BaseChainRunner implements ChainRunner {
 
     // Check for specific error messages
     if (error?.message?.includes("Invalid license key")) {
-      errorMessage = "Invalid Copilot Plus license key. Please check your license key in settings.";
+      errorMessage =
+        "Invalid Obsidian-Mate Plus license key. Please check your license key in settings.";
     } else if (errorCode === "model_not_found") {
       errorMessage =
         "You do not have access to this model or the model does not exist, please check with your API provider.";

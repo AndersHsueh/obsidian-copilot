@@ -20,6 +20,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { createRoot, Root } from "react-dom/client";
 import { CustomCommand } from "@/commands/type";
 import { useSettingsValue } from "@/settings/model";
+import { useTranslation } from "react-i18next";
 
 // Custom hook for managing chat chain
 function useChatChain(selectedModel: CustomModel, systemPrompt?: string) {
@@ -78,6 +79,7 @@ function CustomCommandChatModalContent({
   onReplace,
   systemPrompt,
 }: CustomCommandChatModalContentProps) {
+  const { t } = useTranslation();
   const [aiCurrentMessage, setAiCurrentMessage] = useState<string | null>(null);
   const [processedMessage, setProcessedMessage] = useState<string | null>(null);
   const [followupInstruction, setFollowupInstruction] = useState<string>("");
@@ -335,7 +337,7 @@ function CustomCommandChatModalContent({
           {generating ? (
             // When generating, show Stop button
             <Button size="sm" variant="secondary" onClick={handleStopGeneration}>
-              Stop
+              {t("chat.stopGenerating")}
             </Button>
           ) : showFollowupSubmit ? (
             // When follow-up instruction has content, show Submit button with Enter shortcut
@@ -344,7 +346,7 @@ function CustomCommandChatModalContent({
               onClick={handleFollowupSubmit}
               className="tw-flex tw-items-center tw-gap-1"
             >
-              <span>Submit</span>
+              <span>{t("common.submit")}</span>
               <CornerDownLeft className="tw-size-3" />
             </Button>
           ) : (

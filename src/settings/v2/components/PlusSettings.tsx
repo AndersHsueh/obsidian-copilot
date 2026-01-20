@@ -21,7 +21,7 @@ export function PlusSettings() {
   return (
     <section className="tw-flex tw-flex-col tw-gap-4 tw-rounded-lg tw-bg-secondary tw-p-4">
       <div className="tw-flex tw-items-center tw-justify-between tw-gap-2 tw-text-xl tw-font-bold">
-        <span>Copilot Plus</span>
+        <span>Obsidian-Mate Plus</span>
         {isPlusUser && (
           <Badge variant="outline" className="tw-text-success">
             Active
@@ -30,7 +30,7 @@ export function PlusSettings() {
       </div>
       <div className="tw-flex tw-flex-col tw-gap-2 tw-text-sm tw-text-muted">
         <div>
-          Copilot Plus takes your Obsidian experience to the next level with cutting-edge AI
+          Obsidian-Mate Plus takes your Obsidian experience to the next level with cutting-edge AI
           capabilities. This premium tier unlocks advanced features:{" "}
           <strong>
             {" "}
@@ -39,8 +39,8 @@ export function PlusSettings() {
           </strong>
         </div>
         <div>
-          Copilot Plus is evolving fast, with new features and improvements rolling out regularly.
-          Join now to secure the lowest price and get early access!
+          Obsidian-Mate Plus is evolving fast, with new features and improvements rolling out
+          regularly. Join now to secure the lowest price and get early access!
         </div>
       </div>
       <div className="tw-flex tw-items-center tw-gap-2">

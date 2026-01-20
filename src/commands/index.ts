@@ -152,7 +152,7 @@ export function registerCommands(
     try {
       const VectorStoreManager = (await import("@/search/vectorStoreManager")).default;
       await VectorStoreManager.getInstance().clearIndex();
-      new Notice("Cleared local Copilot semantic index.");
+      new Notice("Cleared local Obsidian-Mate semantic index.");
     } catch (err) {
       logError("Error clearing semantic index:", err);
       new Notice("Failed to clear semantic index.");
@@ -249,7 +249,7 @@ export function registerCommands(
 
       // Create content for the file
       const content = [
-        "# Copilot Files Status",
+        "# Obsidian-Mate Files Status",
         `- Indexed files: ${indexedFiles.size}`,
         `- Unindexed files: ${unindexedFiles.size}`,
         `- Empty files: ${emptyFiles.size}`,
@@ -285,7 +285,7 @@ export function registerCommands(
       ].join("\n");
 
       // Create or update the file in the vault
-      const fileName = `Copilot-Indexed-Files-${new Date().toLocaleDateString().replace(/\//g, "-")}.md`;
+      const fileName = `Obsidian-Mate-Indexed-Files-${new Date().toLocaleDateString().replace(/\//g, "-")}.md`;
       const folderPath = "copilot";
       const filePath = `${folderPath}/${fileName}`;
 
@@ -358,7 +358,7 @@ export function registerCommands(
       ].join("\n");
 
       // Create the debug file
-      const fileName = `Copilot-Embedding-Debug-${activeFile.basename.replace(/[\\/:*?"<>|]/g, "_")}.md`;
+      const fileName = `Obsidian-Mate-Embedding-Debug-${activeFile.basename.replace(/[\\/:*?"<>|]/g, "_")}.md`;
       const folderPath = "copilot";
       const filePath = `${folderPath}/${fileName}`;
 
@@ -394,10 +394,10 @@ export function registerCommands(
       const fileCache = FileCache.getInstance<string>();
       await fileCache.clear();
 
-      new Notice("All Copilot caches cleared successfully");
+      new Notice("All Obsidian-Mate caches cleared successfully");
     } catch (error) {
-      logError("Error clearing Copilot caches:", error);
-      new Notice("Failed to clear Copilot caches");
+      logError("Error clearing Obsidian-Mate caches:", error);
+      new Notice("Failed to clear Obsidian-Mate caches");
     }
   });
 
@@ -407,19 +407,19 @@ export function registerCommands(
       await flushRecordedPromptPayloadToLog();
       await logFileManager.openLogFile();
     } catch (error) {
-      logError("Error creating Copilot log file:", error);
-      new Notice("Failed to create Copilot log file.");
+      logError("Error creating Obsidian-Mate log file:", error);
+      new Notice("Failed to create Obsidian-Mate log file.");
     }
   });
 
-  // Clear Copilot log file (delete on disk and clear in-memory buffer)
+  // Clear Obsidian-Mate log file (delete on disk and clear in-memory buffer)
   addCommand(plugin, COMMAND_IDS.CLEAR_LOG_FILE, async () => {
     try {
       await logFileManager.clear();
-      new Notice("Copilot log cleared.");
+      new Notice("Obsidian-Mate log cleared.");
     } catch (error) {
-      logError("Error clearing Copilot log file:", error);
-      new Notice("Failed to clear Copilot log file.");
+      logError("Error clearing Obsidian-Mate log file:", error);
+      new Notice("Failed to clear Obsidian-Mate log file.");
     }
   });
 
@@ -536,11 +536,11 @@ export function registerCommands(
     modal.open();
   });
 
-  // Add command to download YouTube script (Copilot Plus only)
+  // Add command to download YouTube script (Obsidian-Mate Plus only)
   addCommand(plugin, COMMAND_IDS.DOWNLOAD_YOUTUBE_SCRIPT, async () => {
     const isPlusUser = await checkIsPlusUser();
     if (!isPlusUser) {
-      new Notice("Download YouTube Script (plus) is a Copilot Plus feature");
+      new Notice("Download YouTube Script (plus) is an Obsidian-Mate Plus feature");
       return;
     }
 

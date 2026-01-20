@@ -35,6 +35,9 @@ import {
 } from "@/components/chat-components/ChatHistoryPopover";
 import { TokenCounter } from "./TokenCounter";
 import { ChatSettingsPopover } from "@/components/chat-components/ChatSettingsPopover";
+import { useTranslation } from "react-i18next";
+
+const { t } = useTranslation();
 
 export async function refreshVaultIndex() {
   try {
@@ -296,21 +299,26 @@ export function ChatControls({
         </div>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button variant="ghost2" size="icon" title="New Chat" onClick={onNewChat}>
+            <Button variant="ghost2" size="icon" title={t("chat.newChat")} onClick={onNewChat}>
               <MessageCirclePlus className="tw-size-4" />
             </Button>
           </TooltipTrigger>
-          <TooltipContent>New Chat</TooltipContent>
+          <TooltipContent>{t("chat.newChat")}</TooltipContent>
         </Tooltip>
         {selectedChain !== ChainType.PROJECT_CHAIN && <ChatSettingsPopover />}
         {!settings.autosaveChat && (
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost2" size="icon" title="Save Chat as Note" onClick={onSaveAsNote}>
+              <Button
+                variant="ghost2"
+                size="icon"
+                title={t("chat.saveAsNote")}
+                onClick={onSaveAsNote}
+              >
                 <Download className="tw-size-4" />
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Save Chat as Note</TooltipContent>
+            <TooltipContent>{t("chat.saveAsNote")}</TooltipContent>
           </Tooltip>
         )}
         <Tooltip>
@@ -322,17 +330,22 @@ export function ChatControls({
             onOpenSourceFile={onOpenSourceFile}
           >
             <TooltipTrigger asChild>
-              <Button variant="ghost2" size="icon" title="Chat History" onClick={onLoadHistory}>
+              <Button
+                variant="ghost2"
+                size="icon"
+                title={t("chat.loadHistory")}
+                onClick={onLoadHistory}
+              >
                 <History className="tw-size-4" />
               </Button>
             </TooltipTrigger>
           </ChatHistoryPopover>
-          <TooltipContent>Chat History</TooltipContent>
+          <TooltipContent>{t("chat.loadHistory")}</TooltipContent>
         </Tooltip>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost2" size="icon" title="Advanced Settings">
+            <Button variant="ghost2" size="icon" title={t("settings.advanced.sectionTitle")}>
               <MoreHorizontal className="tw-size-4" />
             </Button>
           </DropdownMenuTrigger>

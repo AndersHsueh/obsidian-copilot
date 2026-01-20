@@ -13,6 +13,7 @@ import { ChainType } from "@/chainFactory";
 import { useProjectContextStatus } from "@/hooks/useProjectContextStatus";
 import { logInfo, logError } from "@/logger";
 import type { WebTabContext } from "@/types/message";
+import { useTranslation } from "react-i18next";
 
 import { ChatControls, reloadCurrentProject } from "@/components/chat-components/ChatControls";
 import ChatInput from "@/components/chat-components/ChatInput";
@@ -44,6 +45,7 @@ import { FileParserManager } from "@/tools/FileParserManager";
 import { ChatMessage } from "@/types/message";
 import { err2String, isPlusChain } from "@/utils";
 import { arrayBufferToBase64 } from "@/utils/base64";
+import { t } from "@/i18n";
 import { Notice, TFile } from "obsidian";
 import { ContextManageModal } from "@/components/modals/project/context-manage-modal";
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
@@ -113,7 +115,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
   }, []);
 
   const [loading, setLoading] = useState(false);
-  const [loadingMessage, setLoadingMessage] = useState(LOADING_MESSAGES.DEFAULT);
+  const [loadingMessage, setLoadingMessage] = useState(t(LOADING_MESSAGES.DEFAULT));
   const [contextNotes, setContextNotes] = useState<TFile[]>([]);
   const [includeActiveNote, setIncludeActiveNote] = useState(false);
   const [includeActiveWebTab, setIncludeActiveWebTab] = useState(false);
@@ -217,7 +219,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
 
     if (hasUrlsInContext && !isPlusChain(currentChain)) {
       // Show notice but continue processing the message without URL context
-      new Notice(RESTRICTION_MESSAGES.URL_PROCESSING_RESTRICTED);
+      new Notice(t(RESTRICTION_MESSAGES.URL_PROCESSING_RESTRICTED));
     }
 
     try {
@@ -273,7 +275,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
       setSelectedImages([]);
       streamingMessageIdRef.current = `msg-${uuidv4()}`;
       safeSet.setLoading(true);
-      safeSet.setLoadingMessage(LOADING_MESSAGES.DEFAULT);
+      safeSet.setLoadingMessage(t(LOADING_MESSAGES.DEFAULT));
 
       // Send message through ChatManager (this handles all the complex context processing)
       const messageId = await chatUIState.sendMessage(
@@ -318,7 +320,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
       new Notice("Failed to send message. Please try again.");
     } finally {
       safeSet.setLoading(false);
-      safeSet.setLoadingMessage(LOADING_MESSAGES.DEFAULT);
+      safeSet.setLoadingMessage(t(LOADING_MESSAGES.DEFAULT));
       streamingMessageIdRef.current = null;
     }
   };
@@ -344,7 +346,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
         logInfo(`stopping generation..., reason: ${reason}`);
         abortControllerRef.current.abort(reason);
         safeSet.setLoading(false);
-        safeSet.setLoadingMessage(LOADING_MESSAGES.DEFAULT);
+        safeSet.setLoadingMessage(t(LOADING_MESSAGES.DEFAULT));
         // Keep the partial AI message visible
         // Don't clear setCurrentAiMessage here
       }

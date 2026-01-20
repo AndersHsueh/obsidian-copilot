@@ -1,6 +1,7 @@
 import { CustomModel, ProjectConfig } from "@/aiParams";
 import { atom, createStore, useAtomValue } from "jotai";
 import { v4 as uuidv4 } from "uuid";
+import { type SupportedLanguage, SUPPORTED_LANGUAGES } from "@/i18n";
 
 import { type ChainType } from "@/chainFactory";
 import { type SortStrategy, isSortStrategy } from "@/utils/recentUsageManager";
@@ -172,6 +173,8 @@ export interface CopilotSettings {
   defaultSystemPromptTitle: string;
   /** Token threshold for auto-compacting large context (range: 64k-1M tokens, default: 128000) */
   autoCompactThreshold: number;
+  /** Interface language: 'auto' (follow system), 'en' (English), 'zh' (Simplified Chinese) */
+  language: SupportedLanguage;
 }
 
 export const settingsStore = createStore();
@@ -496,6 +499,11 @@ export function sanitizeSettings(settings: CopilotSettings): CopilotSettings {
       : DEFAULT_SETTINGS.userSystemPromptsFolder;
 
   sanitizedSettings.qaExclusions = sanitizeQaExclusions(settingsToSanitize.qaExclusions);
+
+  // Ensure language has a valid value
+  if (!Object.values(SUPPORTED_LANGUAGES).includes(settingsToSanitize.language)) {
+    sanitizedSettings.language = SUPPORTED_LANGUAGES.auto;
+  }
 
   return sanitizedSettings;
 }

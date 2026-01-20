@@ -1,10 +1,12 @@
 import { BrevilabsClient } from "@/LLMProviders/brevilabsClient";
 import ProjectManager from "@/LLMProviders/projectManager";
-import { CustomModel, getCurrentProject, setSelectedTextContexts, getSelectedTextContexts } from "@/aiParams";
 import {
-  NoteSelectedTextContext,
-  SelectedTextContext,
-} from "@/types/message";
+  CustomModel,
+  getCurrentProject,
+  setSelectedTextContexts,
+  getSelectedTextContexts,
+} from "@/aiParams";
+import { NoteSelectedTextContext, SelectedTextContext } from "@/types/message";
 import { registerCommands } from "@/commands";
 import CopilotView from "@/components/CopilotView";
 import { APPLY_VIEW_TYPE, ApplyView } from "@/components/composer/ApplyView";
@@ -21,6 +23,7 @@ import { ABORT_REASON, CHAT_VIEWTYPE, DEFAULT_OPEN_AREA, EVENT_NAMES } from "@/c
 import { ChatManager } from "@/core/ChatManager";
 import { MessageRepository } from "@/core/MessageRepository";
 import { encryptAllKeys } from "@/encryptionService";
+import { changeLanguage, getEffectiveLanguage } from "@/i18n";
 import { logInfo, logWarn } from "@/logger";
 import { logFileManager } from "@/logFileManager";
 import { UserMemoryManager } from "@/memory/UserMemoryManager";
@@ -85,6 +88,11 @@ export default class CopilotPlugin extends Plugin {
 
   async onload(): Promise<void> {
     await this.loadSettings();
+
+    // Initialize i18n with saved language setting
+    const settings = getSettings();
+    changeLanguage(settings.language);
+
     this.settingsUnsubscriber = subscribeToSettingsChange(async (prev, next) => {
       if (next.enableEncryption) {
         await this.saveData(await encryptAllKeys(next));
@@ -144,7 +152,7 @@ export default class CopilotPlugin extends Plugin {
 
     this.initActiveLeafChangeHandler();
 
-    this.addRibbonIcon("message-square", "Open Copilot Chat", (evt: MouseEvent) => {
+    this.addRibbonIcon("message-square", "Open Obsidian-Mate", (evt: MouseEvent) => {
       this.activateView();
     });
 
@@ -610,10 +618,11 @@ export default class CopilotPlugin extends Plugin {
       const persistedLastAccessedAtMs = extractChatLastAccessedAtMs(file);
 
       // Use effective last used time (prefers in-memory value for immediate UI updates)
-      const effectiveLastAccessedAtMs = this.chatHistoryLastAccessedAtManager.getEffectiveLastUsedAt(
-        file.path,
-        persistedLastAccessedAtMs ?? createdAt.getTime()
-      );
+      const effectiveLastAccessedAtMs =
+        this.chatHistoryLastAccessedAtManager.getEffectiveLastUsedAt(
+          file.path,
+          persistedLastAccessedAtMs ?? createdAt.getTime()
+        );
       const lastAccessedAt = new Date(effectiveLastAccessedAtMs);
 
       return {

@@ -35,7 +35,7 @@ export class MissingApiKeyError extends Error {
 }
 
 export class MissingPlusLicenseError extends Error {
-  constructor(message: string = "Copilot Plus license key is not configured.") {
+  constructor(message: string = "Obsidian-Mate Plus license key is not configured.") {
     super(message);
     this.name = "MissingPlusLicenseError";
     Object.setPrototypeOf(this, MissingPlusLicenseError.prototype);

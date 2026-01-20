@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Copilot for Obsidian is an AI-powered assistant plugin that integrates various LLM providers (OpenAI, Anthropic, Google, etc.) with Obsidian. It provides chat interfaces, autocomplete, semantic search, and various AI-powered commands for note-taking and knowledge management.
+Obsidian-Mate is an AI-powered assistant plugin that integrates various LLM providers (OpenAI, Anthropic, Google, etc.) with Obsidian. It provides chat interfaces, autocomplete, semantic search, and various AI-powered commands for note-taking and knowledge management.
 
 ## Development Commands
 
@@ -40,7 +40,7 @@ Copilot for Obsidian is an AI-powered assistant plugin that integrates various L
 
 2. **Chain Factory Pattern** (`src/chainFactory.ts`)
 
-   - Different chain types for various AI operations (chat, copilot, adhoc prompts)
+   - Different chain types for various AI operations (chat, obsidian-mate, adhoc prompts)
    - LangChain integration for complex workflows
    - Memory management for conversation context
    - Tool integration (search, file operations, time queries)
@@ -282,10 +282,12 @@ The TODO.md should be:
 - **APAC**: `apac.anthropic.claude-sonnet-4-5-20250929-v1:0`
 
 ❌ **Avoid regional model IDs** (without prefix): `anthropic.claude-sonnet-4-5-20250929-v1:0`
+
 - These only work in specific regions and often fail
 - Not recommended for production use
 
 **References:**
+
 - [AWS Bedrock Cross-Region Inference](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html)
 - [Supported Inference Profiles](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html)
 
@@ -299,7 +301,7 @@ The TODO.md should be:
 - **Clean Architecture**: New architecture follows Repository → Manager → UIState → UI pattern
 - **Single Source of Truth**: All messages stored once in MessageRepository with computed views
 - **Context Always Fresh**: Context is reprocessed when messages are edited to ensure accuracy
-- **Chat History Loading**: Uses pending message mechanism through CopilotView → Chat component props
+- **Chat History Loading**: Uses pending message mechanism through ObsidianMateView → Chat component props
 - **Project Chat Isolation**: Each project now has completely isolated chat history
   - Automatic detection of project switches via `ProjectManager.getCurrentProjectId()`
   - Separate MessageRepository instances per project ID

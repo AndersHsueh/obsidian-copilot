@@ -1,0 +1,408 @@
+{
+  "appName": "Obsidian-Mate",
+  "settings": {
+    "title": "Paramètres Obsidian-Mate",
+    "version": "v{{version}}",
+    "upToDate": "(à jour)",
+    "updateAvailable": "(Mise à jour vers v{{version}})",
+    "resetSettings": "Réinitialiser les paramètres",
+    "tabs": {
+      "basic": "Basique",
+      "model": "Modèle",
+      "qa": "QA",
+      "command": "Commandes",
+      "plus": "Plus",
+      "advanced": "Avancé"
+    },
+    "general": {
+      "sectionTitle": "Général",
+      "apiKeys": {
+        "title": "Clés API",
+        "description": "Configurer les clés API pour différents fournisseurs d'IA",
+        "helpTitle": "Clé API requise pour le chat et les fonctionnalités QA",
+        "helpContent": "Pour activer les fonctionnalités de chat et QA, veuillez fournir une clé API de votre fournisseur sélectionné.",
+        "setKeys": "Définir les clés"
+      },
+      "defaultModel": {
+        "title": "Modèle de chat par défaut",
+        "description": "Sélectionner le modèle de chat à utiliser",
+        "helpTitle": "Le modèle par défaut est OpenRouter Gemini 2.5 Flash",
+        "helpContent": "Définissez votre clé API OpenRouter dans 'Clés API' pour utiliser ce modèle, ou sélectionnez un modèle différent d'un autre fournisseur.",
+        "selectModel": "Sélectionner un modèle"
+      },
+      "defaultMode": {
+        "title": "Mode par défaut",
+        "description": "Sélectionner le mode de chat par défaut",
+        "helpTitle": "Modes de chat",
+        "helpContent": {
+          "chat": "<strong>Chat:</strong> Mode de chat régulier pour les conversations et tâches générales. <i>Gratuit avec votre propre clé API.</i>",
+          "vaultQA": "<strong>Vault QA (Basique):</strong> Posez des questions sur le contenu de votre vault avec recherche sémantique. <i>Gratuit avec votre propre clé API.</i>",
+          "copilotPlus": "<strong>Obsidian-Mate Plus:</strong> Couvre toutes les fonctionnalités des 2 modes gratuits, plus des fonctionnalités payantes avancées incluant le menu contextuel de chat, la recherche avancée, les agents IA, et plus. Consultez <a href=\"{{url}}\" target=\"_blank\" rel=\"noopener noreferrer\">obsidiancopilot.com</a> pour plus de détails."
+        }
+      },
+      "openPluginIn": {
+        "title": "Ouvrir le plugin dans",
+        "description": "Choisir où ouvrir le plugin",
+        "sidebarView": "Vue latérale",
+        "editor": "Éditeur"
+      },
+      "sendShortcut": {
+        "title": "Raccourci d'envoi",
+        "description": "Choisir le raccourci clavier pour envoyer les messages",
+        "helpTitle": "Le raccourci ne fonctionne pas ?",
+        "helpContent": "Si votre raccourci sélectionné ne fonctionne pas, vérifiez <strong>Paramètres d'Obsidian → Raccourcis</strong> pour voir si une autre commande utilise la même combinaison de touches. Vous devrez peut-être supprimer ou modifier d'abord le raccourci conflit.",
+        "enter": "Entrée",
+        "shiftEnter": "Shift + Entrée"
+      },
+      "autoAddActiveContent": {
+        "title": "Ajouter automatiquement le contenu actif au contexte",
+        "description": "Ajouter automatiquement la note active ou l'onglet Web Viewer (bureau uniquement) au contexte de chat lors de l'envoi des messages."
+      },
+      "autoAddSelection": {
+        "title": "Ajouter automatiquement la sélection au contexte",
+        "description": "Ajouter automatiquement le texte sélectionné des notes ou de Web Viewer (bureau uniquement) au contexte de chat. Désactiver pour utiliser la commande manuelle."
+      },
+      "imagesInMarkdown": {
+        "title": "Images dans Markdown",
+        "description": "Transmettre les images intégrées dans markdown à l'IA avec le texte. Fonctionne uniquement avec les modèles multimodaux."
+      },
+      "suggestedPrompts": {
+        "title": "Suggestions de prompts",
+        "description": "Afficher les suggestions de prompts dans la vue de chat"
+      },
+      "relevantNotes": {
+        "title": "Notes pertinentes",
+        "description": "Afficher les notes pertinentes dans la vue de chat"
+      }
+    },
+    "savingConversations": {
+      "sectionTitle": "Enregistrement des conversations",
+      "autosaveChat": {
+        "title": "Enregistrement automatique du chat",
+        "description": "Enregistre automatiquement le chat après chaque message utilisateur et réponse IA."
+      },
+      "generateAIChatTitle": {
+        "title": "Générer un titre de chat IA à l'enregistrement",
+        "description": "Lorsqu'activé, utilise un modèle IA pour générer un titre concis pour les notes de chat enregistrées. Lorsqu'activé, utilise les 10 premiers mots du premier message utilisateur."
+      },
+      "defaultConversationFolder": {
+        "title": "Nom du dossier de conversation par défaut",
+        "description": "Le nom du dossier par défaut où les conversations de chat seront enregistrées. Par défaut 'copilot/copilot-conversations'",
+        "placeholder": "copilot/copilot-conversations"
+      },
+      "defaultConversationTag": {
+        "title": "Étiquette de conversation par défaut",
+        "description": "L'étiquette par défaut à utiliser lors de l'enregistrement d'une conversation. Par défaut 'ai-conversations'",
+        "placeholder": "ai-conversations"
+      },
+      "conversationFilenameTemplate": {
+        "title": "Modèle de nom de fichier de conversation",
+        "description": "Personnaliser le format des noms de notes de conversation enregistrées.",
+        "helpTitle": "Remarque : Toutes les variables suivantes doivent être incluses dans le modèle.",
+        "helpContent": "Variables disponibles :",
+        "variableDate": "<strong>{$date}</strong> : Date au format AAAAMMJJ",
+        "variableTime": "<strong>{$time}</strong> : Heure au format HHMMSS",
+        "variableTopic": "<strong>{$topic}</strong> : Sujet de la conversation de chat",
+        "example": "Exemple : {$date}_{$time}__{$topic} → 20250114_153232__polish_this_article_[[Readme]]",
+        "apply": "Appliquer"
+      }
+    },
+    "sorting": {
+      "sectionTitle": "Tri",
+      "chatHistorySort": {
+        "title": "Stratégie de tri de l'historique de chat",
+        "description": "Ordre de tri pour la liste de l'historique de chat"
+      },
+      "projectListSort": {
+        "title": "Stratégie de tri de la liste de projets",
+        "description": "Ordre de tri pour la liste de projets"
+      },
+      "sortOptions": {
+        "recency": "Récence",
+        "created": "Création",
+        "alphabetical": "Alphabétique"
+      }
+    },
+    "language": {
+      "title": "Langue",
+      "description": "Choisir la langue de l'interface Obsidian-Mate",
+      "auto": "Suivre la langue du système",
+      "en": "English",
+      "zh": "简体中文",
+      "ja": "日本語",
+      "ko": "한국어",
+      "fr": "Français",
+      "es": "Español"
+    }
+  },
+  "chat": {
+    "newChat": "Nouvelle conversation",
+    "saveAsNote": "Enregistrer sous note",
+    "loadHistory": "Charger l'historique de chat",
+    "sendMessage": "Envoyer le message",
+    "stopGenerating": "Arrêter la génération",
+    "regenerate": "Régénérer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "copy": "Copier",
+    "copied": "Copié !",
+    "failedToSend": "Échec de l'envoi du message. Veuillez réessayer.",
+    "failedToSave": "Échuc de l'enregistrement du chat en tant que note. Vérifiez la console pour les détails.",
+    "failedToEdit": "Échec de la modification du message. Veuillez réessayer.",
+    "failedToDelete": "Échec de la suppression du message. Veuillez réessayer.",
+    "cannotRegenerateFirst": "Impossible de régénérer le premier message.",
+    "messageNotFound": "Message non trouvé.",
+    "failedToLoadHistory": "Échec du chargement de l'historique de chat.",
+    "failedToUpdateTitle": "Échec de la mise à jour du titre de chat.",
+    "failedToOpenSource": "Échec de l'ouverture du fichier source.",
+    "chatDeleted": "Chat supprimé.",
+    "chatTitleUpdated": "Titre de chat mis à jour.",
+    "dropFilesHere": "Déposez les fichiers ici...",
+    "includeActiveNote": "Inclure la note active",
+    "includeActiveWebTab": "Inclure l'onglet Web actif",
+    "tokenCount": "Jetons : {{count}}"
+  },
+  "models": {
+    "selectModel": "Sélectionner un modèle",
+    "model": "Modèle",
+    "enabled": "Activé",
+    "disabled": "Désactivé",
+    "addModel": "Ajouter un modèle",
+    "editModel": "Modifier le modèle",
+    "deleteModel": "Supprimer le modèle",
+    "importModels": "Importer des modèles",
+    "builtInModels": "Modèles intégrés",
+    "customModels": "Modèles personnalisés",
+    "noApiKey": "Clé API non définie",
+    "apiKeyRequired": "Clé API requise pour ce modèle",
+    "addCustomModel": "Ajouter un modèle {{type}} personnalisé",
+    "addNewModelDescription": "Ajouter un nouveau modèle à votre collection.",
+    "openRouterPaid": "OpenRouter-Paid:Ds-r1",
+    "copyCurlCommand": "Copier la commande curl pour le test",
+    "optionalTestApi": "Optionnel : tester l'appel API"
+  },
+  "qa": {
+    "sectionTitle": "Paramètres QA",
+    "indexVault": "Indexer le vault",
+    "forceReindex": "Réindexation forcée",
+    "clearIndex": "Effacer l'index",
+    "indexing": "Indexation...",
+    "indexComplete": "Indexation terminée",
+    "indexFailed": "Échec de l'indexation",
+    "semanticSearch": "Recherche sémantique",
+    "lexicalSearch": "Recherche lexicale",
+    "enableSemanticSearch": "Activer la recherche sémantique",
+    "enableSemanticSearchDescription": "Activer la recherche de documents basée sur le sens. Lorsqu'elle est désactivée, utilise uniquement la recherche lexicale rapide. Utilisez 'Actualiser l'index du vault' ou 'Réindexation forcée' pour construire l'index d'intégration.",
+    "enableInlineCitations": "Activer les citations intégrées (expérimental)",
+    "enableInlineCitationsDescription": "Lorsqu'activé, les réponses IA incluront des citations de type note de bas de page dans le texte et des sources numérotées à la fin. C'est une fonctionnalité expérimentale et peut ne pas fonctionner comme prévu pour tous les modèles.",
+    "embeddingModel": "Modèle d'intégration",
+    "embeddingModelDescription": "Alimente la recherche sémantique du vault et les notes pertinentes. Activez la recherche sémantique pour l'utiliser.",
+    "embeddingModelHelp": "Ce modèle convertit le texte en représentations vectorielles, essentiel pour la recherche sémantique et la fonctionnalité de问答 (QA). Changer le modèle d'intégration va :",
+    "embeddingModelHelpItems": [
+      "Nécessiter la reconstruction de l'index vectoriel de votre vault",
+      "Affecter la qualité de la recherche sémantique",
+      "Impacter les performances de la fonctionnalité de问答"
+    ],
+    "autoIndexStrategy": "Stratégie d'indexation automatique",
+    "autoIndexStrategyDescription": "Décider quand vous voulez que le vault soit indexé.",
+    "autoIndexNever": " never ",
+    "autoIndexNeverDesc": "Indexation manuelle via commande ou actualiser uniquement",
+    "autoIndexOnStartup": "ON STARTUP",
+    "autoIndexOnStartupDesc": "Mises à jour de l'index lors du chargement ou rechargement du plugin",
+    "autoIndexOnModeSwitch": "ON MODE SWITCH",
+    "autoIndexOnModeSwitchDesc": "Mises à jour lors de l'entrée en mode QA (Recommandé)",
+    "autoIndexWarning": "Avertissement : Implications de coûts pour les grands vaults avec des modèles payants",
+    "maxSources": "Sources maximales",
+    "maxSourcesDescription": "Obsidian-Mate parcourt votre vault pour trouver les notes pertinentes et transmet les N meilleures au LLM. La valeur par défaut pour N est 15. Augmentez si vous voulez que plus de notes soient incluses dans l'étape de génération de réponse.",
+    "requestsPerMinute": "Requêtes par minute",
+    "requestsPerMinuteDescription": "La valeur par défaut est 60. Diminuez si vous êtes limité en taux par votre fournisseur d'intégration.",
+    "embeddingBatchSize": "Taille du lot d'intégration",
+    "embeddingBatchSizeDescription": "La valeur par défaut est 16. Augmentez si vous êtes limité en taux par votre fournisseur d'intégration.",
+    "numPartitions": "Nombre de partitions",
+    "numPartitionsDescription": "Nombre de partitions pour l'index Obsidian-Mate. La valeur par défaut est 1. Augmentez si vous avez des problèmes pour indexer de grands vaults. Avertissement : Les changements nécessitent l'effacement et la reconstruction de l'index !",
+    "lexicalSearchRamLimit": "Limite RAM de recherche lexicale",
+    "lexicalSearchRamLimitDescription": "Utilisation maximale de la RAM pour l'index de recherche de texte intégral. Des valeurs plus basses utilisent moins de mémoire mais peuvent limiter les performances de recherche sur les grands vaults. La valeur par défaut est 100 Mo.",
+    "enableFolderGraphBoosts": "Activer les améliorations de dossier et graphe",
+    "enableFolderGraphBoostsDescription": "Activer les améliorations de pertinence basées sur le dossier et le graphe pour les résultats de recherche lexicale. Lorsqu'elle est désactivée, fournit un scoring de pertinence purement basé sur les mots-clés sans ajustements basés sur le dossier ou les connexions.",
+    "exclusions": "Exclusions",
+    "exclusionsDescription": "Exclure les dossiers, tags, titres de notes ou extensions de fichiers de l'indexation. Les fichiers précédemment indexés resteront jusqu'à ce qu'une réindexation forcée soit effectuée.",
+    "manageExclusions": "Gérer les exclusions",
+    "inclusions": "Inclusions",
+    "inclusionsDescription": "Indexer uniquement les chemins, tags ou titres de notes spécifiés. Les exclusions ont priorité sur les inclusions. Les fichiers précédemment indexés resteront jusqu'à ce qu'une réindexation forcée soit effectuée.",
+    "manageInclusions": "Gérer les inclusions",
+    "enableObsidianSync": "Activer Obsidian Sync pour l'index Obsidian-Mate",
+    "disableIndexOnMobileDescription": "Lorsqu'activé, l'index Obsidian-Mate ne sera pas chargé sur les appareils mobiles pour économiser des ressources. Seul le mode chat sera disponible. Tout index existant de la synchronisation desktop sera préservé. Décochez pour activer les modes QA sur mobile.",
+    "embeddingModelSaved": "Modèle d'intégration enregistré. Activez la recherche sémantique pour construire l'index.",
+    "manage": "Gérer"
+  },
+  "plus": {
+    "sectionTitle": "Obsidian-Mate Plus",
+    "notPlusUser": "Vous n'êtes pas un utilisateur Obsidian-Mate Plus.",
+    "licenseKey": "Clé de licence",
+    "enterLicenseKey": "Entrez votre clé de licence",
+    "activate": "Activer",
+    "manageSubscription": "Gérer l'abonnement",
+    "features": {
+      "autonomousAgent": "Agent autonome",
+      "webSearch": "Recherche web",
+      "youtubeTranscription": "Transcription YouTube",
+      "memory": "Mémoire à long terme",
+      "advancedContext": "Traitement de contexte avancé"
+    }
+  },
+  "commands": {
+    "sectionTitle": "Paramètres de commande",
+    "customCommands": "Commandes personnalisées",
+    "addCommand": "Ajouter une nouvelle commande",
+    "commandName": "Nom de la commande",
+    "commandPrompt": "Prompt de commande",
+    "commandDescription": "Description"
+  },
+  "advanced": {
+    "sectionTitle": "Paramètres avancés",
+    "debugMode": "Mode débogage",
+    "debugModeDescription": "Activer la journalisation de débogage vers la console",
+    "encryption": "Chiffrement",
+    "encryptionDescription": "Chiffrer les clés API et les données sensibles"
+  },
+  "modals": {
+    "confirm": {
+      "title": "Confirmer",
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "yes": "Oui",
+      "no": "Non"
+    },
+    "newChatConfirm": {
+      "title": "Commencer une nouvelle conversation ?",
+      "description": "Cela effacera la conversation actuelle. Êtes-vous sûr de vouloir continuer ?"
+    },
+    "resetSettingsConfirm": {
+      "title": "Réinitialiser tous les paramètres ?",
+      "description": "Cela réinitialisera tous les paramètres Obsidian-Mate par défaut. Cette action ne peut pas être annulée."
+    },
+    "loadChatHistory": {
+      "title": "Charger l'historique de chat",
+      "noChats": "Aucune historique de chat trouvé."
+    },
+    "addContextNote": {
+      "title": "Ajouter une note de contexte",
+      "searchNotes": "Rechercher des notes...",
+      "noResults": "Aucun résultat trouvé."
+    },
+    "folderSearch": {
+      "title": "Sélectionner un dossier",
+      "searchFolders": "Rechercher des dossiers..."
+    },
+    "customPattern": {
+      "title": "Modèle personnalisé",
+      "addPattern": "Ajouter un modèle"
+    }
+  },
+  "restrictions": {
+    "nonMarkdownFiles": "Les fichiers non-markdown sont uniquement disponibles en mode Obsidian-Mate Plus. Veuillez mettre à niveau pour accéder à ce type de fichier.",
+    "urlProcessing": "Le traitement des URL est uniquement disponible en mode Obsidian-Mate Plus. Les URL ne seront pas traitées pour le contexte.",
+    "unsupportedFile": "Les fichiers {{extension}} ne sont pas pris en charge dans le mode actuel."
+  },
+  "loading": {
+    "default": "",
+    "readingFiles": "Lecture des fichiers",
+    "searchingWeb": "Recherche sur le web",
+    "readingFileTree": "Lecture de l'arborescence des fichiers",
+    "compacting": "Compactage"
+  },
+  "projects": {
+    "sectionTitle": "Projets",
+    "newProject": "Nouveau projet",
+    "projectName": "Nom du projet",
+    "selectFolder": "Sélectionner un dossier",
+    "includeSubfolders": "Inclure les sous-dossiers",
+    "contextNotes": "Notes de contexte",
+    "addNote": "Ajouter une note",
+    "noProjects": "Pas encore de projets",
+    "createFirst": "Créez votre premier projet pour commencer",
+    "loadingContext": "Chargement du contexte du projet...",
+    "contextLoaded": "Contexte du projet chargé",
+    "contextLoadFailed": "Échec du chargement du contexte du projet",
+    "projectAdded": "{{name}} ajouté avec succès",
+    "projectUpdated": "{{name}} mis à jour avec succès",
+    "projectRemoved": "{{name}} supprimé"
+  },
+  "errors": {
+    "generic": "Une erreur s'est produite. Veuillez réessayer.",
+    "network": "Erreur réseau. Veuillez vérifier votre connexion.",
+    "apiKeyMissing": "La clé API est manquante. Veuillez la définir dans les paramètres.",
+    "rateLimit": "Limite de taux dépassée. Veuillez attendre et réessayer.",
+    "modelNotFound": "Modèle non trouvé.",
+    "fileNotFound": "Fichier non trouvé.",
+    "invalidFormat": "Format invalide."
+  },
+  "commandPalette": {
+    "searchCommands": "Rechercher des commandes...",
+    "noCommands": "Aucune commande trouvée."
+  },
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "addButton": "Ajouter...",
+    "remove": "Supprimer",
+    "close": "Fermer",
+    "open": "Ouvrir",
+    "search": "Rechercher",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "warning": "Avertissement",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "first": "Premier",
+    "last": "Dernier",
+    "more": "Plus",
+    "less": "Moins",
+    "all": "Tout",
+    "none": "Aucun",
+    "select": "Sélectionner",
+    "selected": "Sélectionné",
+    "enabled": "Activé",
+    "disabled": "Désactivé",
+    "optional": "Optionnel",
+    "required": "Requis",
+    "name": "Nom",
+    "description": "Description",
+    "settings": "Paramètres",
+    "help": "Aide",
+    "documentation": "Documentation",
+    "feedback": "Retour d'information",
+    "about": "À propos",
+    "version": "Version",
+    "author": "Auteur",
+    "submit": "Soumettre",
+    "copy": "Copier",
+    "active": "Actif",
+    "addToChat": "Ajouter au chat",
+    "refreshIndex": "Actualiser l'index",
+    "chatSettings": "Paramètres de chat",
+    "fileContext": "Contexte de fichier",
+    "selectModel": "Sélectionner un modèle",
+    "addImages": "Ajouter des image(s)",
+    "updateAvailable": "Mise à jour disponible :",
+    "addContext": "Ajouter un contexte",
+    "backlinks": "Liens retour",
+    "loadingError": "Erreur de chargement :",
+    "invalidState": "État invalide - modifications manquantes",
+    "loadingModels": "Chargement des modèles...",
+    "openRouterPaid": "OpenRouter-Paid:Ds-r1",
+    "copyCurlCommand": "Copier la commande curl pour le test",
+    "optionalTestApi": "Optionnel : tester l'appel API",
+    "editProject": "Modifier le projet",
+    "startChat": "Démarrer le chat",
+    "deleteProject": "Supprimer le projet",
+    "closeCurrentProject": "Fermer le projet actuel",
+    "closeProjectMode": "Fermer le mode projet"
+  }
+}

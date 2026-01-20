@@ -24,17 +24,17 @@ function CopilotPlusWelcomeModalContent({
     <div className="tw-flex tw-flex-col tw-gap-4">
       <div>
         <p>
-          Thanks for purchasing <b>Copilot Plus</b>! You have unlocked the full power of Copilot,
-          featuring chat context, PDF and image support, exclusive chat and embedding models, and
-          much more!
+          Thanks for purchasing <b>Obsidian-Mate Plus</b>! You have unlocked the full power of
+          Obsidian-Mate, featuring chat context, PDF and image support, exclusive chat and embedding
+          models, and much more!
         </p>
         <p>
-          Would you like to apply the Copilot Plus settings now? You can always change this later in
-          Settings.
+          Would you like to apply the Obsidian-Mate Plus settings now? You can always change this
+          later in Settings.
         </p>
         <ul className="tw-pl-4">
           <li>
-            Default mode: <b className="tw-text-accent">Copilot Plus</b>
+            Default mode: <b className="tw-text-accent">Obsidian-Mate Plus</b>
           </li>
           <li>
             Chat model: <b className="tw-text-accent">{DEFAULT_COPILOT_PLUS_CHAT_MODEL}</b>
@@ -72,7 +72,7 @@ export class CopilotPlusWelcomeModal extends Modal {
     super(app);
     // https://docs.obsidian.md/Reference/TypeScript+API/Modal/setTitle
     // @ts-ignore
-    this.setTitle("Welcome to Copilot Plus 🚀");
+    this.setTitle("Welcome to Obsidian-Mate Plus 🚀");
   }
 
   onOpen() {

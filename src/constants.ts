@@ -1,5 +1,6 @@
 import { CustomModel } from "@/aiParams";
 import { type CopilotSettings } from "@/settings/model";
+import { type SupportedLanguage, SUPPORTED_LANGUAGES } from "@/i18n";
 import { v4 as uuidv4 } from "uuid";
 import { ChainType } from "./chainFactory";
 import { PromptSortStrategy } from "./types";
@@ -17,7 +18,7 @@ export const DEFAULT_CUSTOM_PROMPTS_FOLDER = `${COPILOT_FOLDER_ROOT}/copilot-cus
 export const DEFAULT_MEMORY_FOLDER = `${COPILOT_FOLDER_ROOT}/memory`;
 export const DEFAULT_SYSTEM_PROMPTS_FOLDER = `${COPILOT_FOLDER_ROOT}/system-prompts`;
 export const DEFAULT_QA_EXCLUSIONS_SETTING = COPILOT_FOLDER_ROOT;
-export const DEFAULT_SYSTEM_PROMPT = `You are Obsidian Copilot, a helpful assistant that integrates AI to Obsidian note-taking.
+export const DEFAULT_SYSTEM_PROMPT = `You are Obsidian-Mate, a helpful assistant that integrates AI to Obsidian note-taking.
   1. Never mention that you do not have access to something. Always rely on the user provided context.
   2. Always answer to the best of your knowledge. If you are unsure about something, say so and ask the user to provide more context.
   3. If the user mentions "note", it most likely means an Obsidian note in the vault, not the generic meaning of a note.
@@ -116,17 +117,17 @@ export const YOUTUBE_VIDEO_CONTEXT_TAG = "youtube_video_context";
 /** Marker text used as placeholder for active web tab in serialized content */
 export const ACTIVE_WEB_TAB_MARKER = "{activeWebTab}";
 export const EMPTY_INDEX_ERROR_MESSAGE =
-  "Copilot index does not exist. Please index your vault first!\n\n1. Set a working embedding model in QA settings. If it's not a local model, don't forget to set the API key. \n\n2. Click 'Refresh Index for Vault' and wait for indexing to complete. If you encounter the rate limiting error, please turn your request per second down in QA setting.";
+  "Obsidian-Mate index does not exist. Please index your vault first!\n\n1. Set a working embedding model in QA settings. If it's not a local model, don't forget to set the API key. \n\n2. Click 'Refresh Index for Vault' and wait for indexing to complete. If you encounter the rate limiting error, please turn your request per second down in QA setting.";
 export const CHUNK_SIZE = 6000;
 export const TEXT_WEIGHT = 0.4;
 export const MAX_CHARS_FOR_LOCAL_SEARCH_CONTEXT = 448000;
 export const LLM_TIMEOUT_MS = 30000; // 30 seconds timeout for LLM operations
 export const LOADING_MESSAGES = {
-  DEFAULT: "",
-  READING_FILES: "Reading files",
-  SEARCHING_WEB: "Searching the web",
-  READING_FILE_TREE: "Reading file tree",
-  COMPACTING: "Compacting",
+  DEFAULT: "loading.default",
+  READING_FILES: "loading.readingFiles",
+  SEARCHING_WEB: "loading.searchingWeb",
+  READING_FILE_TREE: "loading.readingFileTree",
+  COMPACTING: "loading.compacting",
 };
 export const PLUS_UTM_MEDIUMS = {
   SETTINGS: "settings",
@@ -661,14 +662,14 @@ export const ProviderInfo: Record<Provider, ProviderMetadata> = {
     listModelURL: "",
   },
   [EmbeddingModelProviders.COPILOT_PLUS]: {
-    label: "Copilot Plus",
+    label: "Obsidian-Mate Plus",
     host: BREVILABS_MODELS_BASE_URL,
     curlBaseURL: BREVILABS_MODELS_BASE_URL,
     keyManagementURL: "",
     listModelURL: "",
   },
   [EmbeddingModelProviders.COPILOT_PLUS_JINA]: {
-    label: "Copilot Plus",
+    label: "Obsidian-Mate Plus",
     host: BREVILABS_MODELS_BASE_URL,
     curlBaseURL: BREVILABS_MODELS_BASE_URL,
     keyManagementURL: "",
@@ -752,23 +753,24 @@ export const COMMAND_IDS = {
 
 export const COMMAND_NAMES: Record<CommandId, string> = {
   [COMMAND_IDS.TRIGGER_QUICK_COMMAND]: "Trigger quick command",
-  [COMMAND_IDS.CLEAR_LOCAL_COPILOT_INDEX]: "Clear local Copilot index",
-  [COMMAND_IDS.CLEAR_COPILOT_CACHE]: "Clear Copilot cache",
+  [COMMAND_IDS.CLEAR_LOCAL_COPILOT_INDEX]: "Clear local Obsidian-Mate index",
+  [COMMAND_IDS.CLEAR_COPILOT_CACHE]: "Clear Obsidian-Mate cache",
   [COMMAND_IDS.COUNT_TOTAL_VAULT_TOKENS]: "Count total tokens in your vault",
   [COMMAND_IDS.COUNT_WORD_AND_TOKENS_SELECTION]: "Count words and tokens in selection",
   [COMMAND_IDS.DEBUG_WORD_COMPLETION]: "Word completion: Debug",
   [COMMAND_IDS.FORCE_REINDEX_VAULT_TO_COPILOT_INDEX]: "Force reindex vault",
   [COMMAND_IDS.GARBAGE_COLLECT_COPILOT_INDEX]:
-    "Garbage collect Copilot index (remove files that no longer exist in vault)",
+    "Garbage collect Obsidian-Mate index (remove files that no longer exist in vault)",
   [COMMAND_IDS.INDEX_VAULT_TO_COPILOT_INDEX]: "Index (refresh) vault",
-  [COMMAND_IDS.INSPECT_COPILOT_INDEX_BY_NOTE_PATHS]: "Inspect Copilot index by note paths (debug)",
+  [COMMAND_IDS.INSPECT_COPILOT_INDEX_BY_NOTE_PATHS]:
+    "Inspect Obsidian-Mate index by note paths (debug)",
   [COMMAND_IDS.LIST_INDEXED_FILES]: "List all indexed files (debug)",
-  [COMMAND_IDS.LOAD_COPILOT_CHAT_CONVERSATION]: "Load Copilot chat conversation",
-  [COMMAND_IDS.NEW_CHAT]: "New Copilot Chat",
-  [COMMAND_IDS.OPEN_COPILOT_CHAT_WINDOW]: "Open Copilot Chat Window",
-  [COMMAND_IDS.REMOVE_FILES_FROM_COPILOT_INDEX]: "Remove files from Copilot index (debug)",
+  [COMMAND_IDS.LOAD_COPILOT_CHAT_CONVERSATION]: "Load Obsidian-Mate chat conversation",
+  [COMMAND_IDS.NEW_CHAT]: "New Obsidian-Mate Chat",
+  [COMMAND_IDS.OPEN_COPILOT_CHAT_WINDOW]: "Open Obsidian-Mate Chat Window",
+  [COMMAND_IDS.REMOVE_FILES_FROM_COPILOT_INDEX]: "Remove files from Obsidian-Mate index (debug)",
   [COMMAND_IDS.SEARCH_ORAMA_DB]: "Search semantic index (debug)",
-  [COMMAND_IDS.TOGGLE_COPILOT_CHAT_WINDOW]: "Toggle Copilot Chat Window",
+  [COMMAND_IDS.TOGGLE_COPILOT_CHAT_WINDOW]: "Toggle Obsidian-Mate Chat Window",
   [COMMAND_IDS.ADD_SELECTION_TO_CHAT_CONTEXT]: "Add selection to chat context",
   [COMMAND_IDS.ADD_WEB_SELECTION_TO_CHAT_CONTEXT]: "Add web selection to chat context",
   [COMMAND_IDS.ADD_CUSTOM_COMMAND]: "Add new custom command",
@@ -781,12 +783,9 @@ export const COMMAND_NAMES: Record<CommandId, string> = {
 export type CommandId = (typeof COMMAND_IDS)[keyof typeof COMMAND_IDS];
 
 export const RESTRICTION_MESSAGES = {
-  NON_MARKDOWN_FILES_RESTRICTED:
-    "Non-markdown files are only available in Copilot Plus mode. Please upgrade to access this file type.",
-  URL_PROCESSING_RESTRICTED:
-    "URL processing is only available in Copilot Plus mode. URLs will not be processed for context.",
-  UNSUPPORTED_FILE_TYPE: (extension: string) =>
-    `${extension.toUpperCase()} files are not supported in the current mode.`,
+  NON_MARKDOWN_FILES_RESTRICTED: "restrictions.nonMarkdownFiles",
+  URL_PROCESSING_RESTRICTED: "restrictions.urlProcessing",
+  UNSUPPORTED_FILE_TYPE: (extension: string) => `restrictions.unsupportedFile`,
 } as const;
 
 export const DEFAULT_SETTINGS: CopilotSettings = {
@@ -894,6 +893,7 @@ export const DEFAULT_SETTINGS: CopilotSettings = {
   userSystemPromptsFolder: DEFAULT_SYSTEM_PROMPTS_FOLDER,
   defaultSystemPromptTitle: "",
   autoCompactThreshold: 128000,
+  language: SUPPORTED_LANGUAGES.auto,
 };
 
 export const EVENT_NAMES = {

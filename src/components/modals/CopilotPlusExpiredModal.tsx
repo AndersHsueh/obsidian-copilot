@@ -17,12 +17,12 @@ function CopilotPlusExpiredModalContent({ onCancel }: { onCancel: () => void }) 
     <div className="tw-flex tw-flex-col tw-gap-4">
       <div className="tw-flex tw-flex-col tw-gap-2">
         <div>
-          Your Copilot Plus license key is no longer valid. Please renew your subscription to
-          continue using Copilot Plus.
+          Your Obsidian-Mate Plus license key is no longer valid. Please renew your subscription to
+          continue using Obsidian-Mate Plus.
         </div>
         {isUsingPlusModels && (
           <div className="tw-text-sm tw-text-warning">
-            The Copilot Plus exclusive models will stop working. You can switch to the default
+            The Obsidian-Mate Plus exclusive models will stop working. You can switch to the default
             models in the Settings.
           </div>
         )}
@@ -51,7 +51,7 @@ export class CopilotPlusExpiredModal extends Modal {
     super(app);
     // https://docs.obsidian.md/Reference/TypeScript+API/Modal/setTitle
     // @ts-ignore
-    this.setTitle("Thanks for being a Copilot Plus user 👋");
+    this.setTitle("Thanks for being an Obsidian-Mate Plus user 👋");
   }
 
   onOpen() {

@@ -262,7 +262,7 @@ export default class ChatModelManager {
           fetch: customModel.enableCors ? safeFetch : undefined,
           defaultHeaders: {
             "HTTP-Referer": "https://obsidiancopilot.com",
-            "X-Title": "Obsidian Copilot",
+            "X-Title": "Obsidian-Mate",
           },
         },
         // Enable reasoning if the model has the reasoning capability
@@ -717,7 +717,7 @@ export default class ChatModelManager {
       const errorMessage = `API key is not provided for the model: ${modelKey}.`;
       if (model.provider === ChatModelProviders.COPILOT_PLUS) {
         throw new MissingPlusLicenseError(
-          "Copilot Plus license key is not configured. Please enter your license key in the Copilot Plus section at the top of Basic Settings."
+          "Obsidian-Mate Plus license key is not configured. Please enter your license key in the Obsidian-Mate Plus section at the top of Basic Settings."
         );
       }
       throw new MissingApiKeyError(errorMessage);

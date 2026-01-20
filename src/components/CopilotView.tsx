@@ -41,11 +41,11 @@ export default class CopilotView extends ItemView {
 
   // Return a title for this view
   getTitle(): string {
-    return "Copilot Chat";
+    return "Obsidian-Mate";
   }
 
   getDisplayText(): string {
-    return "Copilot";
+    return "Obsidian-Mate";
   }
 
   async onOpen(): Promise<void> {

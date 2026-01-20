@@ -54,7 +54,7 @@ export async function executeSequentialToolCall(
       if (!isPlusUser) {
         return {
           toolName: toolCall.name,
-          result: `Error: ${getToolDisplayName(toolCall.name)} requires a Copilot Plus subscription`,
+          result: `Error: ${getToolDisplayName(toolCall.name)} requires an Obsidian-Mate Plus subscription`,
           success: false,
         };
       }

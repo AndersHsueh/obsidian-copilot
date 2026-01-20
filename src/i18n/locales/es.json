@@ -1,0 +1,408 @@
+{
+  "appName": "Obsidian-Mate",
+  "settings": {
+    "title": "Configuración de Obsidian-Mate",
+    "version": "v{{version}}",
+    "upToDate": "(actualizado)",
+    "updateAvailable": "(Actualizar a v{{version}})",
+    "resetSettings": "Restablecer configuración",
+    "tabs": {
+      "basic": "Básico",
+      "model": "Modelo",
+      "qa": "QA",
+      "command": "Comandos",
+      "plus": "Plus",
+      "advanced": "Avanzado"
+    },
+    "general": {
+      "sectionTitle": "General",
+      "apiKeys": {
+        "title": "Claves API",
+        "description": "Configurar claves API para diferentes proveedores de IA",
+        "helpTitle": "Se requiere clave API para funciones de chat y QA",
+        "helpContent": "Para habilitar las funciones de chat y QA, proporcione una clave API de su proveedor seleccionado.",
+        "setKeys": "Establecer claves"
+      },
+      "defaultModel": {
+        "title": "Modelo de chat predeterminado",
+        "description": "Seleccionar el modelo de chat a usar",
+        "helpTitle": "El modelo predeterminado es OpenRouter Gemini 2.5 Flash",
+        "helpContent": "Establezca su clave API de OpenRouter en 'Claves API' para usar este modelo, o seleccione un modelo diferente de otro proveedor.",
+        "selectModel": "Seleccionar modelo"
+      },
+      "defaultMode": {
+        "title": "Modo predeterminado",
+        "description": "Seleccionar el modo de chat predeterminado",
+        "helpTitle": "Modos de chat",
+        "helpContent": {
+          "chat": "<strong>Chat:</strong> Modo de chat regular para conversaciones y tareas generales. <i>Gratis con su propia clave API.</i>",
+          "vaultQA": "<strong>Vault QA (Básico):</strong> Hacer preguntas sobre el contenido de su bóveda con búsqueda semántica. <i>Gratis con su propia clave API.</i>",
+          "copilotPlus": "<strong>Obsidian-Mate Plus:</strong> Incluye todas las funciones de los 2 modos gratuitos, más funciones premium avanzadas incluyendo menú contextual de chat, búsqueda avanzada, agentes de IA y más. Visite <a href=\"{{url}}\" target=\"_blank\" rel=\"noopener noreferrer\">obsidiancopilot.com</a> para más detalles."
+        }
+      },
+      "openPluginIn": {
+        "title": "Abrir plugin en",
+        "description": "Elegir dónde abrir el plugin",
+        "sidebarView": "Vista de barra lateral",
+        "editor": "Editor"
+      },
+      "sendShortcut": {
+        "title": "Atajo de envío",
+        "description": "Elegir atajo de teclado para enviar mensajes",
+        "helpTitle": "¿El atajo no funciona?",
+        "helpContent": "Si el atajo seleccionado no funciona, revise <strong>Configuración de Obsidian → Atajos</strong> para ver si otro comando usa la misma combinación de teclas. Es posible que necesite eliminar o cambiar primero el atajo conflictivo.",
+        "enter": "Enter",
+        "shiftEnter": "Shift + Enter"
+      },
+      "autoAddActiveContent": {
+        "title": "Añadir contenido activo automáticamente al contexto",
+        "description": "Añadir automáticamente la nota activa o pestaña del Visor Web (solo escritorio) al contexto de chat al enviar mensajes."
+      },
+      "autoAddSelection": {
+        "title": "Añadir selección automáticamente al contexto",
+        "description": "Añadir automáticamente el texto seleccionado de notas o Visor Web (solo escritorio) al contexto de chat. Deshabilitar para usar comando manual."
+      },
+      "imagesInMarkdown": {
+        "title": "Imágenes en Markdown",
+        "description": "Pasar imágenes incrustadas en markdown a la IA junto con el texto. Solo funciona con modelos multimodales."
+      },
+      "suggestedPrompts": {
+        "title": "Sugerencias de prompts",
+        "description": "Mostrar sugerencias de prompts en la vista de chat"
+      },
+      "relevantNotes": {
+        "title": "Notas relevantes",
+        "description": "Mostrar notas relevantes en la vista de chat"
+      }
+    },
+    "savingConversations": {
+      "sectionTitle": "Guardado de conversaciones",
+      "autosaveChat": {
+        "title": "Auto-guardar chat",
+        "description": "Guarda automáticamente el chat después de cada mensaje de usuario y respuesta de IA."
+      },
+      "generateAIChatTitle": {
+        "title": "Generar título de chat con IA al guardar",
+        "description": "Cuando está habilitado, usa un modelo de IA para generar un título conciso para las notas de chat guardadas. Cuando está deshabilitado, usa las primeras 10 palabras del primer mensaje del usuario."
+      },
+      "defaultConversationFolder": {
+        "title": "Nombre de carpeta de conversación predeterminado",
+        "description": "El nombre de carpeta predeterminado donde se guardarán las conversaciones de chat. El valor predeterminado es 'copilot/copilot-conversations'",
+        "placeholder": "copilot/copilot-conversations"
+      },
+      "defaultConversationTag": {
+        "title": "Etiqueta de conversación predeterminada",
+        "description": "La etiqueta predeterminada a usar al guardar una conversación. El valor predeterminado es 'ai-conversations'",
+        "placeholder": "ai-conversations"
+      },
+      "conversationFilenameTemplate": {
+        "title": "Plantilla de nombre de archivo de conversación",
+        "description": "Personalizar el formato de los nombres de las notas de conversación guardadas.",
+        "helpTitle": "Nota: Todas las siguientes variables deben incluirse en la plantilla.",
+        "helpContent": "Variables disponibles:",
+        "variableDate": "<strong>{$date}</strong>: Fecha en formato AAAAMMDD",
+        "variableTime": "<strong>{$time}</strong>: Hora en formato HHMMSS",
+        "variableTopic": "<strong>{$topic}</strong>: Tema de la conversación de chat",
+        "example": "Ejemplo: {$date}_{$time}__{$topic} → 20250114_153232__polish_this_article_[[Readme]]",
+        "apply": "Aplicar"
+      }
+    },
+    "sorting": {
+      "sectionTitle": "Ordenación",
+      "chatHistorySort": {
+        "title": "Estrategia de ordenación del historial de chat",
+        "description": "Orden de ordenación para la lista del historial de chat"
+      },
+      "projectListSort": {
+        "title": "Estrategia de ordenación de la lista de proyectos",
+        "description": "Orden de ordenación para la lista de proyectos"
+      },
+      "sortOptions": {
+        "recency": "Reciente",
+        "created": "Creación",
+        "alphabetical": "Alfabético"
+      }
+    },
+    "language": {
+      "title": "Idioma",
+      "description": "Elegir el idioma de la interfaz de Obsidian-Mate",
+      "auto": "Seguir idioma del sistema",
+      "en": "English",
+      "zh": "简体中文",
+      "ja": "日本語",
+      "ko": "한국어",
+      "fr": "Français",
+      "es": "Español"
+    }
+  },
+  "chat": {
+    "newChat": "Nuevo chat",
+    "saveAsNote": "Guardar como nota",
+    "loadHistory": "Cargar historial de chat",
+    "sendMessage": "Enviar mensaje",
+    "stopGenerating": "Detener generación",
+    "regenerate": "Regenerar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "failedToSend": "Error al enviar el mensaje. Por favor, inténtelo de nuevo.",
+    "failedToSave": "Error al guardar el chat como nota. Revise la consola para detalles.",
+    "failedToEdit": "Error al editar el mensaje. Por favor, inténtelo de nuevo.",
+    "failedToDelete": "Error al eliminar el mensaje. Por favor, inténtelo de nuevo.",
+    "cannotRegenerateFirst": "No se puede regenerar el primer mensaje.",
+    "messageNotFound": "Mensaje no encontrado.",
+    "failedToLoadHistory": "Error al cargar el historial de chat.",
+    "failedToUpdateTitle": "Error al actualizar el título del chat.",
+    "failedToOpenSource": "Error al abrir el archivo fuente.",
+    "chatDeleted": "Chat eliminado.",
+    "chatTitleUpdated": "Título del chat actualizado.",
+    "dropFilesHere": "Suelte archivos aquí...",
+    "includeActiveNote": "Incluir nota activa",
+    "includeActiveWebTab": "Incluir pestaña web activa",
+    "tokenCount": "Tokens: {{count}}"
+  },
+  "models": {
+    "selectModel": "Seleccionar modelo",
+    "model": "Modelo",
+    "enabled": "Habilitado",
+    "disabled": "Deshabilitado",
+    "addModel": "Añadir modelo",
+    "editModel": "Editar modelo",
+    "deleteModel": "Eliminar modelo",
+    "importModels": "Importar modelos",
+    "builtInModels": "Modelos integrados",
+    "customModels": "Modelos personalizados",
+    "noApiKey": "Clave API no establecida",
+    "apiKeyRequired": "Se requiere clave API para este modelo",
+    "addCustomModel": "Añadir modelo {{type}} personalizado",
+    "addNewModelDescription": "Añadir un nuevo modelo a su colección.",
+    "openRouterPaid": "OpenRouter-Paid:Ds-r1",
+    "copyCurlCommand": "Copiar comando curl para probar",
+    "optionalTestApi": "Opcional: probar llamada API"
+  },
+  "qa": {
+    "sectionTitle": "Configuración de QA",
+    "indexVault": "Indexar bóveda",
+    "forceReindex": "Reindexación forzada",
+    "clearIndex": "Borrar índice",
+    "indexing": "Indexando...",
+    "indexComplete": "Indexación completada",
+    "indexFailed": "Error de indexación",
+    "semanticSearch": "Búsqueda semántica",
+    "lexicalSearch": "Búsqueda léxica",
+    "enableSemanticSearch": "Habilitar búsqueda semántica",
+    "enableSemanticSearchDescription": "Habilitar búsqueda de documentos basada en significado. Cuando está deshabilitada, usa solo búsqueda léxica rápida. Use 'Actualizar índice de bóveda' o 'Reindexación forzada' para construir el índice de embedding.",
+    "enableInlineCitations": "Habilitar citas en línea (experimental)",
+    "enableInlineCitationsDescription": "Cuando está habilitado, las respuestas de IA incluirán citas estilo nota al pie dentro del texto y fuentes numeradas al final. Esta es una característica experimental y puede no funcionar como se espera en todos los modelos.",
+    "embeddingModel": "Modelo de embedding",
+    "embeddingModelDescription": "Potencia la búsqueda semántica de bóveda y notas relevantes. Habilite la búsqueda semántica para usarlo.",
+    "embeddingModelHelp": "Este modelo convierte texto en representaciones vectoriales, esencial para la búsqueda semántica y la funcionalidad de Preguntas y Respuestas (QA). Cambiar el modelo de embedding will:",
+    "embeddingModelHelpItems": [
+      "Requerir reconstruir el índice vectorial de su bóveda",
+      "Afectar la calidad de búsqueda semántica",
+      "Impactar el rendimiento de la funcionalidad de QA"
+    ],
+    "autoIndexStrategy": "Estrategia de indexación automática",
+    "autoIndexStrategyDescription": "Decidir cuándo desea que se indexe la bóveda.",
+    "autoIndexNever": " never ",
+    "autoIndexNeverDesc": "Indexación manual solo vía comando o actualizar",
+    "autoIndexOnStartup": "ON STARTUP",
+    "autoIndexOnStartupDesc": "Actualizaciones de índice cuando el plugin se carga o recarga",
+    "autoIndexOnModeSwitch": "ON MODE SWITCH",
+    "autoIndexOnModeSwitchDesc": "Actualizaciones al entrar en modo QA (Recomendado)",
+    "autoIndexWarning": "Advertencia: Implicaciones de costos para bóvedas grandes con modelos de pago",
+    "maxSources": "Fuentes máximas",
+    "maxSourcesDescription": "Obsidian-Mate revisa su bóveda para encontrar notas relevantes y pasa las N principales al LLM. El valor predeterminado para N es 15. Aumente si desea que más notas se incluyan en el paso de generación de respuesta.",
+    "requestsPerMinute": "Solicitudes por minuto",
+    "requestsPerMinuteDescription": "El valor predeterminado es 60. Disminuya si está limitado en tasa por su proveedor de embedding.",
+    "embeddingBatchSize": "Tamaño de lote de embedding",
+    "embeddingBatchSizeDescription": "El valor predeterminado es 16. Aumente si está limitado en tasa por su proveedor de embedding.",
+    "numPartitions": "Número de particiones",
+    "numPartitionsDescription": "Número de particiones para el índice de Obsidian-Mate. El valor predeterminado es 1. Aumente si tiene problemas indexando bóvedas grandes. ¡Advertencia: Los cambios requieren borrar y reconstruir el índice!",
+    "lexicalSearchRamLimit": "Límite RAM de búsqueda léxica",
+    "lexicalSearchRamLimitDescription": "Uso máximo de RAM para el índice de búsqueda de texto completo. Valores más bajos usan menos memoria pero pueden limitar el rendimiento de búsqueda en bóvedas grandes. El valor predeterminado es 100 MB.",
+    "enableFolderGraphBoosts": "Habilitar mejoras de carpeta y grafo",
+    "enableFolderGraphBoostsDescription": "Habilitar mejoras de relevancia basadas en carpeta y grafo para resultados de búsqueda léxica. Cuando está deshabilitada, proporciona puntuación de relevancia puramente basada en palabras clave sin ajustes basados en carpeta o conexiones.",
+    "exclusions": "Exclusiones",
+    "exclusionsDescription": "Excluir carpetas, etiquetas, títulos de notas o extensiones de archivos de la indexación. Los archivos previamente indexados permanecerán hasta que se realice una reindexación forzada.",
+    "manageExclusions": "Gestionar exclusiones",
+    "inclusions": "Inclusiones",
+    "inclusionsDescription": "Indexar solo las rutas, etiquetas o títulos de notas especificados. Las exclusiones tienen prioridad sobre las inclusiones. Los archivos previamente indexados permanecerán hasta que se realice una reindexación forzada.",
+    "manageInclusions": "Gestionar inclusiones",
+    "enableObsidianSync": "Habilitar Obsidian Sync para índice de Obsidian-Mate",
+    "disableIndexOnMobileDescription": "Cuando está habilitado, el índice de Obsidian-Mate no se cargará en dispositivos móviles para ahorrar recursos. Solo el modo chat estará disponible. Cualquier índice existente de sincronización de escritorio se preservará. Desmarque para habilitar modos QA en móvil.",
+    "embeddingModelSaved": "Modelo de embedding guardado. Habilite la búsqueda semántica para construir el índice.",
+    "manage": "Gestionar"
+  },
+  "plus": {
+    "sectionTitle": "Obsidian-Mate Plus",
+    "notPlusUser": "No es usuario de Obsidian-Mate Plus.",
+    "licenseKey": "Clave de licencia",
+    "enterLicenseKey": "Ingrese su clave de licencia",
+    "activate": "Activar",
+    "manageSubscription": "Gestionar suscripción",
+    "features": {
+      "autonomousAgent": "Agente autónomo",
+      "webSearch": "Búsqueda web",
+      "youtubeTranscription": "Transcripción de YouTube",
+      "memory": "Memoria a largo plazo",
+      "advancedContext": "Procesamiento de contexto avanzado"
+    }
+  },
+  "commands": {
+    "sectionTitle": "Configuración de comandos",
+    "customCommands": "Comandos personalizados",
+    "addCommand": "Añadir nuevo comando",
+    "commandName": "Nombre del comando",
+    "commandPrompt": "Prompt del comando",
+    "commandDescription": "Descripción"
+  },
+  "advanced": {
+    "sectionTitle": "Configuración avanzada",
+    "debugMode": "Modo de depuración",
+    "debugModeDescription": "Habilitar registro de depuración en consola",
+    "encryption": "Cifrado",
+    "encryptionDescription": "Cifrar claves API y datos sensibles"
+  },
+  "modals": {
+    "confirm": {
+      "title": "Confirmar",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "yes": "Sí",
+      "no": "No"
+    },
+    "newChatConfirm": {
+      "title": "¿Iniciar nuevo chat?",
+      "description": "Esto borrará la conversación actual. ¿Está seguro de que desea continuar?"
+    },
+    "resetSettingsConfirm": {
+      "title": "¿Restablecer toda la configuración?",
+      "description": "Esto restablecerá toda la configuración de Obsidian-Mate a los valores predeterminados. Esta acción no se puede deshacer."
+    },
+    "loadChatHistory": {
+      "title": "Cargar historial de chat",
+      "noChats": "No se encontró historial de chat."
+    },
+    "addContextNote": {
+      "title": "Añadir nota de contexto",
+      "searchNotes": "Buscar notas...",
+      "noResults": "No se encontraron resultados."
+    },
+    "folderSearch": {
+      "title": "Seleccionar carpeta",
+      "searchFolders": "Buscar carpetas..."
+    },
+    "customPattern": {
+      "title": "Patrón personalizado",
+      "addPattern": "Añadir patrón"
+    }
+  },
+  "restrictions": {
+    "nonMarkdownFiles": "Los archivos no markdown solo están disponibles en el modo Obsidian-Mate Plus. Actualice para acceder a este tipo de archivo.",
+    "urlProcessing": "El procesamiento de URL solo está disponible en el modo Obsidian-Mate Plus. Las URL no se procesarán para el contexto.",
+    "unsupportedFile": "Los archivos {{extension}} no están soportados en el modo actual."
+  },
+  "loading": {
+    "default": "",
+    "readingFiles": "Leyendo archivos",
+    "searchingWeb": "Buscando en la web",
+    "readingFileTree": "Leyendo árbol de archivos",
+    "compacting": "Compactando"
+  },
+  "projects": {
+    "sectionTitle": "Proyectos",
+    "newProject": "Nuevo proyecto",
+    "projectName": "Nombre del proyecto",
+    "selectFolder": "Seleccionar carpeta",
+    "includeSubfolders": "Incluir subcarpetas",
+    "contextNotes": "Notas de contexto",
+    "addNote": "Añadir nota",
+    "noProjects": "Aún no hay proyectos",
+    "createFirst": "Cree su primer proyecto para comenzar",
+    "loadingContext": "Cargando contexto del proyecto...",
+    "contextLoaded": "Contexto del proyecto cargado",
+    "contextLoadFailed": "Error al cargar el contexto del proyecto",
+    "projectAdded": "{{name}} añadido correctamente",
+    "projectUpdated": "{{name}} actualizado correctamente",
+    "projectRemoved": "{{name}} eliminado"
+  },
+  "errors": {
+    "generic": "Ocurrió un error. Por favor, inténtelo de nuevo.",
+    "network": "Error de red. Por favor, verifique su conexión.",
+    "apiKeyMissing": "Falta la clave API. Por favor, configúrela en la configuración.",
+    "rateLimit": "Límite de tasa excedido. Por favor, espere e inténtelo de nuevo.",
+    "modelNotFound": "Modelo no encontrado.",
+    "fileNotFound": "Archivo no encontrado.",
+    "invalidFormat": "Formato inválido."
+  },
+  "commandPalette": {
+    "searchCommands": "Buscar comandos...",
+    "noCommands": "No se encontraron comandos."
+  },
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Añadir",
+    "addButton": "Añadir...",
+    "remove": "Eliminar",
+    "close": "Cerrar",
+    "open": "Abrir",
+    "search": "Buscar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "warning": "Advertencia",
+    "confirm": "Confirmar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "first": "Primero",
+    "last": "Último",
+    "more": "Más",
+    "less": "Menos",
+    "all": "Todo",
+    "none": "Ninguno",
+    "select": "Seleccionar",
+    "selected": "Seleccionado",
+    "enabled": "Habilitado",
+    "disabled": "Deshabilitado",
+    "optional": "Opcional",
+    "required": "Requerido",
+    "name": "Nombre",
+    "description": "Descripción",
+    "settings": "Configuración",
+    "help": "Ayuda",
+    "documentation": "Documentación",
+    "feedback": "Comentarios",
+    "about": "Acerca de",
+    "version": "Versión",
+    "author": "Autor",
+    "submit": "Enviar",
+    "copy": "Copiar",
+    "active": "Activo",
+    "addToChat": "Añadir al chat",
+    "refreshIndex": "Actualizar índice",
+    "chatSettings": "Configuración de chat",
+    "fileContext": "Contexto de archivo",
+    "selectModel": "Seleccionar modelo",
+    "addImages": "Añadir imagen(es)",
+    "updateAvailable": "Actualización disponible:",
+    "addContext": "Añadir contexto",
+    "backlinks": "Enlaces de retroceso",
+    "loadingError": "Error de carga:",
+    "invalidState": "Estado inválido - cambios faltantes",
+    "loadingModels": "Cargando modelos...",
+    "openRouterPaid": "OpenRouter-Paid:Ds-r1",
+    "copyCurlCommand": "Copiar comando curl para probar",
+    "optionalTestApi": "Opcional: probar llamada API",
+    "editProject": "Editar proyecto",
+    "startChat": "Iniciar chat",
+    "deleteProject": "Eliminar proyecto",
+    "closeCurrentProject": "Cerrar proyecto actual",
+    "closeProjectMode": "Cerrar modo proyecto"
+  }
+}

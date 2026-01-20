@@ -3,6 +3,7 @@ import { BaseNoteModal } from "./BaseNoteModal";
 import { ChainType } from "@/chainFactory";
 import { isAllowedFileForChainContext } from "@/utils";
 import { RESTRICTION_MESSAGES } from "@/constants";
+import { t } from "@/i18n";
 
 interface AddContextNoteModalProps {
   app: App;
@@ -49,7 +50,7 @@ export class AddContextNoteModal extends BaseNoteModal<TFile> {
   onChooseItem(note: TFile, evt: MouseEvent | KeyboardEvent) {
     // Check if the file is allowed for the current chain type
     if (!isAllowedFileForChainContext(note, this.chainType)) {
-      new Notice(RESTRICTION_MESSAGES.NON_MARKDOWN_FILES_RESTRICTED);
+      new Notice(t(RESTRICTION_MESSAGES.NON_MARKDOWN_FILES_RESTRICTED));
       return;
     }
 

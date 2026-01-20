@@ -9,6 +9,9 @@ import { VAULT_VECTOR_STORE_STRATEGIES } from "@/constants";
 import { getModelKeyFromModel, updateSetting, useSettingsValue } from "@/settings/model";
 import { Notice } from "obsidian";
 import React from "react";
+import { useTranslation } from "react-i18next";
+
+const { t } = useTranslation();
 
 export const QASettings: React.FC = () => {
   const settings = useSettingsValue();
@@ -28,7 +31,7 @@ export const QASettings: React.FC = () => {
 
     // Persist without rebuild when semantic search is disabled
     updateSetting("embeddingModelKey", modelKey);
-    new Notice("Embedding model saved. Enable Semantic Search to build the index.");
+    new Notice(t("qa.embeddingModelSaved"));
   };
 
   // Partitions are automatically managed in v3 (150MB per JSONL partition).
@@ -42,8 +45,8 @@ export const QASettings: React.FC = () => {
           {/* Enable Semantic Search (v3) */}
           <SettingItem
             type="switch"
-            title="Enable Semantic Search"
-            description="Enable semantic search for meaning-based document retrieval. When disabled, uses fast lexical search only. Use 'Refresh Vault Index' or 'Force Reindex Vault' to build the embedding index."
+            title={t("qa.enableSemanticSearch")}
+            description={t("qa.enableSemanticSearchDescription")}
             checked={settings.enableSemanticSearchV3}
             onCheckedChange={(checked) => {
               // Show confirmation modal with appropriate message
@@ -65,8 +68,8 @@ export const QASettings: React.FC = () => {
           {/* Enable Inline Citations */}
           <SettingItem
             type="switch"
-            title="Enable Inline Citations (experimental)"
-            description="When enabled, AI responses will include footnote-style citations within the text and numbered sources at the end. This is an experimental feature and may not work as expected for all models."
+            title={t("qa.enableInlineCitations")}
+            description={t("qa.enableInlineCitationsDescription")}
             checked={settings.enableInlineCitations}
             onCheckedChange={(checked) => updateSetting("enableInlineCitations", checked)}
           />
@@ -74,26 +77,23 @@ export const QASettings: React.FC = () => {
           {/* Embedding Model - Always shown to reduce ambiguity */}
           <SettingItem
             type="select"
-            title="Embedding Model"
+            title={t("qa.embeddingModel")}
             description={
               <div className="tw-space-y-2">
                 <div className="tw-flex tw-items-center tw-gap-1.5">
                   <span className="tw-font-medium tw-leading-none tw-text-accent">
-                    Powers Semantic Vault Search and Relevant Notes. Enable Semantic Search to use
-                    it.
+                    {t("qa.embeddingModelDescription")}
                   </span>
                   <HelpTooltip
                     content={
                       <div className="tw-flex tw-max-w-96 tw-flex-col tw-gap-2">
                         <div className="tw-pt-2 tw-text-sm tw-text-muted">
-                          This model converts text into vector representations, essential for
-                          semantic search and Question Answering (QA) functionality. Changing the
-                          embedding model will:
+                          {t("qa.embeddingModelHelp")}
                         </div>
                         <ul className="tw-pl-4 tw-text-sm tw-text-muted">
-                          <li>Require rebuilding your vault&#39;s vector index</li>
-                          <li>Affect semantic search quality</li>
-                          <li>Impact Question Answering feature performance</li>
+                          <li>{t("qa.embeddingModelHelpItems.0")}</li>
+                          <li>{t("qa.embeddingModelHelpItems.1")}</li>
+                          <li>{t("qa.embeddingModelHelpItems.2")}</li>
                         </ul>
                       </div>
                     }
@@ -107,54 +107,52 @@ export const QASettings: React.FC = () => {
               label: getModelDisplayWithIcons(model),
               value: getModelKeyFromModel(model),
             }))}
-            placeholder="Model"
+            placeholder={t("models.model")}
           />
 
           {/* Auto-Index Strategy */}
           <SettingItem
             type="select"
-            title="Auto-Index Strategy"
+            title={t("qa.autoIndexStrategy")}
             description={
               <div className="tw-flex tw-items-center tw-gap-1.5">
-                <span className="tw-leading-none">
-                  Decide when you want the vault to be indexed.
-                </span>
+                <span className="tw-leading-none">{t("qa.autoIndexStrategyDescription")}</span>
                 <HelpTooltip
                   content={
                     <div className="tw-space-y-2 tw-py-2">
                       <div className="tw-space-y-1">
                         <div className="tw-text-sm tw-text-muted">
-                          Choose when to index your vault:
+                          {t("qa.autoIndexStrategyDescription")}
                         </div>
                         <ul className="tw-list-disc tw-space-y-1 tw-pl-2 tw-text-sm">
                           <li>
                             <div className="tw-flex tw-items-center tw-gap-1">
                               <strong className="tw-inline-block tw-whitespace-nowrap">
-                                NEVER:
+                                {t("qa.autoIndexNever")}:
                               </strong>
-                              <span>Manual indexing via command or refresh only</span>
+                              <span>{t("qa.autoIndexNeverDesc")}</span>
                             </div>
                           </li>
                           <li>
                             <div className="tw-flex tw-items-center tw-gap-1">
                               <strong className="tw-inline-block tw-whitespace-nowrap">
-                                ON STARTUP:
+                                {t("qa.autoIndexOnStartup")}:
                               </strong>
-                              <span>Index updates when plugin loads or reloads</span>
+                              <span>{t("qa.autoIndexOnStartupDesc")}</span>
                             </div>
                           </li>
                           <li>
                             <div className="tw-flex tw-items-center tw-gap-1">
                               <strong className="tw-inline-block tw-whitespace-nowrap">
-                                ON MODE SWITCH:
+                                {t("qa.autoIndexOnModeSwitch")}:
                               </strong>
-                              <span>Updates when entering QA mode (Recommended)</span>
+                              <span>{t("qa.autoIndexOnModeSwitchDesc")}</span>
                             </div>
                           </li>
                         </ul>
                       </div>
                       <p className="tw-text-sm tw-text-callout-warning">
-                        Warning: Cost implications for large vaults with paid models
+                        {t("qa.autoIndexWarning")}
                       </p>
                     </div>
                   }
@@ -166,7 +164,12 @@ export const QASettings: React.FC = () => {
               updateSetting("indexVaultToVectorStore", value);
             }}
             options={VAULT_VECTOR_STORE_STRATEGIES.map((strategy) => ({
-              label: strategy,
+              label:
+                strategy === "NEVER"
+                  ? t("qa.autoIndexNever")
+                  : strategy === "ON_STARTUP"
+                    ? t("qa.autoIndexOnStartup")
+                    : t("qa.autoIndexOnModeSwitch"),
               value: strategy,
             }))}
             placeholder="Strategy"
@@ -175,8 +178,8 @@ export const QASettings: React.FC = () => {
           {/* Max Sources */}
           <SettingItem
             type="slider"
-            title="Max Sources"
-            description="Copilot goes through your vault to find relevant notes and passes the top N to the LLM. Default for N is 15. Increase if you want more notes included in the answer generation step."
+            title={t("qa.maxSources")}
+            description={t("qa.maxSourcesDescription")}
             min={1}
             max={128}
             step={1}
@@ -190,8 +193,8 @@ export const QASettings: React.FC = () => {
               {/* Requests per Minute */}
               <SettingItem
                 type="slider"
-                title="Requests per Minute"
-                description="Default is 60. Decrease if you are rate limited by your embedding provider."
+                title={t("qa.requestsPerMinute")}
+                description={t("qa.requestsPerMinuteDescription")}
                 min={10}
                 max={60}
                 step={10}
@@ -202,8 +205,8 @@ export const QASettings: React.FC = () => {
               {/* Embedding batch size */}
               <SettingItem
                 type="slider"
-                title="Embedding Batch Size"
-                description="Default is 16. Increase if you are rate limited by your embedding provider."
+                title={t("qa.embeddingBatchSize")}
+                description={t("qa.embeddingBatchSizeDescription")}
                 min={1}
                 max={128}
                 step={1}
@@ -214,8 +217,8 @@ export const QASettings: React.FC = () => {
               {/* Number of Partitions */}
               <SettingItem
                 type="select"
-                title="Number of Partitions"
-                description="Number of partitions for Copilot index. Default is 1. Increase if you have issues indexing large vaults. Warning: Changes require clearing and rebuilding the index!"
+                title={t("qa.numPartitions")}
+                description={t("qa.numPartitionsDescription")}
                 value={String(settings.numPartitions || 1)}
                 onChange={(value) => updateSetting("numPartitions", Number(value))}
                 options={[
@@ -227,7 +230,7 @@ export const QASettings: React.FC = () => {
                   { label: "32", value: "32" },
                   { label: "40", value: "40" },
                 ]}
-                placeholder="Select partitions"
+                placeholder={t("common.select")}
               />
             </>
           )}
@@ -235,8 +238,8 @@ export const QASettings: React.FC = () => {
           {/* Lexical Search RAM Limit */}
           <SettingItem
             type="slider"
-            title="Lexical Search RAM Limit"
-            description="Maximum RAM usage for full-text search index. Lower values use less memory but may limit search performance on large vaults. Default is 100 MB."
+            title={t("qa.lexicalSearchRamLimit")}
+            description={t("qa.lexicalSearchRamLimitDescription")}
             min={20}
             max={1000}
             step={20}
@@ -248,8 +251,8 @@ export const QASettings: React.FC = () => {
           {/* Enable Folder and Graph Boosts */}
           <SettingItem
             type="switch"
-            title="Enable Folder and Graph Boosts"
-            description="Enable folder and graph-based relevance boosts for lexical search results. When disabled, provides pure keyword-based relevance scoring without folder or connection-based adjustments."
+            title={t("qa.enableFolderGraphBoosts")}
+            description={t("qa.enableFolderGraphBoostsDescription")}
             checked={settings.enableLexicalBoosts}
             onCheckedChange={(checked) => updateSetting("enableLexicalBoosts", checked)}
           />
@@ -257,13 +260,10 @@ export const QASettings: React.FC = () => {
           {/* Exclusions */}
           <SettingItem
             type="custom"
-            title="Exclusions"
+            title={t("qa.exclusions")}
             description={
               <>
-                <p>
-                  Exclude folders, tags, note titles or file extensions from being indexed.
-                  Previously indexed files will remain until a force re-index is performed.
-                </p>
+                <p>{t("qa.exclusionsDescription")}</p>
               </>
             }
           >
@@ -274,25 +274,19 @@ export const QASettings: React.FC = () => {
                   app,
                   (value) => updateSetting("qaExclusions", value),
                   settings.qaExclusions,
-                  "Manage Exclusions"
+                  t("qa.manageExclusions")
                 ).open()
               }
             >
-              Manage
+              {t("qa.manage")}
             </Button>
           </SettingItem>
 
           {/* Inclusions */}
           <SettingItem
             type="custom"
-            title="Inclusions"
-            description={
-              <p>
-                Index only the specified paths, tags, or note titles. Exclusions take precedence
-                over inclusions. Previously indexed files will remain until a force re-index is
-                performed.
-              </p>
-            }
+            title={t("qa.inclusions")}
+            description={<p>{t("qa.inclusionsDescription")}</p>}
           >
             <Button
               variant="secondary"
@@ -301,19 +295,19 @@ export const QASettings: React.FC = () => {
                   app,
                   (value) => updateSetting("qaInclusions", value),
                   settings.qaInclusions,
-                  "Manage Inclusions"
+                  t("qa.manageInclusions")
                 ).open()
               }
             >
-              Manage
+              {t("qa.manage")}
             </Button>
           </SettingItem>
 
           {/* Enable Obsidian Sync */}
           <SettingItem
             type="switch"
-            title="Enable Obsidian Sync for Copilot index"
-            description="If enabled, store the semantic index in .obsidian so it syncs with Obsidian Sync. If disabled, store it under .copilot/ at the vault root."
+            title={t("qa.enableObsidianSync")}
+            description={t("qa.enableObsidianSyncDescription")}
             checked={settings.enableIndexSync}
             onCheckedChange={(checked) => updateSetting("enableIndexSync", checked)}
           />
@@ -321,8 +315,8 @@ export const QASettings: React.FC = () => {
           {/* Disable index loading on mobile */}
           <SettingItem
             type="switch"
-            title="Disable index loading on mobile"
-            description="When enabled, Copilot index won't be loaded on mobile devices to save resources. Only chat mode will be available. Any existing index from desktop sync will be preserved. Uncheck to enable QA modes on mobile."
+            title={t("qa.disableIndexOnMobile")}
+            description={t("qa.disableIndexOnMobileDescription")}
             checked={settings.disableIndexOnMobile}
             onCheckedChange={(checked) => updateSetting("disableIndexOnMobile", checked)}
           />

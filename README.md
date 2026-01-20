@@ -1,4 +1,4 @@
-<h1 align="center">Copilot for Obsidian</h1>
+<h1 align="center">Obsidian-Mate</h1>
 
 <h2 align="center">
 The Ultimate AI Assistant for Your Second Brain
@@ -24,7 +24,7 @@ The Ultimate AI Assistant for Your Second Brain
 
 ## The What
 
-_Copilot for Obsidian_ is your in‑vault AI assistant with chat-based vault search, web and YouTube support, powerful context processing, and ever-expanding agentic capabilities within Obsidian's highly customizable workspace - all while keeping your data under **your** control.
+_Obsidian-Mate_ is your in‑vault AI assistant with chat-based vault search, web and YouTube support, powerful context processing, and ever-expanding agentic capabilities within Obsidian's highly customizable workspace - all while keeping your data under **your** control.
 
 ## The Why
 
@@ -39,13 +39,13 @@ This is the future we believe in. If you share this vision, please support this 
 - **🔒 Your data is 100% yours**: Local search and storage, and full control of your data if you use self-hosted models.
 - **🧠 Bring Your Own Model**: Tap any OpenAI-compatible or local model to uncover insights, spark connections, and create content.
 - **🖼️ Multimedia understanding**: Drop in webpages, YouTube videos, images, PDFs, EPUBS, or real-time web search for quick insights.
-- **🔍 Smart Vault Search**: Search your vault with chat, no setup required. Embeddings are optional. Copilot delivers results right away.
+- **🔍 Smart Vault Search**: Search your vault with chat, no setup required. Embeddings are optional. Obsidian-Mate delivers results right away.
 - **✍️ Composer and Quick Commands**: Interact with your writing with chat, apply changes with 1 click.
 - **🗂️ Project Mode**: Create AI-ready context based on folders and tags. Think NotebookLM but inside your vault!
-- **🤖 Agent Mode (Plus)**: Unlock an autonomous agent with built-in tool calling. No commands needed. Copilot automatically triggers vault, web searches or any other relevant tool when relevant.
+- **🤖 Agent Mode (Plus)**: Unlock an autonomous agent with built-in tool calling. No commands needed. Obsidian-Mate automatically triggers vault, web searches or any other relevant tool when relevant.
 
 <p align="center">
-  <em>Copilot's Agent can call the proper tools on its own upon your request.</em>
+  <em>Obsidian-Mate's Agent can call the proper tools on its own upon your request.</em>
 </p>
 <p align="center">
   <img src="./images/product-ui-screenshot.png" alt="Product UI screenshot" width="800"/>

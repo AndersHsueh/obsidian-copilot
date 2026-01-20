@@ -15,6 +15,7 @@ import { getSettings } from "@/settings/model";
 import { FileParserManager } from "@/tools/FileParserManager";
 import { ChatMessage, MessageContext } from "@/types/message";
 import { extractNoteFiles, getNotesFromPath, getNotesFromTags } from "@/utils";
+import { t } from "@/i18n";
 import { TFile, Vault } from "obsidian";
 import { MessageRepository } from "./MessageRepository";
 
@@ -238,7 +239,7 @@ export class ContextManager {
       let wasCompacted = false;
       let compactedContextPortion = contextPortion;
       if (finalProcessedMessage.length > charThreshold) {
-        updateLoadingMessage?.(LOADING_MESSAGES.COMPACTING);
+        updateLoadingMessage?.(t(LOADING_MESSAGES.COMPACTING));
         const compactor = await getContextCompactor();
         // Only compact context portion, not user message, to preserve boundary
         const result = await compactor.compact(contextPortion);
@@ -251,7 +252,7 @@ export class ContextManager {
             `[ContextManager] Compacted context: ${result.originalCharCount} -> ${result.compactedCharCount} chars`
           );
         }
-        updateLoadingMessage?.(LOADING_MESSAGES.DEFAULT);
+        updateLoadingMessage?.(t(LOADING_MESSAGES.DEFAULT));
       }
 
       logInfo(`[ContextManager] Successfully processed context for message ${message.id}`);

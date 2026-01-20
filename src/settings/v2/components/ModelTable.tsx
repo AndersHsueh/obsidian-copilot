@@ -55,6 +55,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { isRequiredChatModel } from "@/utils/modelUtils";
+import { useTranslation } from "react-i18next";
 
 const CAPABILITY_ICONS: Record<
   ModelCapability,
@@ -163,6 +164,7 @@ const ModelCard: React.FC<ModelCardProps> = ({
   id,
   containerRef,
 }) => {
+  const { t } = useTranslation();
   const dropdownActions: MobileCardDropdownAction<CustomModel>[] = [];
 
   if (onEdit) {
@@ -194,7 +196,7 @@ const ModelCard: React.FC<ModelCardProps> = ({
     <div className="tw-flex tw-justify-around">
       {!model.isEmbeddingModel && (
         <div className="tw-flex tw-items-center tw-gap-2">
-          <span className="tw-text-sm">Enabled</span>
+          <span className="tw-text-sm">{t("models.enabled")}</span>
           <Checkbox
             checked={model.enabled}
             onCheckedChange={(checked: boolean) => onUpdateModel({ ...model, enabled: checked })}

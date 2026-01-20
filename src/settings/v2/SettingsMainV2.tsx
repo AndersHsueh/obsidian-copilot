@@ -8,11 +8,14 @@ import { resetSettings } from "@/settings/model";
 import { CommandSettings } from "@/settings/v2/components/CommandSettings";
 import { Cog, Command, Cpu, Database, Sparkles, Wrench } from "lucide-react";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { AdvancedSettings } from "./components/AdvancedSettings";
 import { BasicSettings } from "./components/BasicSettings";
 import { CopilotPlusSettings } from "./components/CopilotPlusSettings";
 import { ModelSettings } from "./components/ModelSettings";
 import { QASettings } from "./components/QASettings";
+
+const { t } = useTranslation();
 
 const TAB_IDS = ["basic", "model", "QA", "command", "plus", "advanced"] as const;
 type TabId = (typeof TAB_IDS)[number];
@@ -41,7 +44,7 @@ const components: Record<TabId, React.FC> = {
 const tabs: TabItemType[] = TAB_IDS.map((id) => ({
   id,
   icon: icons[id],
-  label: id.charAt(0).toUpperCase() + id.slice(1),
+  label: t(`settings.tabs.${id}`),
 }));
 
 const SettingsContent: React.FC = () => {
@@ -101,7 +104,7 @@ const SettingsMainV2: React.FC<SettingsMainV2Props> = ({ plugin }) => {
         <div className="tw-flex tw-flex-col tw-gap-2">
           <h1 className="tw-flex tw-flex-col tw-gap-2 sm:tw-flex-row sm:tw-items-center sm:tw-justify-between">
             <div className="tw-flex tw-items-center tw-gap-2">
-              <span>Copilot Settings</span>
+              <span>{t("settings.title")}</span>
               <div className="tw-flex tw-items-center tw-gap-1">
                 <span className="tw-text-xs tw-text-muted">v{plugin.manifest.version}</span>
                 {latestVersion && (
@@ -113,10 +116,10 @@ const SettingsMainV2: React.FC<SettingsMainV2Props> = ({ plugin }) => {
                         rel="noopener noreferrer"
                         className="tw-text-xs tw-text-accent hover:tw-underline"
                       >
-                        (Update to v{latestVersion})
+                        {t("settings.updateAvailable", { version: latestVersion })}
                       </a>
                     ) : (
-                      <span className="tw-text-xs tw-text-normal"> (up to date)</span>
+                      <span className="tw-text-xs tw-text-normal"> {t("settings.upToDate")}</span>
                     )}
                   </>
                 )}
@@ -124,7 +127,7 @@ const SettingsMainV2: React.FC<SettingsMainV2Props> = ({ plugin }) => {
             </div>
             <div className="tw-self-end sm:tw-self-auto">
               <Button variant="secondary" size="sm" onClick={handleReset}>
-                Reset Settings
+                {t("settings.resetSettings")}
               </Button>
             </div>
           </h1>

@@ -12,6 +12,7 @@ import { getApiKeyForProvider } from "@/utils/modelUtils";
 import { App, Modal } from "obsidian";
 import React, { useEffect, useState } from "react";
 import { createRoot, Root } from "react-dom/client";
+import { useTranslation } from "react-i18next";
 
 interface ApiKeyModalContentProps {
   onClose: () => void;
@@ -24,6 +25,7 @@ interface ProviderKeyItem {
 }
 
 function ApiKeyModalContent({ onClose, onGoToModelTab }: ApiKeyModalContentProps) {
+  const { t } = useTranslation();
   const [expandedProvider, setExpandedProvider] = useState<SettingKeyProviders | null>(null);
 
   useEffect(() => {
@@ -166,7 +168,7 @@ function ApiKeyModalContent({ onClose, onGoToModelTab }: ApiKeyModalContentProps
       </div>
 
       <div className="tw-mt-4 tw-flex tw-justify-end">
-        <Button onClick={onClose}>Close</Button>
+        <Button onClick={onClose}>{t("common.close")}</Button>
       </div>
     </div>
   );

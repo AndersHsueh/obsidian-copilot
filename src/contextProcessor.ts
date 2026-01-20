@@ -9,6 +9,7 @@ import { FileParserManager } from "@/tools/FileParserManager";
 import { isPlusChain } from "@/utils";
 import { normalizeUrlString } from "@/utils/urlNormalization";
 import { TFile, Vault, Notice } from "obsidian";
+import { t } from "@/i18n";
 import {
   NOTE_CONTEXT_PROMPT_TAG,
   EMBEDDED_PDF_TAG,
@@ -556,9 +557,11 @@ export class ContextProcessor {
         // 2. Apply chain restrictions only to supported files that are NOT md or canvas
         if (!isPlusChain(currentChain) && note.extension !== "md" && note.extension !== "canvas") {
           // This file type is supported, but requires Plus mode (e.g., PDF)
-          logWarn(`File type ${note.extension} requires Copilot Plus mode for context processing.`);
+          logWarn(
+            `File type ${note.extension} requires Obsidian-Mate Plus mode for context processing.`
+          );
           // Show user-facing notice about the restriction
-          new Notice(RESTRICTION_MESSAGES.NON_MARKDOWN_FILES_RESTRICTED);
+          new Notice(t(RESTRICTION_MESSAGES.NON_MARKDOWN_FILES_RESTRICTED));
           return;
         }
 

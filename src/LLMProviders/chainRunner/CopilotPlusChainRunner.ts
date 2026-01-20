@@ -58,6 +58,7 @@ import { parseXMLToolCalls, unescapeXml } from "./utils/xmlParsing";
 import { extractParametersFromZod, SimpleTool } from "@/tools/SimpleTool";
 import ProjectManager from "@/LLMProviders/projectManager";
 import { isProjectMode } from "@/aiParams";
+import { t } from "@/i18n";
 
 type ToolCallWithExecutor = {
   tool: any;
@@ -848,7 +849,7 @@ OUTPUT ONLY XML - NO OTHER TEXT.`;
       );
     } catch (error: any) {
       // Reset loading message to default
-      updateLoadingMessage?.(LOADING_MESSAGES.DEFAULT);
+      updateLoadingMessage?.(t(LOADING_MESSAGES.DEFAULT));
 
       // Check if the error is due to abort signal
       if (error.name === "AbortError" || abortController.signal.aborted) {
@@ -926,11 +927,11 @@ OUTPUT ONLY XML - NO OTHER TEXT.`;
 
       logInfo(`Step 2: Calling tool: ${toolCall.tool.name}`);
       if (toolCall.tool.name === "localSearch") {
-        updateLoadingMessage?.(LOADING_MESSAGES.READING_FILES);
+        updateLoadingMessage?.(t(LOADING_MESSAGES.READING_FILES));
       } else if (toolCall.tool.name === "webSearch") {
-        updateLoadingMessage?.(LOADING_MESSAGES.SEARCHING_WEB);
+        updateLoadingMessage?.(t(LOADING_MESSAGES.SEARCHING_WEB));
       } else if (toolCall.tool.name === "getFileTree") {
-        updateLoadingMessage?.(LOADING_MESSAGES.READING_FILE_TREE);
+        updateLoadingMessage?.(t(LOADING_MESSAGES.READING_FILE_TREE));
       }
       const output = await ToolManager.callTool(toolCall.tool, toolCall.args);
 

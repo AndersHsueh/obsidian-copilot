@@ -1,0 +1,408 @@
+{
+  "appName": "Obsidian-Mate",
+  "settings": {
+    "title": "Obsidian-Mate 설정",
+    "version": "v{{version}}",
+    "upToDate": "(최신 버전)",
+    "updateAvailable": "(v{{version}}로 업데이트)",
+    "resetSettings": "설정 초기화",
+    "tabs": {
+      "basic": "기본",
+      "model": "모델",
+      "qa": "问答",
+      "command": "명령",
+      "plus": "플러스",
+      "advanced": "고급"
+    },
+    "general": {
+      "sectionTitle": "일반",
+      "apiKeys": {
+        "title": "API 키",
+        "description": "다른 AI 제공자의 API 키 구성",
+        "helpTitle": "채팅 및 QA 기능에 API 키 필요",
+        "helpContent": "채팅 및 QA 기능을 활성화하려면 선택한 제공자의 API 키를 제공하세요.",
+        "setKeys": "키 설정"
+      },
+      "defaultModel": {
+        "title": "기본 채팅 모델",
+        "description": "사용할 채팅 모델 선택",
+        "helpTitle": "기본 모델은 OpenRouter Gemini 2.5 Flash입니다",
+        "helpContent": "이 모델을 사용하려면 'API 키'에서 OpenRouter API 키를 설정하거나 다른 제공자의 다른 모델을 선택하세요.",
+        "selectModel": "모델 선택"
+      },
+      "defaultMode": {
+        "title": "기본 모드",
+        "description": "기본 채팅 모드 선택",
+        "helpTitle": "채팅 모드",
+        "helpContent": {
+          "chat": "<strong>채팅:</strong> 일반적인 대화 및 작업에 적합한 일반 채팅 모드.<i>자체 API 키로 무료 사용.</i>",
+          "vaultQA": "<strong>Vault QA (기본):</strong> 의미론적 검색으로 볼트 내용에 대해 질문.<i>자체 API 키로 무료 사용.</i>",
+          "copilotPlus": "<strong>Obsidian-Mate Plus:</strong> 2개의 무료 모드 모든 기능，加上高級 유료 기능 包括채팅 컨텍스트 메뉴, 고급 검색, AI 에이전트 등. 더 자세한 내용은 <a href=\"{{url}}\" target=\"_blank\" rel=\"noopener noreferrer\">obsidiancopilot.com</a>을 참조하세요."
+        }
+      },
+      "openPluginIn": {
+        "title": "플러그인 열기 위치",
+        "description": "플러그인을 열 위치 선택",
+        "sidebarView": "사이드바 보기",
+        "editor": "편집기"
+      },
+      "sendShortcut": {
+        "title": "전송 바로 가기",
+        "description": "메시지를 전송할 키보드 바로 가기 선택",
+        "helpTitle": "바로 가기가 작동하지 않나요?",
+        "helpContent": "선택한 바로 가기가 작동하지 않으면 <strong>Obsidian 설정 → 단축키</strong>에서 다른 명령이 같은 키 조합을 사용하고 있는지 확인하세요. 먼저 충돌하는 단축키를 제거하거나 변경해야 할 수 있습니다.",
+        "enter": "엔터",
+        "shiftEnter": "Shift + 엔터"
+      },
+      "autoAddActiveContent": {
+        "title": "활성 콘텐츠를 컨텍스트에 자동 추가",
+        "description": "메시지를 보낼 때 활성 노트 또는 Web Viewer 탭(데스크톱 전용)을 채팅 컨텍스트에 자동으로 추가합니다."
+      },
+      "autoAddSelection": {
+        "title": "선택 항목을 컨텍스트에 자동 추가",
+        "description": "노트 또는 Web Viewer(데스크톱 전용)에서 선택한 텍스트를 채팅 컨텍스트에 자동으로 추가합니다. 수동 명령을 사용하려면 비활성화하세요."
+      },
+      "imagesInMarkdown": {
+        "title": "Markdown의 이미지",
+        "description": "멀티모달 모델에서만 작동합니다. 텍스트와 함께 markdown에 포함된 이미지를 AI에 전달합니다."
+      },
+      "suggestedPrompts": {
+        "title": "제안 프롬프트",
+        "description": "채팅 보기에 제안 프롬프트 표시"
+      },
+      "relevantNotes": {
+        "title": "관련 노트",
+        "description": "채팅 보기에 관련 노트 표시"
+      }
+    },
+    "savingConversations": {
+      "sectionTitle": "대화 저장",
+      "autosaveChat": {
+        "title": "채팅 자동 저장",
+        "description": "사용자 메시지와 AI 응답마다 채팅을 자동으로 저장합니다."
+      },
+      "generateAIChatTitle": {
+        "title": "저장 시 AI로 채팅 제목 생성",
+        "description": "활성화하면 AI 모델을 사용하여 저장된 채팅 노트에 간결한 제목을 생성합니다. 비활성화하면 첫 번째 사용자 메시지의 첫 10개 단어를 사용합니다."
+      },
+      "defaultConversationFolder": {
+        "title": "기본 대화 폴더 이름",
+        "description": "채팅 대화가 저장될 기본 폴더 이름입니다. 기본값은 'copilot/copilot-conversations'입니다",
+        "placeholder": "copilot/copilot-conversations"
+      },
+      "defaultConversationTag": {
+        "title": "기본 대화 태그",
+        "description": "대화를 저장할 때 사용되는 기본 태그입니다. 기본값은 'ai-conversations'입니다",
+        "placeholder": "ai-conversations"
+      },
+      "conversationFilenameTemplate": {
+        "title": "대화 파일 이름 템플릿",
+        "description": "저장된 대화 노트 이름의 형식을 사용자 지정합니다.",
+        "helpTitle": "참고: 다음 변수는 모두 템플릿에 포함되어야 합니다.",
+        "helpContent": "사용 가능한 변수:",
+        "variableDate": "<strong>{$date}</strong>: YYYYMMDD 형식의 날짜",
+        "variableTime": "<strong>{$time}</strong>: HHMMSS 형식의 시간",
+        "variableTopic": "<strong>{$topic}</strong>: 채팅 대화 주제",
+        "example": "예시: {$date}_{$time}__{$topic} → 20250114_153232__polish_this_article_[[Readme]]",
+        "apply": "적용"
+      }
+    },
+    "sorting": {
+      "sectionTitle": "정렬",
+      "chatHistorySort": {
+        "title": "채팅 기록 정렬 전략",
+        "description": "채팅 기록 목록의 정렬 순서"
+      },
+      "projectListSort": {
+        "title": "프로젝트 목록 정렬 전략",
+        "description": "프로젝트 목록의 정렬 순서"
+      },
+      "sortOptions": {
+        "recency": "최신순",
+        "created": "생성일순",
+        "alphabetical": "가나다순"
+      }
+    },
+    "language": {
+      "title": "언어",
+      "description": "Obsidian-Mate 인터페이스의 언어 선택",
+      "auto": "시스템 언어 따름",
+      "en": "English",
+      "zh": "简体中文",
+      "ja": "日本語",
+      "ko": "한국어",
+      "fr": "Français",
+      "es": "Español"
+    }
+  },
+  "chat": {
+    "newChat": "새 채팅",
+    "saveAsNote": "노트로 저장",
+    "loadHistory": "채팅 기록 로드",
+    "sendMessage": "메시지 전송",
+    "stopGenerating": "생성 중지",
+    "regenerate": "다시 생성",
+    "edit": "편집",
+    "delete": "삭제",
+    "copy": "복사",
+    "copied": "복사됨!",
+    "failedToSend": "메시지 전송에 실패했습니다. 다시 시도하세요.",
+    "failedToSave": "채팅을 노트로 저장하지 못했습니다. 콘솔에서 세부 정보를 확인하세요.",
+    "failedToEdit": "메시지 편집에 실패했습니다. 다시 시도하세요.",
+    "failedToDelete": "메시지 삭제에 실패했습니다. 다시 시도하세요.",
+    "cannotRegenerateFirst": "첫 번째 메시지는 다시 생성할 수 없습니다.",
+    "messageNotFound": "메시지를 찾을 수 없습니다.",
+    "failedToLoadHistory": "채팅 기록을 로드하지 못했습니다.",
+    "failedToUpdateTitle": "채팅 제목을 업데이트하지 못했습니다.",
+    "failedToOpenSource": "소스 파일을 열지 못했습니다.",
+    "chatDeleted": "채팅이 삭제되었습니다.",
+    "chatTitleUpdated": "채팅 제목이 업데이트되었습니다.",
+    "dropFilesHere": "여기에 파일을 드롭...",
+    "includeActiveNote": "활성 노트 포함",
+    "includeActiveWebTab": "활성 Web 탭 포함",
+    "tokenCount": "토큰: {{count}}"
+  },
+  "models": {
+    "selectModel": "모델 선택",
+    "model": "모델",
+    "enabled": "활성화",
+    "disabled": "비활성화",
+    "addModel": "모델 추가",
+    "editModel": "모델 편집",
+    "deleteModel": "모델 삭제",
+    "importModels": "모델 가져오기",
+    "builtInModels": "기본 제공 모델",
+    "customModels": "사용자 정의 모델",
+    "noApiKey": "API 키가 설정되지 않음",
+    "apiKeyRequired": "이 모델에는 API 키가 필요합니다",
+    "addCustomModel": "사용자 정의 {{type}} 모델 추가",
+    "addNewModelDescription": "새 모델을 모델 컬렉션에 추가합니다.",
+    "openRouterPaid": "OpenRouter-Paid:Ds-r1",
+    "copyCurlCommand": "테스트용 curl 명령 복사",
+    "optionalTestApi": "선택 사항: API 호출 테스트"
+  },
+  "qa": {
+    "sectionTitle": "QA 설정",
+    "indexVault": "볼트 색인 생성",
+    "forceReindex": "강제 재색인",
+    "clearIndex": "색인 지우기",
+    "indexing": "색인 생성 중...",
+    "indexComplete": "색인 완료",
+    "indexFailed": "색인 실패",
+    "semanticSearch": "의미론적 검색",
+    "lexicalSearch": "어휘 검색",
+    "enableSemanticSearch": "의미론적 검색 활성화",
+    "enableSemanticSearchDescription": "의미 기반 문서 검색을 활성화합니다. 비활성화하면 빠른 어휘 검색만 사용합니다. '볼트 색인 새로고침' 또는 '강제 재색인'을 사용하여 임베딩 색인을 구축하세요.",
+    "enableInlineCitations": "인라인 인용 활성화 (실험적)",
+    "enableInlineCitationsDescription": "활성화하면 AI 응답에 텍스트 내 각주 스타일 인용과末尾에 번호가 매겨진 소스가 포함됩니다. 이것은 실험적 기능이며 모든 모델에서 예상대로 작동하지 않을 수 있습니다.",
+    "embeddingModel": "임베딩 모델",
+    "embeddingModelDescription": "의미론적 볼트 검색 및 관련 노트를 지원합니다. 의미론적 검색을 활성화하면 사용할 수 있습니다.",
+    "embeddingModelHelp": "이 모델은 텍스트를 벡터 표현으로 변환하며, 의미론적 검색 및 질문 답변(QA) 기능에 필수적입니다. 임베딩 모델을 변경하면:",
+    "embeddingModelHelpItems": [
+      "볼트의 벡터 색인을 다시 구축해야 합니다",
+      "의미론적 검색 품질에 영향을 미칩니다",
+      "질문 답변 기능 성능에 영향을 미칩니다"
+    ],
+    "autoIndexStrategy": "자동 색인 전략",
+    "autoIndexStrategyDescription": "볼트를 색인화할 시기를 결정합니다.",
+    "autoIndexNever": " never ",
+    "autoIndexNeverDesc": "명령 또는 수동 새로고침을 통한 색인만",
+    "autoIndexOnStartup": "ON STARTUP",
+    "autoIndexOnStartupDesc": "플러그인 로드 또는 재로드 시 색인 업데이트",
+    "autoIndexOnModeSwitch": "ON MODE SWITCH",
+    "autoIndexOnModeSwitchDesc": "QA 모드 진입 시 업데이트 (권장)",
+    "autoIndexWarning": "경고: 대형 볼트에서 유료 모델의 비용 영향",
+    "maxSources": "최대 소스 수",
+    "maxSourcesDescription": "Obsidian-Mate은 볼트를 검색하여 관련 노트를 찾고 상위 N개를 LLM에 전달합니다. N의 기본값은 15입니다. 답변 생성 단계에 더 많은 노트를 포함하려면 증가하세요.",
+    "requestsPerMinute": "분당 요청 수",
+    "requestsPerMinuteDescription": "기본값은 60입니다. 임베딩 제공자로부터 비율 제한을 받는 경우 줄이세요.",
+    "embeddingBatchSize": "임베딩 배치 크기",
+    "embeddingBatchSizeDescription": "기본값은 16입니다. 임베딩 제공자로부터 비율 제한을 받는 경우 늘리세요.",
+    "numPartitions": "파티션 수",
+    "numPartitionsDescription": "Obsidian-Mate 색인의 파티션 수입니다. 기본값은 1입니다. 대형 볼트 색인화에 문제가 있으면 증가하세요. 경고: 변경 시 색인을 지우고 다시 구축해야 합니다!",
+    "lexicalSearchRamLimit": "어휘 검색 RAM 제한",
+    "lexicalSearchRamLimitDescription": "전체 텍스트 검색 색인의 최대 RAM 사용량입니다. 값을 낮추면 메모리를 덜 사용하지만 대형 볼트에서 검색 성능이 제한될 수 있습니다. 기본값은 100MB입니다.",
+    "enableFolderGraphBoosts": "폴더 및 그래프 부스트 활성화",
+    "enableFolderGraphBoostsDescription": "어휘 검색 결과에 폴더 및 그래프 기반 관련성 부스트를 활성화합니다. 비활성화하면 폴더 또는 연결 기반 조정 없이 순수 키워드 기반 관련성 점수를 제공합니다.",
+    "exclusions": "제외 항목",
+    "exclusionsDescription": "색인에서 제외할 폴더, 태그, 노트 제목 또는 파일 확장자입니다. 이전에 색인화된 파일은 강제 재색인이 실행될 때까지 유지됩니다.",
+    "manageExclusions": "제외 항목 관리",
+    "inclusions": "포함 항목",
+    "inclusionsDescription": "지정된 경로, 태그 또는 노트 제목만 색인화합니다. 제외 항목이 포함 항목보다 우선합니다. 이전에 색인화된 파일은 강제 재색인이 실행될 때까지 유지됩니다.",
+    "manageInclusions": "포함 항목 관리",
+    "enableObsidianSync": "Obsidian-Mate 색인에 Obsidian 동기화 활성화",
+    "disableIndexOnMobileDescription": "활성화하면 Obsidian-Mate 색인이 모바일 장치에 로드되지 않아 리소스가 절약됩니다. 채팅 모드만 사용할 수 있습니다. 데스크톱 동기화의 기존 색인이 유지됩니다. 모바일에서 QA 모드를 활성화하려면 확인 표시를 제거하세요.",
+    "embeddingModelSaved": "임베딩 모델이 저장되었습니다. 의미론적 검색을 활성화하여 색인을 구축하세요.",
+    "manage": "관리"
+  },
+  "plus": {
+    "sectionTitle": "Obsidian-Mate Plus",
+    "notPlusUser": "Obsidian-Mate Plus 사용자가 아닙니다.",
+    "licenseKey": "라이선스 키",
+    "enterLicenseKey": "라이선스 키 입력",
+    "activate": "활성화",
+    "manageSubscription": "구독 관리",
+    "features": {
+      "autonomousAgent": "자율 에이전트",
+      "webSearch": "웹 검색",
+      "youtubeTranscription": "YouTube 자막",
+      "memory": "장기 메모리",
+      "advancedContext": "고급 컨텍스트 처리"
+    }
+  },
+  "commands": {
+    "sectionTitle": "명령 설정",
+    "customCommands": "사용자 정의 명령",
+    "addCommand": "새 명령 추가",
+    "commandName": "명령 이름",
+    "commandPrompt": "명령 프롬프트",
+    "commandDescription": "설명"
+  },
+  "advanced": {
+    "sectionTitle": "고급 설정",
+    "debugMode": "디버그 모드",
+    "debugModeDescription": "콘솔에 디버그 로깅 활성화",
+    "encryption": "암호화",
+    "encryptionDescription": "API 키 및 민감한 데이터 암호화"
+  },
+  "modals": {
+    "confirm": {
+      "title": "확인",
+      "cancel": "취소",
+      "confirm": "확인",
+      "yes": "예",
+      "no": "아니오"
+    },
+    "newChatConfirm": {
+      "title": "새 채팅 시작?",
+      "description": "이렇게 하면 현재 대화가 지워집니다. 계속하시겠습니까?"
+    },
+    "resetSettingsConfirm": {
+      "title": "모든 설정 초기화?",
+      "description": "이렇게 하면 모든 Obsidian-Mate 설정이 기본값으로 초기화됩니다. 이 작업은 실행 취소할 수 없습니다."
+    },
+    "loadChatHistory": {
+      "title": "채팅 기록 로드",
+      "noChats": "채팅 기록을 찾을 수 없습니다."
+    },
+    "addContextNote": {
+      "title": "컨텍스트 노트 추가",
+      "searchNotes": "노트 검색...",
+      "noResults": "결과를 찾을 수 없습니다."
+    },
+    "folderSearch": {
+      "title": "폴더 선택",
+      "searchFolders": "폴더 검색..."
+    },
+    "customPattern": {
+      "title": "사용자 정의 패턴",
+      "addPattern": "패턴 추가"
+    }
+  },
+  "restrictions": {
+    "nonMarkdownFiles": "비마크다운 파일은 Obsidian-Mate Plus 모드에서만 사용할 수 있습니다. 이 파일 유형에 액세스하려면 업그레이드하세요.",
+    "urlProcessing": "URL 처리는 Obsidian-Mate Plus 모드에서만 사용할 수 있습니다. URL은 컨텍스트용으로 처리되지 않습니다.",
+    "unsupportedFile": "{{extension}} 파일은 현재 모드에서 지원되지 않습니다."
+  },
+  "loading": {
+    "default": "",
+    "readingFiles": "파일 읽는 중",
+    "searchingWeb": "웹 검색 중",
+    "readingFileTree": "파일 트리 읽는 중",
+    "compacting": "압축 중"
+  },
+  "projects": {
+    "sectionTitle": "프로젝트",
+    "newProject": "새 프로젝트",
+    "projectName": "프로젝트 이름",
+    "selectFolder": "폴더 선택",
+    "includeSubfolders": "하위 폴더 포함",
+    "contextNotes": "컨텍스트 노트",
+    "addNote": "노트 추가",
+    "noProjects": "아직 프로젝트가 없습니다",
+    "createFirst": "시작하려면 첫 번째 프로젝트를 만드세요",
+    "loadingContext": "프로젝트 컨텍스트 로드 중...",
+    "contextLoaded": "프로젝트 컨텍스트가 로드되었습니다",
+    "contextLoadFailed": "프로젝트 컨텍스트 로드 실패",
+    "projectAdded": "{{name}}이(가) 성공적으로 추가되었습니다",
+    "projectUpdated": "{{name}}이(가) 성공적으로 업데이트되었습니다",
+    "projectRemoved": "{{name}}이(가) 제거되었습니다"
+  },
+  "errors": {
+    "generic": "오류가 발생했습니다. 다시 시도하세요.",
+    "network": "네트워크 오류입니다. 연결을 확인하세요.",
+    "apiKeyMissing": "API 키가 없습니다. 설정에서 설정하세요.",
+    "rateLimit": "비율 제한을 초과했습니다. 잠시 기다렸다가 다시 시도하세요.",
+    "modelNotFound": "모델을 찾을 수 없습니다.",
+    "fileNotFound": "파일을 찾을 수 없습니다.",
+    "invalidFormat": "잘못된 형식입니다."
+  },
+  "commandPalette": {
+    "searchCommands": "명령 검색...",
+    "noCommands": "명령을 찾을 수 없습니다."
+  },
+  "common": {
+    "save": "저장",
+    "cancel": "취소",
+    "delete": "삭제",
+    "edit": "편집",
+    "add": "추가",
+    "addButton": "추가...",
+    "remove": "제거",
+    "close": "닫기",
+    "open": "열기",
+    "search": "검색",
+    "loading": "로딩 중...",
+    "error": "오류",
+    "success": "성공",
+    "warning": "경고",
+    "confirm": "확인",
+    "back": "뒤로",
+    "next": "다음",
+    "previous": "이전",
+    "first": "첫 번째",
+    "last": "마지막",
+    "more": "더 보기",
+    "less": "덜 보기",
+    "all": "모두",
+    "none": "없음",
+    "select": "선택",
+    "selected": "선택됨",
+    "enabled": "활성화됨",
+    "disabled": "비활성화됨",
+    "optional": "선택 사항",
+    "required": "필수",
+    "name": "이름",
+    "description": "설명",
+    "settings": "설정",
+    "help": "도움말",
+    "documentation": "문서",
+    "feedback": "피드백",
+    "about": "정보",
+    "version": "버전",
+    "author": "작성자",
+    "submit": "제출",
+    "copy": "복사",
+    "active": "활성",
+    "addToChat": "채팅에 추가",
+    "refreshIndex": "색인 새로고침",
+    "chatSettings": "채팅 설정",
+    "fileContext": "파일 컨텍스트",
+    "selectModel": "모델 선택",
+    "addImages": "이미지 추가",
+    "updateAvailable": "사용 가능한 업데이트:",
+    "addContext": "컨텍스트 추가",
+    "backlinks": "백링크",
+    "loadingError": "로딩 오류:",
+    "invalidState": "잘못된 상태 - 변경 없음",
+    "loadingModels": "모델 로딩 중...",
+    "openRouterPaid": "OpenRouter-Paid:Ds-r1",
+    "copyCurlCommand": "테스트용 curl 명령 복사",
+    "optionalTestApi": "선택 사항: API 호출 테스트",
+    "editProject": "프로젝트 편집",
+    "startChat": "채팅 시작",
+    "deleteProject": "프로젝트 삭제",
+    "closeCurrentProject": "현재 프로젝트 닫기",
+    "closeProjectMode": "프로젝트 모드 닫기"
+  }
+}

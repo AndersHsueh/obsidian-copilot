@@ -1,0 +1,408 @@
+{
+  "appName": "Obsidian-Mate",
+  "settings": {
+    "title": "Obsidian-Mate Settings",
+    "version": "v{{version}}",
+    "upToDate": "(up to date)",
+    "updateAvailable": "(Update to v{{version}})",
+    "resetSettings": "Reset Settings",
+    "tabs": {
+      "basic": "Basic",
+      "model": "Model",
+      "qa": "QA",
+      "command": "Commands",
+      "plus": "Plus",
+      "advanced": "Advanced"
+    },
+    "general": {
+      "sectionTitle": "General",
+      "apiKeys": {
+        "title": "API Keys",
+        "description": "Configure API keys for different AI providers",
+        "helpTitle": "API key required for chat and QA features",
+        "helpContent": "To enable chat and QA functionality, please provide an API key from your selected provider.",
+        "setKeys": "Set Keys"
+      },
+      "defaultModel": {
+        "title": "Default Chat Model",
+        "description": "Select the Chat model to use",
+        "helpTitle": "Default model is OpenRouter Gemini 2.5 Flash",
+        "helpContent": "Set your OpenRouter API key in 'API keys' to use this model, or select a different model from another provider.",
+        "selectModel": "Select Model"
+      },
+      "defaultMode": {
+        "title": "Default Mode",
+        "description": "Select the default chat mode",
+        "helpTitle": "Chat Modes",
+        "helpContent": {
+          "chat": "<strong>Chat:</strong> Regular chat mode for general conversations and tasks. <i>Free to use with your own API key.</i>",
+          "vaultQA": "<strong>Vault QA (Basic):</strong> Ask questions about your vault content with semantic search. <i>Free to use with your own API key.</i>",
+          "copilotPlus": "<strong>Obsidian-Mate Plus:</strong> Covers all features of the 2 free modes, plus advanced paid features including chat context menu, advanced search, AI agents, and more. Check out <a href=\"{{url}}\" target=\"_blank\" rel=\"noopener noreferrer\">obsidiancopilot.com</a> for more details."
+        }
+      },
+      "openPluginIn": {
+        "title": "Open Plugin In",
+        "description": "Choose where to open the plugin",
+        "sidebarView": "Sidebar View",
+        "editor": "Editor"
+      },
+      "sendShortcut": {
+        "title": "Send Shortcut",
+        "description": "Choose keyboard shortcut to send messages",
+        "helpTitle": "Shortcut not working?",
+        "helpContent": "If your selected shortcut doesn't work, check <strong>Obsidian's Settings → Hotkeys</strong> to see if another command is using the same key combination. You may need to remove or change the conflicting hotkey first.",
+        "enter": "Enter",
+        "shiftEnter": "Shift + Enter"
+      },
+      "autoAddActiveContent": {
+        "title": "Auto-Add Active Content to Context",
+        "description": "Automatically add the active note or Web Viewer tab (Desktop only) to chat context when sending messages."
+      },
+      "autoAddSelection": {
+        "title": "Auto-Add Selection to Context",
+        "description": "Automatically add selected text from notes or Web Viewer (Desktop only) to chat context. Disable to use manual command instead."
+      },
+      "imagesInMarkdown": {
+        "title": "Images in Markdown",
+        "description": "Pass embedded images in markdown to the AI along with the text. Only works with multimodal models."
+      },
+      "suggestedPrompts": {
+        "title": "Suggested Prompts",
+        "description": "Show suggested prompts in the chat view"
+      },
+      "relevantNotes": {
+        "title": "Relevant Notes",
+        "description": "Show relevant notes in the chat view"
+      }
+    },
+    "savingConversations": {
+      "sectionTitle": "Saving Conversations",
+      "autosaveChat": {
+        "title": "Autosave Chat",
+        "description": "Automatically saves the chat after every user message and AI response."
+      },
+      "generateAIChatTitle": {
+        "title": "Generate AI Chat Title on Save",
+        "description": "When enabled, uses an AI model to generate a concise title for saved chat notes. When disabled, uses the first 10 words of the first user message."
+      },
+      "defaultConversationFolder": {
+        "title": "Default Conversation Folder Name",
+        "description": "The default folder name where chat conversations will be saved. Default is 'copilot/copilot-conversations'",
+        "placeholder": "copilot/copilot-conversations"
+      },
+      "defaultConversationTag": {
+        "title": "Default Conversation Tag",
+        "description": "The default tag to be used when saving a conversation. Default is 'ai-conversations'",
+        "placeholder": "ai-conversations"
+      },
+      "conversationFilenameTemplate": {
+        "title": "Conversation Filename Template",
+        "description": "Customize the format of saved conversation note names.",
+        "helpTitle": "Note: All the following variables must be included in the template.",
+        "helpContent": "Available variables:",
+        "variableDate": "<strong>{$date}</strong>: Date in YYYYMMDD format",
+        "variableTime": "<strong>{$time}</strong>: Time in HHMMSS format",
+        "variableTopic": "<strong>{$topic}</strong>: Chat conversation topic",
+        "example": "Example: {$date}_{$time}__{$topic} → 20250114_153232__polish_this_article_[[Readme]]",
+        "apply": "Apply"
+      }
+    },
+    "sorting": {
+      "sectionTitle": "Sorting",
+      "chatHistorySort": {
+        "title": "Chat History Sort Strategy",
+        "description": "Sort order for the chat history list"
+      },
+      "projectListSort": {
+        "title": "Project List Sort Strategy",
+        "description": "Sort order for the project list"
+      },
+      "sortOptions": {
+        "recency": "Recency",
+        "created": "Created",
+        "alphabetical": "Alphabetical"
+      }
+    },
+    "language": {
+      "title": "Language",
+      "description": "Choose the language for Obsidian-Mate interface",
+      "auto": "Follow System Language",
+      "en": "English",
+      "zh": "简体中文",
+      "ja": "日本語",
+      "ko": "한국어",
+      "fr": "Français",
+      "es": "Español"
+    }
+  },
+  "chat": {
+    "newChat": "New Chat",
+    "saveAsNote": "Save as Note",
+    "loadHistory": "Load Chat History",
+    "sendMessage": "Send Message",
+    "stopGenerating": "Stop Generating",
+    "regenerate": "Regenerate",
+    "edit": "Edit",
+    "delete": "Delete",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "failedToSend": "Failed to send message. Please try again.",
+    "failedToSave": "Failed to save chat as note. Check console for details.",
+    "failedToEdit": "Failed to edit message. Please try again.",
+    "failedToDelete": "Failed to delete message. Please try again.",
+    "cannotRegenerateFirst": "Cannot regenerate the first message.",
+    "messageNotFound": "Message not found.",
+    "failedToLoadHistory": "Failed to load chat history.",
+    "failedToUpdateTitle": "Failed to update chat title.",
+    "failedToOpenSource": "Failed to open source file.",
+    "chatDeleted": "Chat deleted.",
+    "chatTitleUpdated": "Chat title updated.",
+    "dropFilesHere": "Drop files here...",
+    "includeActiveNote": "Include Active Note",
+    "includeActiveWebTab": "Include Active Web Tab",
+    "tokenCount": "Tokens: {{count}}"
+  },
+  "models": {
+    "selectModel": "Select Model",
+    "model": "Model",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "addModel": "Add Model",
+    "editModel": "Edit Model",
+    "deleteModel": "Delete Model",
+    "importModels": "Import Models",
+    "builtInModels": "Built-in Models",
+    "customModels": "Custom Models",
+    "noApiKey": "API key not set",
+    "apiKeyRequired": "API key required for this model",
+    "addCustomModel": "Add Custom {{type}} Model",
+    "addNewModelDescription": "Add a new model to your collection.",
+    "openRouterPaid": "OpenRouter-Paid:Ds-r1",
+    "copyCurlCommand": "Copy curl command for testing",
+    "optionalTestApi": "Optional: test API call"
+  },
+  "qa": {
+    "sectionTitle": "QA Settings",
+    "indexVault": "Index Vault",
+    "forceReindex": "Force Reindex",
+    "clearIndex": "Clear Index",
+    "indexing": "Indexing...",
+    "indexComplete": "Index complete",
+    "indexFailed": "Index failed",
+    "semanticSearch": "Semantic Search",
+    "lexicalSearch": "Lexical Search",
+    "enableSemanticSearch": "Enable Semantic Search",
+    "enableSemanticSearchDescription": "Enable semantic search for meaning-based document retrieval. When disabled, uses fast lexical search only. Use 'Refresh Vault Index' or 'Force Reindex Vault' to build the embedding index.",
+    "enableInlineCitations": "Enable Inline Citations (experimental)",
+    "enableInlineCitationsDescription": "When enabled, AI responses will include footnote-style citations within the text and numbered sources at the end. This is an experimental feature and may not work as expected for all models.",
+    "embeddingModel": "Embedding Model",
+    "embeddingModelDescription": "Powers Semantic Vault Search and Relevant Notes. Enable Semantic Search to use it.",
+    "embeddingModelHelp": "This model converts text into vector representations, essential for semantic search and Question Answering (QA) functionality. Changing the embedding model will:",
+    "embeddingModelHelpItems": [
+      "Require rebuilding your vault's vector index",
+      "Affect semantic search quality",
+      "Impact Question Answering feature performance"
+    ],
+    "autoIndexStrategy": "Auto-Index Strategy",
+    "autoIndexStrategyDescription": "Decide when you want the vault to be indexed.",
+    "autoIndexNever": "NEVER",
+    "autoIndexNeverDesc": "Manual indexing via command or refresh only",
+    "autoIndexOnStartup": "ON STARTUP",
+    "autoIndexOnStartupDesc": "Index updates when plugin loads or reloads",
+    "autoIndexOnModeSwitch": "ON MODE SWITCH",
+    "autoIndexOnModeSwitchDesc": "Updates when entering QA mode (Recommended)",
+    "autoIndexWarning": "Warning: Cost implications for large vaults with paid models",
+    "maxSources": "Max Sources",
+    "maxSourcesDescription": "Obsidian-Mate goes through your vault to find relevant notes and passes the top N to the LLM. Default for N is 15. Increase if you want more notes included in the answer generation step.",
+    "requestsPerMinute": "Requests per Minute",
+    "requestsPerMinuteDescription": "Default is 60. Decrease if you are rate limited by your embedding provider.",
+    "embeddingBatchSize": "Embedding Batch Size",
+    "embeddingBatchSizeDescription": "Default is 16. Increase if you are rate limited by your embedding provider.",
+    "numPartitions": "Number of Partitions",
+    "numPartitionsDescription": "Number of partitions for Obsidian-Mate index. Default is 1. Increase if you have issues indexing large vaults. Warning: Changes require clearing and rebuilding the index!",
+    "lexicalSearchRamLimit": "Lexical Search RAM Limit",
+    "lexicalSearchRamLimitDescription": "Maximum RAM usage for full-text search index. Lower values use less memory but may limit search performance on large vaults. Default is 100 MB.",
+    "enableFolderGraphBoosts": "Enable Folder and Graph Boosts",
+    "enableFolderGraphBoostsDescription": "Enable folder and graph-based relevance boosts for lexical search results. When disabled, provides pure keyword-based relevance scoring without folder or connection-based adjustments.",
+    "exclusions": "Exclusions",
+    "exclusionsDescription": "Exclude folders, tags, note titles or file extensions from being indexed. Previously indexed files will remain until a force reindex is performed.",
+    "manageExclusions": "Manage Exclusions",
+    "inclusions": "Inclusions",
+    "inclusionsDescription": "Index only the specified paths, tags, or note titles. Exclusions take precedence over inclusions. Previously indexed files will remain until a force reindex is performed.",
+    "manageInclusions": "Manage Inclusions",
+    "enableObsidianSync": "Enable Obsidian Sync for Obsidian-Mate index",
+    "disableIndexOnMobileDescription": "When enabled, Obsidian-Mate index won't be loaded on mobile devices to save resources. Only chat mode will be available. Any existing index from desktop sync will be preserved. Uncheck to enable QA modes on mobile.",
+    "embeddingModelSaved": "Embedding model saved. Enable Semantic Search to build the index.",
+    "manage": "Manage"
+  },
+  "plus": {
+    "sectionTitle": "Obsidian-Mate Plus",
+    "notPlusUser": "You are not an Obsidian-Mate Plus user.",
+    "licenseKey": "License Key",
+    "enterLicenseKey": "Enter your license key",
+    "activate": "Activate",
+    "manageSubscription": "Manage Subscription",
+    "features": {
+      "autonomousAgent": "Autonomous Agent",
+      "webSearch": "Web Search",
+      "youtubeTranscription": "YouTube Transcription",
+      "memory": "Long-term Memory",
+      "advancedContext": "Advanced Context Processing"
+    }
+  },
+  "commands": {
+    "sectionTitle": "Command Settings",
+    "customCommands": "Custom Commands",
+    "addCommand": "Add New Command",
+    "commandName": "Command Name",
+    "commandPrompt": "Command Prompt",
+    "commandDescription": "Description"
+  },
+  "advanced": {
+    "sectionTitle": "Advanced Settings",
+    "debugMode": "Debug Mode",
+    "debugModeDescription": "Enable debug logging to console",
+    "encryption": "Encryption",
+    "encryptionDescription": "Encrypt API keys and sensitive data"
+  },
+  "modals": {
+    "confirm": {
+      "title": "Confirm",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "newChatConfirm": {
+      "title": "Start New Chat?",
+      "description": "This will clear the current conversation. Are you sure you want to continue?"
+    },
+    "resetSettingsConfirm": {
+      "title": "Reset All Settings?",
+      "description": "This will reset all Obsidian-Mate settings to defaults. This action cannot be undone."
+    },
+    "loadChatHistory": {
+      "title": "Load Chat History",
+      "noChats": "No chat history found."
+    },
+    "addContextNote": {
+      "title": "Add Context Note",
+      "searchNotes": "Search notes...",
+      "noResults": "No results found."
+    },
+    "folderSearch": {
+      "title": "Select Folder",
+      "searchFolders": "Search folders..."
+    },
+    "customPattern": {
+      "title": "Custom Pattern",
+      "addPattern": "Add Pattern"
+    }
+  },
+  "restrictions": {
+    "nonMarkdownFiles": "Non-markdown files are only available in Obsidian-Mate Plus mode. Please upgrade to access this file type.",
+    "urlProcessing": "URL processing is only available in Obsidian-Mate Plus mode. URLs will not be processed for context.",
+    "unsupportedFile": "{{extension}} files are not supported in the current mode."
+  },
+  "loading": {
+    "default": "",
+    "readingFiles": "Reading files",
+    "searchingWeb": "Searching the web",
+    "readingFileTree": "Reading file tree",
+    "compacting": "Compacting"
+  },
+  "projects": {
+    "sectionTitle": "Projects",
+    "newProject": "New Project",
+    "projectName": "Project Name",
+    "selectFolder": "Select Folder",
+    "includeSubfolders": "Include Subfolders",
+    "contextNotes": "Context Notes",
+    "addNote": "Add Note",
+    "noProjects": "No projects yet",
+    "createFirst": "Create your first project to get started",
+    "loadingContext": "Loading project context...",
+    "contextLoaded": "Project context loaded",
+    "contextLoadFailed": "Failed to load project context",
+    "projectAdded": "{{name}} added successfully",
+    "projectUpdated": "{{name}} updated successfully",
+    "projectRemoved": "{{name}} removed"
+  },
+  "errors": {
+    "generic": "An error occurred. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "apiKeyMissing": "API key is missing. Please set it in settings.",
+    "rateLimit": "Rate limit exceeded. Please wait and try again.",
+    "modelNotFound": "Model not found.",
+    "fileNotFound": "File not found.",
+    "invalidFormat": "Invalid format."
+  },
+  "commandPalette": {
+    "searchCommands": "Search commands...",
+    "noCommands": "No commands found."
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "addButton": "Add...",
+    "remove": "Remove",
+    "close": "Close",
+    "open": "Open",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "first": "First",
+    "last": "Last",
+    "more": "More",
+    "less": "Less",
+    "all": "All",
+    "none": "None",
+    "select": "Select",
+    "selected": "Selected",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "optional": "Optional",
+    "required": "Required",
+    "name": "Name",
+    "description": "Description",
+    "settings": "Settings",
+    "help": "Help",
+    "documentation": "Documentation",
+    "feedback": "Feedback",
+    "about": "About",
+    "version": "Version",
+    "author": "Author",
+    "submit": "Submit",
+    "copy": "Copy",
+    "active": "Active",
+    "addToChat": "Add to Chat",
+    "refreshIndex": "Refresh Index",
+    "chatSettings": "Chat Settings",
+    "fileContext": "File Context",
+    "selectModel": "Select Model",
+    "addImages": "Add image(s)",
+    "updateAvailable": "Update available:",
+    "addContext": "Add context",
+    "backlinks": "Backlinks",
+    "loadingError": "Loading Error: ",
+    "invalidState": "Invalid state - missing changes",
+    "loadingModels": "Loading models...",
+    "openRouterPaid": "OpenRouter-Paid:Ds-r1",
+    "copyCurlCommand": "Copy curl command for testing",
+    "optionalTestApi": "Optional: test API call",
+    "editProject": "Edit Project",
+    "startChat": "Start Chat",
+    "deleteProject": "Delete Project",
+    "closeCurrentProject": "Close Current Project",
+    "closeProjectMode": "Close Project Mode"
+  }
+}

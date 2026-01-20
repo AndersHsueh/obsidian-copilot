@@ -1,0 +1,408 @@
+{
+  "appName": "Obsidian-Mate",
+  "settings": {
+    "title": "Obsidian-Mate 设置",
+    "version": "v{{version}}",
+    "upToDate": "（已是最新）",
+    "updateAvailable": "（更新至 v{{version}}）",
+    "resetSettings": "重置设置",
+    "tabs": {
+      "basic": "基础",
+      "model": "模型",
+      "qa": "问答",
+      "command": "命令",
+      "plus": "高级版",
+      "advanced": "高级"
+    },
+    "general": {
+      "sectionTitle": "通用",
+      "apiKeys": {
+        "title": "API 密钥",
+        "description": "配置不同 AI 服务商的 API 密钥",
+        "helpTitle": "聊天和问答功能需要 API 密钥",
+        "helpContent": "要启用聊天和问答功能，请提供所选服务商的 API 密钥。",
+        "setKeys": "设置密钥"
+      },
+      "defaultModel": {
+        "title": "默认聊天模型",
+        "description": "选择默认使用的聊天模型",
+        "helpTitle": "默认模型为 OpenRouter Gemini 2.5 Flash",
+        "helpContent": "在「API 密钥」中设置您的 OpenRouter API 密钥以使用此模型，或从其他提供商选择不同的模型。",
+        "selectModel": "选择模型"
+      },
+      "defaultMode": {
+        "title": "默认模式",
+        "description": "选择默认的聊天模式",
+        "helpTitle": "聊天模式",
+        "helpContent": {
+          "chat": "<strong>聊天：</strong>适用于日常对话和任务的常规聊天模式。<i>免费使用，需要您自己的 API 密钥。</i>",
+          "vaultQA": "<strong>知识库问答（基础）：</strong>使用语义搜索提问关于您知识库内容的问题。<i>免费使用，需要您自己的 API 密钥。</i>",
+          "copilotPlus": "<strong>Obsidian-Mate 高级版：</strong>包含两种免费模式的所有功能，还包括高级付费功能，如聊天右键菜单、高级搜索、AI 代理等。查看 <a href=\"{{url}}\" target=\"_blank\" rel=\"noopener noreferrer\">obsidiancopilot.com</a> 了解更多详情。"
+        }
+      },
+      "openPluginIn": {
+        "title": "打开方式",
+        "description": "选择打开插件的位置",
+        "sidebarView": "侧边栏视图",
+        "editor": "编辑器"
+      },
+      "sendShortcut": {
+        "title": "发送快捷键",
+        "description": "选择发送消息的键盘快捷键",
+        "helpTitle": "快捷键不生效？",
+        "helpContent": "如果所选快捷键无效，请检查 <strong>Obsidian 设置 → 快捷键</strong> 查看是否有其他命令使用了相同的按键组合。您可能需要先移除或更改冲突的快捷键。",
+        "enter": "回车",
+        "shiftEnter": "Shift + 回车"
+      },
+      "autoAddActiveContent": {
+        "title": "自动添加活动内容到上下文",
+        "description": "发送消息时自动将活动笔记或网页视图标签（仅桌面版）添加到聊天上下文。"
+      },
+      "autoAddSelection": {
+        "title": "自动添加选中文本到上下文",
+        "description": "自动将来自笔记或网页视图（仅桌面版）的选中文本添加到聊天上下文。禁用后请使用手动命令。"
+      },
+      "imagesInMarkdown": {
+        "title": "Markdown 图片",
+        "description": "将 Markdown 中嵌入的图片与文本一起传递给 AI。仅适用于多模态模型。"
+      },
+      "suggestedPrompts": {
+        "title": "建议提示词",
+        "description": "在聊天视图中显示建议的提示词"
+      },
+      "relevantNotes": {
+        "title": "相关笔记",
+        "description": "在聊天视图中显示相关笔记"
+      }
+    },
+    "savingConversations": {
+      "sectionTitle": "保存对话",
+      "autosaveChat": {
+        "title": "自动保存聊天",
+        "description": "在每次用户消息和 AI 回复后自动保存聊天记录。"
+      },
+      "generateAIChatTitle": {
+        "title": "保存时生成 AI 聊天标题",
+        "description": "启用后，使用 AI 模型为保存的聊天笔记生成简洁标题。禁用时，使用第一条用户消息的前 10 个词作为标题。"
+      },
+      "defaultConversationFolder": {
+        "title": "默认对话文件夹名称",
+        "description": "保存聊天对话的默认文件夹名称。默认为 'copilot/copilot-conversations'",
+        "placeholder": "copilot/copilot-conversations"
+      },
+      "defaultConversationTag": {
+        "title": "默认对话标签",
+        "description": "保存对话时使用的默认标签。默认为 'ai-conversations'",
+        "placeholder": "ai-conversations"
+      },
+      "conversationFilenameTemplate": {
+        "title": "对话文件名模板",
+        "description": "自定义保存的对话笔记名称格式。",
+        "helpTitle": "注意：模板必须包含以下所有变量。",
+        "helpContent": "可用变量：",
+        "variableDate": "<strong>{$date}</strong>：YYYYMMDD 格式的日期",
+        "variableTime": "<strong>{$time}</strong>：HHMMSS 格式的时间",
+        "variableTopic": "<strong>{$topic}</strong>：聊天主题",
+        "example": "示例：{$date}_{$time}__{$topic} → 20250114_153232__polish_this_article_[[Readme]]",
+        "apply": "应用"
+      }
+    },
+    "sorting": {
+      "sectionTitle": "排序",
+      "chatHistorySort": {
+        "title": "聊天历史排序策略",
+        "description": "聊天历史列表的排序方式"
+      },
+      "projectListSort": {
+        "title": "项目列表排序策略",
+        "description": "项目列表的排序方式"
+      },
+      "sortOptions": {
+        "recency": "最近使用",
+        "created": "创建时间",
+        "alphabetical": "字母顺序"
+      }
+    },
+    "language": {
+      "title": "语言",
+      "description": "选择 Obsidian-Mate 界面的语言",
+      "auto": "跟随系统语言",
+      "en": "English",
+      "zh": "简体中文",
+      "ja": "日本語",
+      "ko": "한국어",
+      "fr": "Français",
+      "es": "Español"
+    }
+  },
+  "chat": {
+    "newChat": "新聊天",
+    "saveAsNote": "保存为笔记",
+    "loadHistory": "加载聊天历史",
+    "sendMessage": "发送消息",
+    "stopGenerating": "停止生成",
+    "regenerate": "重新生成",
+    "edit": "编辑",
+    "delete": "删除",
+    "copy": "复制",
+    "copied": "已复制！",
+    "failedToSend": "发送消息失败，请重试。",
+    "failedToSave": "保存聊天为笔记失败，请查看控制台详情。",
+    "failedToEdit": "编辑消息失败，请重试。",
+    "failedToDelete": "删除消息失败，请重试。",
+    "cannotRegenerateFirst": "无法重新生成第一条消息。",
+    "messageNotFound": "未找到消息。",
+    "failedToLoadHistory": "加载聊天历史失败。",
+    "failedToUpdateTitle": "更新聊天标题失败。",
+    "failedToOpenSource": "打开源文件失败。",
+    "chatDeleted": "聊天已删除。",
+    "chatTitleUpdated": "聊天标题已更新。",
+    "dropFilesHere": "拖放文件到此处...",
+    "includeActiveNote": "包含活动笔记",
+    "includeActiveWebTab": "包含活动网页标签",
+    "tokenCount": "令牌数：{{count}}"
+  },
+  "models": {
+    "selectModel": "选择模型",
+    "model": "模型",
+    "enabled": "已启用",
+    "disabled": "已禁用",
+    "addModel": "添加模型",
+    "editModel": "编辑模型",
+    "deleteModel": "删除模型",
+    "importModels": "导入模型",
+    "builtInModels": "内置模型",
+    "customModels": "自定义模型",
+    "noApiKey": "未设置 API 密钥",
+    "apiKeyRequired": "此模型需要 API 密钥",
+    "addCustomModel": "添加自定义{{type}}模型",
+    "addNewModelDescription": "将新模型添加到您的模型集合中。",
+    "openRouterPaid": "OpenRouter-Paid:Ds-r1",
+    "copyCurlCommand": "复制 curl 命令以进行测试",
+    "optionalTestApi": "可选：测试 API 调用"
+  },
+  "qa": {
+    "sectionTitle": "问答设置",
+    "indexVault": "索引知识库",
+    "forceReindex": "强制重新索引",
+    "clearIndex": "清除索引",
+    "indexing": "索引中...",
+    "indexComplete": "索引完成",
+    "indexFailed": "索引失败",
+    "semanticSearch": "语义搜索",
+    "lexicalSearch": "词汇搜索",
+    "enableSemanticSearch": "启用语义搜索",
+    "enableSemanticSearchDescription": "启用基于语义的文档检索搜索。禁用时将仅使用快速词汇搜索。请使用「刷新知识库索引」或「强制重新索引」来构建嵌入索引。",
+    "enableInlineCitations": "启用内联引用（实验性）",
+    "enableInlineCitationsDescription": "启用后，AI 响应将在文本内包含脚注式引用，并在末尾添加编号来源。这是一个实验性功能，可能无法在所有模型上正常工作。",
+    "embeddingModel": "嵌入模型",
+    "embeddingModelDescription": "为语义知识库搜索和相关内容提供支持。启用语义搜索后即可使用。",
+    "embeddingModelHelp": "此模型将文本转换为向量表示，对于语义搜索和问答功能至关重要。更改嵌入模型将：",
+    "embeddingModelHelpItems": [
+      "需要重新构建知识库的向量索引",
+      "影响语义搜索质量",
+      "影响问答功能的性能"
+    ],
+    "autoIndexStrategy": "自动索引策略",
+    "autoIndexStrategyDescription": "决定何时对知识库进行索引。",
+    "autoIndexNever": "从不",
+    "autoIndexNeverDesc": "仅通过命令或手动刷新进行索引",
+    "autoIndexOnStartup": "启动时",
+    "autoIndexOnStartupDesc": "插件加载或重新加载时更新索引",
+    "autoIndexOnModeSwitch": "切换模式时",
+    "autoIndexOnModeSwitchDesc": "进入问答模式时更新（推荐）",
+    "autoIndexWarning": "警告：大型知识库使用付费模型可能产生费用",
+    "maxSources": "最大来源数",
+    "maxSourcesDescription": "Obsidian-Mate 会遍历您的知识库查找相关笔记，并将前 N 个传递给 LLM。N 的默认值为 15。如果您希望在答案生成步骤中包含更多笔记，请增加此值。",
+    "requestsPerMinute": "每分钟请求数",
+    "requestsPerMinuteDescription": "默认值为 60。如果您的嵌入服务提供商限制了请求速率，请降低此值。",
+    "embeddingBatchSize": "嵌入批次大小",
+    "embeddingBatchSizeDescription": "默认值为 16。如果您的嵌入服务提供商限制了请求速率，请增加此值。",
+    "numPartitions": "分区数量",
+    "numPartitionsDescription": "Obsidian-Mate 索引的分区数量。默认值为 1。如果您在索引大型知识库时遇到问题，请增加此值。警告：更改此值需要清除并重新构建索引！",
+    "lexicalSearchRamLimit": "词汇搜索内存限制",
+    "lexicalSearchRamLimitDescription": "全文搜索索引的最大内存使用量。较低的值使用更少的内存，但可能会限制大型知识库的搜索性能。默认值为 100 MB。",
+    "enableFolderGraphBoosts": "启用文件夹和图谱增强",
+    "enableFolderGraphBoostsDescription": "为词汇搜索结果启用基于文件夹和图谱的相关性增强。禁用时，将提供纯基于关键字的相关性评分，不进行文件夹或连接性调整。",
+    "exclusions": "排除项",
+    "exclusionsDescription": "从索引中排除文件夹、标签、笔记标题或文件扩展名。之前已索引的文件将保留，直到执行强制重新索引。",
+    "manageExclusions": "管理排除项",
+    "inclusions": "包含项",
+    "inclusionsDescription": "仅索引指定的路径、标签或笔记标题。排除项优先于包含项。之前已索引的文件将保留，直到执行强制重新索引。",
+    "manageInclusions": "管理包含项",
+    "enableObsidianSync": "为 Obsidian-Mate 索引启用 Obsidian 同步",
+    "disableIndexOnMobileDescription": "启用后，Obsidian-Mate 索引不会在移动设备上加载以节省资源。仅聊天模式可用。桌面端同步的任何现有索引将被保留。取消勾选可在移动端启用问答模式。",
+    "embeddingModelSaved": "嵌入模型已保存。启用语义搜索以构建索引。",
+    "manage": "管理"
+  },
+  "plus": {
+    "sectionTitle": "Obsidian-Mate 高级版",
+    "notPlusUser": "您还不是 Obsidian-Mate 高级版用户。",
+    "licenseKey": "许可证密钥",
+    "enterLicenseKey": "输入您的许可证密钥",
+    "activate": "激活",
+    "manageSubscription": "管理订阅",
+    "features": {
+      "autonomousAgent": "自主代理",
+      "webSearch": "网页搜索",
+      "youtubeTranscription": "YouTube 字幕转录",
+      "memory": "长期记忆",
+      "advancedContext": "高级上下文处理"
+    }
+  },
+  "commands": {
+    "sectionTitle": "命令设置",
+    "customCommands": "自定义命令",
+    "addCommand": "添加新命令",
+    "commandName": "命令名称",
+    "commandPrompt": "命令提示词",
+    "commandDescription": "描述"
+  },
+  "advanced": {
+    "sectionTitle": "高级设置",
+    "debugMode": "调试模式",
+    "debugModeDescription": "启用调试日志输出到控制台",
+    "encryption": "加密",
+    "encryptionDescription": "加密 API 密钥和敏感数据"
+  },
+  "modals": {
+    "confirm": {
+      "title": "确认",
+      "cancel": "取消",
+      "confirm": "确认",
+      "yes": "是",
+      "no": "否"
+    },
+    "newChatConfirm": {
+      "title": "开始新聊天？",
+      "description": "这将清除当前对话。确定要继续吗？"
+    },
+    "resetSettingsConfirm": {
+      "title": "重置所有设置？",
+      "description": "这将把所有 Obsidian-Mate 设置重置为默认值。此操作无法撤消。"
+    },
+    "loadChatHistory": {
+      "title": "加载聊天历史",
+      "noChats": "未找到聊天历史。"
+    },
+    "addContextNote": {
+      "title": "添加上下文笔记",
+      "searchNotes": "搜索笔记...",
+      "noResults": "未找到结果。"
+    },
+    "folderSearch": {
+      "title": "选择文件夹",
+      "searchFolders": "搜索文件夹..."
+    },
+    "customPattern": {
+      "title": "自定义模式",
+      "addPattern": "添加模式"
+    }
+  },
+  "restrictions": {
+    "nonMarkdownFiles": "非 Markdown 文件仅在 Obsidian-Mate 高级版模式下可用。请升级以访问此文件类型。",
+    "urlProcessing": "URL 处理仅在 Obsidian-Mate 高级版模式下可用。URL 将不会被处理为上下文。",
+    "unsupportedFile": "{{extension}} 文件在当前模式下不支持。"
+  },
+  "loading": {
+    "default": "",
+    "readingFiles": "正在读取文件",
+    "searchingWeb": "正在搜索网页",
+    "readingFileTree": "正在读取文件树",
+    "compacting": "正在压缩"
+  },
+  "projects": {
+    "sectionTitle": "项目",
+    "newProject": "新建项目",
+    "projectName": "项目名称",
+    "selectFolder": "选择文件夹",
+    "includeSubfolders": "包含子文件夹",
+    "contextNotes": "上下文笔记",
+    "addNote": "添加笔记",
+    "noProjects": "暂无项目",
+    "createFirst": "创建您的第一个项目以开始使用",
+    "loadingContext": "正在加载项目上下文...",
+    "contextLoaded": "项目上下文已加载",
+    "contextLoadFailed": "加载项目上下文失败",
+    "projectAdded": "{{name}} 添加成功",
+    "projectUpdated": "{{name}} 更新成功",
+    "projectRemoved": "{{name}} 已移除"
+  },
+  "errors": {
+    "generic": "发生错误，请重试。",
+    "network": "网络错误，请检查您的连接。",
+    "apiKeyMissing": "缺少 API 密钥，请前往设置中设置。",
+    "rateLimit": "超出速率限制，请等待后重试。",
+    "modelNotFound": "未找到模型。",
+    "fileNotFound": "未找到文件。",
+    "invalidFormat": "格式无效。"
+  },
+  "commandPalette": {
+    "searchCommands": "搜索命令...",
+    "noCommands": "未找到命令。"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "add": "添加",
+    "addButton": "添加...",
+    "remove": "移除",
+    "close": "关闭",
+    "open": "打开",
+    "search": "搜索",
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "warning": "警告",
+    "confirm": "确认",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "first": "第一个",
+    "last": "最后一个",
+    "more": "更多",
+    "less": "更少",
+    "all": "全部",
+    "none": "无",
+    "select": "选择",
+    "selected": "已选择",
+    "enabled": "已启用",
+    "disabled": "已禁用",
+    "optional": "可选",
+    "required": "必需",
+    "name": "名称",
+    "description": "描述",
+    "settings": "设置",
+    "help": "帮助",
+    "documentation": "文档",
+    "feedback": "反馈",
+    "about": "关于",
+    "version": "版本",
+    "author": "作者",
+    "submit": "提交",
+    "copy": "复制",
+    "active": "激活",
+    "addToChat": "添加到聊天",
+    "refreshIndex": "刷新索引",
+    "chatSettings": "聊天设置",
+    "fileContext": "文件上下文",
+    "selectModel": "选择模型",
+    "addImages": "添加图片",
+    "updateAvailable": "有可用更新：",
+    "addContext": "添加上下文",
+    "backlinks": "反向链接",
+    "loadingError": "加载错误：",
+    "invalidState": "状态无效 - 缺少更改",
+    "loadingModels": "正在加载模型...",
+    "openRouterPaid": "OpenRouter-Paid:Ds-r1",
+    "copyCurlCommand": "复制 curl 命令以进行测试",
+    "optionalTestApi": "可选：测试 API 调用",
+    "editProject": "编辑项目",
+    "startChat": "开始聊天",
+    "deleteProject": "删除项目",
+    "closeCurrentProject": "关闭当前项目",
+    "closeProjectMode": "关闭项目模式"
+  }
+}

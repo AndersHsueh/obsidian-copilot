@@ -81,7 +81,7 @@ export class BrevilabsClient {
   private checkLicenseKey() {
     if (!getSettings().plusLicenseKey) {
       throw new MissingPlusLicenseError(
-        "Copilot Plus license key not found. Please enter your license key in the settings."
+        "Obsidian-Mate Plus license key not found. Please enter your license key in the settings."
       );
     }
   }
