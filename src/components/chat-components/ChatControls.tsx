@@ -103,7 +103,7 @@ export async function reloadCurrentProject() {
       await plugin.projectManager.getProjectContext(currentProject.id);
       new Notice(`Project context for "${currentProject.name}" reloaded successfully.`);
     } else {
-      throw new Error("Copilot plugin or ProjectManager not available.");
+      throw new Error("Obsidian-Mate plugin or ProjectManager not available.");
     }
   } catch (error) {
     logError("Error reloading project context:", error);
@@ -152,7 +152,7 @@ export async function forceRebuildCurrentProjectContext() {
             `Project context for "${currentProject.name}" rebuilt successfully from scratch.`
           );
         } else {
-          throw new Error("Copilot plugin or ProjectManager not available for rebuild.");
+          throw new Error("Obsidian-Mate plugin or ProjectManager not available for rebuild.");
         }
       } catch (error) {
         logError("Error force rebuilding project context:", error);

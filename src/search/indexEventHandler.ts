@@ -41,7 +41,7 @@ export class IndexEventHandler {
   private syncEventListeners(): void {
     const shouldListen = this.shouldHandleEvents();
     if (shouldListen && !this.listenersActive) {
-      logInfo("Copilot Plus: Initializing semantic index event listeners");
+      logInfo("Obsidian-Mate Plus: Initializing semantic index event listeners");
       this.app.workspace.on("active-leaf-change", this.handleActiveLeafChange);
       this.app.vault.on("delete", this.handleFileDelete);
       this.listenersActive = true;

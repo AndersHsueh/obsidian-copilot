@@ -246,7 +246,7 @@ export default class CopilotPlugin extends Plugin {
 
     // Best-effort flush of log file
     await logFileManager.flush();
-    logInfo("Copilot plugin unloaded");
+    logInfo("Obsidian-Mate plugin unloaded");
   }
 
   updateUserMessageHistory(newMessage: string) {

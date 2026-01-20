@@ -902,7 +902,7 @@ export class ModelAdapterFactory {
 
     // Copilot Plus models
     if (modelName.includes("copilot-plus")) {
-      logInfo("Using BaseModelAdapter for Copilot Plus");
+      logInfo("Using BaseModelAdapter for Obsidian-Mate Plus");
       return new BaseModelAdapter(modelName);
     }
 

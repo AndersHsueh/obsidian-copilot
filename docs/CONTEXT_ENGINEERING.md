@@ -214,7 +214,7 @@ All tools (`localSearch`, `webSearch`, `getFileTree`, etc.) are treated uniforml
    When `ProjectManager.instance.getProjectContext()` returns `null` (e.g., context still loading or cache miss), the `<project_context>` block is omitted entirely rather than interpolating the literal string "null" into L1.
 
 3. **Envelope integration.**
-   The helper's return value is passed into `processMessageContext` / `reprocessMessageContext`. `PromptContextEngine` serializes the full string into the L1 layer, so `ProjectChainRunner` drops its bespoke `getSystemPrompt` override and reuses the envelope just like Copilot Plus.
+   The helper's return value is passed into `processMessageContext` / `reprocessMessageContext`. `PromptContextEngine` serializes the full string into the L1 layer, so `ProjectChainRunner` drops its bespoke `getSystemPrompt` override and reuses the envelope just like Obsidian-Mate Plus.
 
 4. **Simplified ProjectChainRunner.**
    The class is now just a pass-through to `CopilotPlusChainRunner` with no overrides - project context automatically appears in L1 via `ChatManager`.

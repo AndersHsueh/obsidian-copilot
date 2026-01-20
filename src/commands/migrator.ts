@@ -83,7 +83,7 @@ export async function migrateCommands() {
 
   updateSetting("inlineEditCommands", []);
 
-  new ConfirmModal(app, () => {}, message, "🚀 New Copilot Custom Commands", "OK", "").open();
+  new ConfirmModal(app, () => {}, message, "🚀 New Obsidian-Mate Custom Commands", "OK", "").open();
 }
 
 /** Generates the default commands. */

@@ -69,7 +69,7 @@ describe("toolExecution", () => {
 
       expect(result).toEqual({
         toolName: "plusTool",
-        result: "Error: plusTool requires a Copilot Plus subscription",
+        result: "Error: plusTool requires an Obsidian-Mate Plus subscription",
         success: false,
       });
       expect(mockCallTool).not.toHaveBeenCalled();
