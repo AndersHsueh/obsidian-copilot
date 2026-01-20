@@ -1,8 +1,6 @@
 import { ChainType } from "@/chainFactory";
 import { BaseChatModel } from "@langchain/core/language_models/chat_models";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
-
-import { ModelCapability, ReasoningEffort, Verbosity } from "@/constants";
 import { settingsAtom, settingsStore } from "@/settings/model";
 import { SelectedTextContext } from "@/types/message";
 import { atom, useAtom } from "jotai";
@@ -132,26 +130,14 @@ export interface CustomModel {
   projectEnabled?: boolean;
   plusExclusive?: boolean;
   believerExclusive?: boolean;
-  capabilities?: ModelCapability[];
+  // Local model flag
+  isLocal?: boolean;
+  // Capabilities like "reasoning", "vision" (string for flexibility)
+  capabilities?: string[];
   displayName?: string;
 
-  // Embedding models only (Jina at the moment)
+  // Embedding models only
   dimensions?: number;
-  // OpenAI specific fields
-  openAIOrgId?: string;
-
-  // Azure OpenAI specific fields
-  azureOpenAIApiInstanceName?: string;
-  azureOpenAIApiDeploymentName?: string;
-  azureOpenAIApiVersion?: string;
-  azureOpenAIApiEmbeddingDeploymentName?: string;
-
-  // Amazon Bedrock specific fields
-  bedrockRegion?: string;
-
-  // OpenAI GPT-5 and O-series specific fields
-  reasoningEffort?: ReasoningEffort;
-  verbosity?: Verbosity;
 }
 
 export function setModelKey(modelKey: string) {

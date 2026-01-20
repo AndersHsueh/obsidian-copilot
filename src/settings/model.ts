@@ -47,29 +47,7 @@ export interface LegacyCommandSettings {
 
 export interface CopilotSettings {
   userId: string;
-  plusLicenseKey: string;
-  openAIApiKey: string;
-  openAIOrgId: string;
-  huggingfaceApiKey: string;
-  cohereApiKey: string;
-  anthropicApiKey: string;
-  azureOpenAIApiKey: string;
-  azureOpenAIApiInstanceName: string;
-  azureOpenAIApiDeploymentName: string;
-  azureOpenAIApiVersion: string;
-  azureOpenAIApiEmbeddingDeploymentName: string;
-  googleApiKey: string;
-  openRouterAiApiKey: string;
-  xaiApiKey: string;
-  mistralApiKey: string;
-  deepseekApiKey: string;
-  amazonBedrockApiKey: string;
-  amazonBedrockRegion: string;
-  siliconflowApiKey: string;
-  // GitHub Copilot OAuth tokens
-  githubCopilotAccessToken: string;
-  githubCopilotToken: string;
-  githubCopilotTokenExpiresAt: number;
+  // Local models don't require API keys
   defaultChainType: ChainType;
   defaultModelKey: string;
   embeddingModelKey: string;
@@ -85,10 +63,6 @@ export interface CopilotSettings {
   defaultSaveFolder: string;
   defaultConversationTag: string;
   autosaveChat: boolean;
-  /**
-   * When enabled, generate a short AI title for chat notes on save.
-   * When disabled (default), use the first 10 words of the first user message.
-   */
   generateAIChatTitleOnSave: boolean;
   autoAddActiveContentToContext: boolean;
   customPromptsFolder: string;
@@ -102,7 +76,6 @@ export interface CopilotSettings {
   enableInlineCitations: boolean;
   qaExclusions: string;
   qaInclusions: string;
-  groqApiKey: string;
   activeModels: Array<CustomModel>;
   activeEmbeddingModels: Array<CustomModel>;
   promptUsageTimestamps: Record<string, number>;
@@ -118,7 +91,7 @@ export interface CopilotSettings {
   showRelevantNotes: boolean;
   numPartitions: number;
   defaultConversationNoteName: string;
-  // undefined means never checked
+  // undefined means never checked (Plus feature, kept for migration)
   isPlusUser: boolean | undefined;
   inlineEditCommands: LegacyCommandSettings[] | undefined;
   projectList: Array<ProjectConfig>;
@@ -129,51 +102,23 @@ export interface CopilotSettings {
   enableSemanticSearchV3: boolean;
   /** Enable lexical boosts (folder and graph) in search - default: true */
   enableLexicalBoosts: boolean;
-  /**
-   * RAM limit for lexical search index (in MB)
-   * Controls memory usage for full-text search operations
-   * - Range: 20-1000 MB
-   * - Default: 100 MB
-   */
   lexicalSearchRamLimit: number;
-  /** Whether we have suggested built-in default commands to the user once. */
   suggestedDefaultCommands: boolean;
   autonomousAgentMaxIterations: number;
   autonomousAgentEnabledToolIds: string[];
-  /** Default reasoning effort for models that support it (GPT-5, O-series, etc.) */
-  reasoningEffort: "minimal" | "low" | "medium" | "high";
-  /** Default verbosity level for models that support it */
-  verbosity: "low" | "medium" | "high";
-  /** Folder where memory data is stored */
   memoryFolderName: string;
-  /** Reference recent conversation history to provide more contextually relevant responses */
   enableRecentConversations: boolean;
-  /** Maximum number of recent conversations to remember (10-50) */
   maxRecentConversations: number;
-  /** Reference saved memories that user explicitly asked to remember */
   enableSavedMemory: boolean;
-  /** Last selected model for quick command */
   quickCommandModelKey: string | undefined;
-  /** Last checkbox state for including note context in quick command */
   quickCommandIncludeNoteContext: boolean;
-  /** Automatically add text selections to chat context */
   autoIncludeTextSelection: boolean;
   autoAddSelectionToContext: boolean;
-  /** Automatically accept file edits without showing preview confirmation */
   autoAcceptEdits: boolean;
-  /** Preferred diff view mode: side-by-side or split */
   diffViewMode: "side-by-side" | "split";
-  /** Folder where user system prompts are stored */
   userSystemPromptsFolder: string;
-  /**
-   * Global default system prompt title
-   * Used as the default for all new chat sessions
-   * Empty string means no custom system prompt (use builtin)
-   */
   defaultSystemPromptTitle: string;
-  /** Token threshold for auto-compacting large context (range: 64k-1M tokens, default: 128000) */
   autoCompactThreshold: number;
-  /** Interface language: 'auto' (follow system), 'en' (English), 'zh' (Simplified Chinese) */
   language: SupportedLanguage;
 }
 

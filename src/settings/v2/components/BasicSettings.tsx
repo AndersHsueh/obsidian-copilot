@@ -4,13 +4,11 @@ import { HelpTooltip } from "@/components/ui/help-tooltip";
 import { Input } from "@/components/ui/input";
 import { getModelDisplayWithIcons } from "@/components/ui/model-display";
 import { SettingItem } from "@/components/ui/setting-item";
-import { DEFAULT_OPEN_AREA, PLUS_UTM_MEDIUMS, SEND_SHORTCUT } from "@/constants";
+import { DEFAULT_OPEN_AREA, SEND_SHORTCUT } from "@/constants";
 import { useTab } from "@/contexts/TabContext";
 import { changeLanguage, LANGUAGE_NAMES, SUPPORTED_LANGUAGES } from "@/i18n";
 import { cn } from "@/lib/utils";
-import { createPlusPageUrl } from "@/plusUtils";
 import { getModelKeyFromModel, updateSetting, useSettingsValue } from "@/settings/model";
-import { PlusSettings } from "@/settings/v2/components/PlusSettings";
 import { checkModelApiKey, formatDateTime } from "@/utils";
 import { isSortStrategy } from "@/utils/recentUsageManager";
 import { Key, Loader2 } from "lucide-react";
@@ -24,7 +22,6 @@ const { t } = useTranslation();
 const ChainType2Label: Record<ChainType, string> = {
   [ChainType.LLM_CHAIN]: "Chat",
   [ChainType.VAULT_QA_CHAIN]: "Vault QA (Basic)",
-  [ChainType.COPILOT_PLUS_CHAIN]: "Obsidian-Mate Plus",
   [ChainType.PROJECT_CHAIN]: "Projects (alpha)",
 };
 
@@ -95,8 +92,6 @@ export const BasicSettings: React.FC = () => {
 
   return (
     <div className="tw-space-y-4">
-      <PlusSettings />
-
       {/* General Section */}
       <section>
         <div className="tw-mb-3 tw-text-xl tw-font-bold">{t("settings.general.sectionTitle")}</div>
@@ -228,21 +223,12 @@ export const BasicSettings: React.FC = () => {
                       <ul className="tw-pl-4 tw-text-sm tw-text-muted">
                         <li
                           dangerouslySetInnerHTML={{
-                            __html: t("settings.general.defaultMode.helpContent.chat", {
-                              url: createPlusPageUrl(PLUS_UTM_MEDIUMS.MODE_SELECT_TOOLTIP),
-                            }),
+                            __html: t("settings.general.defaultMode.helpContent.chat"),
                           }}
                         />
                         <li
                           dangerouslySetInnerHTML={{
                             __html: t("settings.general.defaultMode.helpContent.vaultQA"),
-                          }}
-                        />
-                        <li
-                          dangerouslySetInnerHTML={{
-                            __html: t("settings.general.defaultMode.helpContent.copilotPlus", {
-                              url: createPlusPageUrl(PLUS_UTM_MEDIUMS.MODE_SELECT_TOOLTIP),
-                            }),
                           }}
                         />
                       </ul>
