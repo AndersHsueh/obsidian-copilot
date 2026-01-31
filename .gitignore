@@ -8,25 +8,39 @@
 # npm
 node_modules
 
-# Don't include the compiled main.js file in the repo.
-# They should be uploaded to GitHub releases instead.
+# 构建产物 - 不包含在仓库中
+# 应通过 GitHub releases 发布
 main.js
 styles.css
 
-# Exclude sourcemaps
+# 排除 sourcemaps
 *.map
 
-# obsidian
+# obsidian 数据文件
 data.json
 
-# Exclude macOS Finder (System Explorer) View States
+# macOS Finder 视图状态
 .DS_Store
 
-# Test Environment
-.env.test
+# Windows 缩略图缓存
+Thumbs.db
 
-# Claude configuration
+# 测试环境
+.env.test
+.env.local
+.env
+
+# Claude 配置
 .claude/settings.local.json
 
-# Development session tracking
+# 开发会话跟踪
 TODO.md
+
+# 日志文件
+*.log
+npm-debug.log*
+
+# 临时文件
+*.tmp
+*.temp
+*.bak

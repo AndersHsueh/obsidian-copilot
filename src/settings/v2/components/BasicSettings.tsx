@@ -18,10 +18,10 @@ import React, { useState } from "react";
 import { ApiKeyDialog } from "./ApiKeyDialog";
 
 const ChainType2Label: Record<ChainType, string> = {
-  [ChainType.LLM_CHAIN]: "Chat",
-  [ChainType.VAULT_QA_CHAIN]: "Vault QA (Basic)",
+  [ChainType.LLM_CHAIN]: "聊天",
+  [ChainType.VAULT_QA_CHAIN]: "知识库问答 (基础)",
   [ChainType.COPILOT_PLUS_CHAIN]: "Copilot Plus",
-  [ChainType.PROJECT_CHAIN]: "Projects (alpha)",
+  [ChainType.PROJECT_CHAIN]: "项目 (测试版)",
 };
 
 export const BasicSettings: React.FC = () => {
@@ -95,27 +95,24 @@ export const BasicSettings: React.FC = () => {
 
       {/* General Section */}
       <section>
-        <div className="tw-mb-3 tw-text-xl tw-font-bold">General</div>
+        <div className="tw-mb-3 tw-text-xl tw-font-bold">通用设置</div>
         <div className="tw-space-y-4">
           <div className="tw-space-y-4">
             {/* API Key Section */}
             <SettingItem
               type="custom"
-              title="API Keys"
+              title="API 密钥"
               description={
                 <div className="tw-flex tw-items-center tw-gap-1.5">
-                  <span className="tw-leading-none">
-                    Configure API keys for different AI providers
-                  </span>
+                  <span className="tw-leading-none">配置不同 AI 服务商的 API 密钥</span>
                   <HelpTooltip
                     content={
                       <div className="tw-flex tw-max-w-96 tw-flex-col tw-gap-2 tw-py-4">
                         <div className="tw-text-sm tw-font-medium tw-text-accent">
-                          API key required for chat and QA features
+                          聊天和问答功能需要 API 密钥
                         </div>
                         <div className="tw-text-xs tw-text-muted">
-                          To enable chat and QA functionality, please provide an API key from your
-                          selected provider.
+                          要启用聊天和问答功能，请提供您所选服务商的 API 密钥。
                         </div>
                       </div>
                     }
@@ -130,33 +127,33 @@ export const BasicSettings: React.FC = () => {
                 variant="secondary"
                 className="tw-flex tw-w-full tw-items-center tw-justify-center tw-gap-2 sm:tw-w-auto sm:tw-justify-start"
               >
-                Set Keys
+                设置密钥
                 <Key className="tw-size-4" />
               </Button>
             </SettingItem>
           </div>
           <SettingItem
             type="select"
-            title="Default Chat Model"
+            title="默认聊天模型"
             description={
               <div className="tw-flex tw-items-center tw-gap-1.5">
-                <span className="tw-leading-none">Select the Chat model to use</span>
+                <span className="tw-leading-none">选择要使用的聊天模型</span>
                 <HelpTooltip
                   content={
                     <div className="tw-flex tw-max-w-96 tw-flex-col tw-gap-2 tw-py-4">
                       <div className="tw-text-sm tw-font-medium tw-text-accent">
-                        Default model is OpenRouter Gemini 2.5 Flash
+                        默认模型是 OpenRouter Gemini 2.5 Flash
                       </div>
                       <div className="tw-text-xs tw-text-muted">
-                        Set your OpenRouter API key in &apos;API keys&apos; to use this model, or
-                        select a different model from another provider.
+                        在"API 密钥"中设置您的 OpenRouter API
+                        密钥以使用此模型，或从其他服务商选择不同的模型。
                       </div>
                     </div>
                   }
                 />
               </div>
             }
-            value={defaultModelActivated ? settings.defaultModelKey : "Select Model"}
+            value={defaultModelActivated ? settings.defaultModelKey : "选择模型"}
             onChange={(value) => {
               const selectedModel = settings.activeModels.find(
                 (m) => m.enabled && getModelKeyFromModel(m) === value
@@ -172,34 +169,33 @@ export const BasicSettings: React.FC = () => {
             options={
               defaultModelActivated
                 ? enableActivatedModels
-                : [{ label: "Select Model", value: "Select Model" }, ...enableActivatedModels]
+                : [{ label: "选择模型", value: "选择模型" }, ...enableActivatedModels]
             }
-            placeholder="Model"
+            placeholder="模型"
           />
 
           {/* Basic Configuration Group */}
           <SettingItem
             type="select"
-            title="Default Mode"
+            title="默认模式"
             description={
               <div className="tw-flex tw-items-center tw-gap-1.5">
-                <span className="tw-leading-none">Select the default chat mode</span>
+                <span className="tw-leading-none">选择默认的聊天模式</span>
                 <HelpTooltip
                   content={
                     <div className="tw-flex tw-max-w-96 tw-flex-col tw-gap-2">
                       <ul className="tw-pl-4 tw-text-sm tw-text-muted">
                         <li>
-                          <strong>Chat:</strong> Regular chat mode for general conversations and
-                          tasks. <i>Free to use with your own API key.</i>
+                          <strong>聊天：</strong>用于一般对话和任务的常规聊天模式。
+                          <i>使用您自己的 API 密钥免费。</i>
                         </li>
                         <li>
-                          <strong>Vault QA (Basic):</strong> Ask questions about your vault content
-                          with semantic search. <i>Free to use with your own API key.</i>
+                          <strong>知识库问答 (基础)：</strong>通过语义搜索询问您知识库内容的问题。
+                          <i>使用您自己的 API 密钥免费。</i>
                         </li>
                         <li>
-                          <strong>Copilot Plus:</strong> Covers all features of the 2 free modes,
-                          plus advanced paid features including chat context menu, advanced search,
-                          AI agents, and more. Check out{" "}
+                          <strong>Copilot Plus：</strong>涵盖两种免费模式的所有功能，
+                          以及高级付费功能，包括聊天上下文菜单、高级搜索、AI 代理等。 查看{" "}
                           <a
                             href={createPlusPageUrl(PLUS_UTM_MEDIUMS.MODE_SELECT_TOOLTIP)}
                             target="_blank"
@@ -208,7 +204,7 @@ export const BasicSettings: React.FC = () => {
                           >
                             obsidiancopilot.com
                           </a>{" "}
-                          for more details.
+                          了解更多详情。
                         </li>
                       </ul>
                     </div>
@@ -226,33 +222,34 @@ export const BasicSettings: React.FC = () => {
 
           <SettingItem
             type="select"
-            title="Open Plugin In"
-            description="Choose where to open the plugin"
+            title="打开插件位置"
+            description="选择在哪里打开插件"
             value={settings.defaultOpenArea}
             onChange={(value) => updateSetting("defaultOpenArea", value as DEFAULT_OPEN_AREA)}
             options={[
-              { label: "Sidebar View", value: DEFAULT_OPEN_AREA.VIEW },
-              { label: "Editor", value: DEFAULT_OPEN_AREA.EDITOR },
+              { label: "侧边栏视图", value: DEFAULT_OPEN_AREA.VIEW },
+              { label: "编辑器", value: DEFAULT_OPEN_AREA.EDITOR },
             ]}
           />
 
           <SettingItem
             type="select"
-            title="Send Shortcut"
+            title="发送快捷键"
             description={
               <div className="tw-flex tw-items-center tw-gap-1.5">
-                <span className="tw-leading-none">Choose keyboard shortcut to send messages</span>
+                <span className="tw-leading-none">选择发送消息的键盘快捷键</span>
                 <HelpTooltip
                   content={
                     <div className="tw-flex tw-max-w-96 tw-flex-col tw-gap-2 tw-py-4">
                       <div className="tw-text-sm tw-font-medium tw-text-accent">
-                        Shortcut not working?
+                        快捷键不起作用？
                       </div>
                       <div className="tw-text-xs tw-text-muted">
-                        If your selected shortcut doesn&#39;t work, check
-                        <strong> Obsidian&#39;s Settings → Hotkeys</strong> to see if another
-                        command is using the same key combination. <br />
-                        You may need to remove or change the conflicting hotkey first.
+                        如果您选择的快捷键不起作用，请检查
+                        <strong> Obsidian 的设置 → 快捷键</strong>
+                        ，看看是否有其他命令正在使用相同的组合键。
+                        <br />
+                        您可能需要先删除或更改冲突的快捷键。
                       </div>
                     </div>
                   }
@@ -269,8 +266,8 @@ export const BasicSettings: React.FC = () => {
 
           <SettingItem
             type="switch"
-            title="Auto-Add Active Content to Context"
-            description="Automatically add the active note or Web Viewer tab (Desktop only) to chat context when sending messages."
+            title="自动添加活动内容到上下文"
+            description="发送消息时自动将当前笔记或 Web 查看器标签页（仅桌面端）添加到聊天上下文。"
             checked={settings.autoAddActiveContentToContext}
             onCheckedChange={(checked) => {
               updateSetting("autoAddActiveContentToContext", checked);
@@ -279,8 +276,8 @@ export const BasicSettings: React.FC = () => {
 
           <SettingItem
             type="switch"
-            title="Auto-Add Selection to Context"
-            description="Automatically add selected text from notes or Web Viewer (Desktop only) to chat context. Disable to use manual command instead."
+            title="自动添加选中内容到上下文"
+            description="自动将笔记或 Web 查看器（仅桌面端）中选中的文本添加到聊天上下文。禁用后可使用手动命令代替。"
             checked={settings.autoAddSelectionToContext}
             onCheckedChange={(checked) => {
               updateSetting("autoAddSelectionToContext", checked);
@@ -289,8 +286,8 @@ export const BasicSettings: React.FC = () => {
 
           <SettingItem
             type="switch"
-            title="Images in Markdown"
-            description="Pass embedded images in markdown to the AI along with the text. Only works with multimodal models."
+            title="Markdown 中的图片"
+            description="将 Markdown 中嵌入的图片连同文本一起传递给 AI。仅适用于多模态模型。"
             checked={settings.passMarkdownImages}
             onCheckedChange={(checked) => {
               updateSetting("passMarkdownImages", checked);
@@ -299,16 +296,16 @@ export const BasicSettings: React.FC = () => {
 
           <SettingItem
             type="switch"
-            title="Suggested Prompts"
-            description="Show suggested prompts in the chat view"
+            title="建议提示词"
+            description="在聊天视图中显示建议的提示词"
             checked={settings.showSuggestedPrompts}
             onCheckedChange={(checked) => updateSetting("showSuggestedPrompts", checked)}
           />
 
           <SettingItem
             type="switch"
-            title="Relevant Notes"
-            description="Show relevant notes in the chat view"
+            title="相关笔记"
+            description="在聊天视图中显示相关笔记"
             checked={settings.showRelevantNotes}
             onCheckedChange={(checked) => updateSetting("showRelevantNotes", checked)}
           />
@@ -317,28 +314,28 @@ export const BasicSettings: React.FC = () => {
 
       {/* Saving Conversations Section */}
       <section>
-        <div className="tw-mb-3 tw-text-xl tw-font-bold">Saving Conversations</div>
+        <div className="tw-mb-3 tw-text-xl tw-font-bold">保存对话</div>
         <div className="tw-space-y-4">
           <SettingItem
             type="switch"
-            title="Autosave Chat"
-            description="Automatically saves the chat after every user message and AI response."
+            title="自动保存聊天"
+            description="在每条用户消息和 AI 回复后自动保存聊天记录。"
             checked={settings.autosaveChat}
             onCheckedChange={(checked) => updateSetting("autosaveChat", checked)}
           />
 
           <SettingItem
             type="switch"
-            title="Generate AI Chat Title on Save"
-            description="When enabled, uses an AI model to generate a concise title for saved chat notes. When disabled, uses the first 10 words of the first user message."
+            title="保存时生成 AI 聊天标题"
+            description="启用后，使用 AI 模型为保存的聊天笔记生成简洁的标题。禁用后，使用用户第一条消息的前 10 个词。"
             checked={settings.generateAIChatTitleOnSave}
             onCheckedChange={(checked) => updateSetting("generateAIChatTitleOnSave", checked)}
           />
 
           <SettingItem
             type="text"
-            title="Default Conversation Folder Name"
-            description="The default folder name where chat conversations will be saved. Default is 'copilot/copilot-conversations'"
+            title="默认对话文件夹名称"
+            description="聊天对话将保存到的默认文件夹名称。默认为 'copilot/copilot-conversations'"
             value={settings.defaultSaveFolder}
             onChange={(value) => updateSetting("defaultSaveFolder", value)}
             placeholder="copilot/copilot-conversations"
@@ -346,8 +343,8 @@ export const BasicSettings: React.FC = () => {
 
           <SettingItem
             type="text"
-            title="Default Conversation Tag"
-            description="The default tag to be used when saving a conversation. Default is 'ai-conversations'"
+            title="默认对话标签"
+            description="保存对话时使用的默认标签。默认为 'ai-conversations'"
             value={settings.defaultConversationTag}
             onChange={(value) => updateSetting("defaultConversationTag", value)}
             placeholder="ai-conversations"
@@ -355,35 +352,31 @@ export const BasicSettings: React.FC = () => {
 
           <SettingItem
             type="custom"
-            title="Conversation Filename Template"
+            title="对话文件名模板"
             description={
               <div className="tw-flex tw-items-start tw-gap-1.5 ">
-                <span className="tw-leading-none">
-                  Customize the format of saved conversation note names.
-                </span>
+                <span className="tw-leading-none">自定义保存对话笔记的文件名格式。</span>
                 <HelpTooltip
                   content={
                     <div className="tw-flex tw-max-w-96 tw-flex-col tw-gap-2 tw-py-4">
                       <div className="tw-text-sm tw-font-medium tw-text-accent">
-                        Note: All the following variables must be included in the template.
+                        注意：以下所有变量必须包含在模板中。
                       </div>
                       <div>
-                        <div className="tw-text-sm tw-font-medium tw-text-muted">
-                          Available variables:
-                        </div>
+                        <div className="tw-text-sm tw-font-medium tw-text-muted">可用变量：</div>
                         <ul className="tw-pl-4 tw-text-sm tw-text-muted">
                           <li>
-                            <strong>{"{$date}"}</strong>: Date in YYYYMMDD format
+                            <strong>{"{$date}"}</strong>：YYYYMMDD 格式的日期
                           </li>
                           <li>
-                            <strong>{"{$time}"}</strong>: Time in HHMMSS format
+                            <strong>{"{$time}"}</strong>：HHMMSS 格式的时间
                           </li>
                           <li>
-                            <strong>{"{$topic}"}</strong>: Chat conversation topic
+                            <strong>{"{$topic}"}</strong>：聊天对话主题
                           </li>
                         </ul>
                         <i className="tw-mt-2 tw-text-sm tw-text-muted">
-                          Example: {"{$date}_{$time}__{$topic}"} →
+                          示例：{"{$date}_{$time}__{$topic}"} →
                           20250114_153232__polish_this_article_[[Readme]]
                         </i>
                       </div>
@@ -414,10 +407,10 @@ export const BasicSettings: React.FC = () => {
                 {isChecking ? (
                   <>
                     <Loader2 className="tw-mr-2 tw-size-4 tw-animate-spin" />
-                    Apply
+                    应用
                   </>
                 ) : (
-                  "Apply"
+                  "应用"
                 )}
               </Button>
             </div>
@@ -427,12 +420,12 @@ export const BasicSettings: React.FC = () => {
 
       {/* Sorting Section */}
       <section>
-        <div className="tw-mb-3 tw-text-xl tw-font-bold">Sorting</div>
+        <div className="tw-mb-3 tw-text-xl tw-font-bold">排序</div>
         <div className="tw-space-y-4">
           <SettingItem
             type="select"
-            title="Chat History Sort Strategy"
-            description="Sort order for the chat history list"
+            title="聊天历史排序策略"
+            description="聊天历史列表的排序方式"
             value={settings.chatHistorySortStrategy}
             onChange={(value) => {
               if (isSortStrategy(value)) {
@@ -440,16 +433,16 @@ export const BasicSettings: React.FC = () => {
               }
             }}
             options={[
-              { label: "Recency", value: "recent" },
-              { label: "Created", value: "created" },
-              { label: "Alphabetical", value: "name" },
+              { label: "最近使用", value: "recent" },
+              { label: "创建时间", value: "created" },
+              { label: "按字母顺序", value: "name" },
             ]}
           />
 
           <SettingItem
             type="select"
-            title="Project List Sort Strategy"
-            description="Sort order for the project list"
+            title="项目列表排序策略"
+            description="项目列表的排序方式"
             value={settings.projectListSortStrategy}
             onChange={(value) => {
               if (isSortStrategy(value)) {
@@ -457,9 +450,9 @@ export const BasicSettings: React.FC = () => {
               }
             }}
             options={[
-              { label: "Recency", value: "recent" },
-              { label: "Created", value: "created" },
-              { label: "Alphabetical", value: "name" },
+              { label: "最近使用", value: "recent" },
+              { label: "创建时间", value: "created" },
+              { label: "按字母顺序", value: "name" },
             ]}
           />
         </div>

@@ -55,8 +55,8 @@ export const ToolSettingsSection: React.FC = () => {
     <>
       <SettingItem
         type="slider"
-        title="Max Iterations"
-        description="Maximum number of reasoning iterations the autonomous agent can perform. Higher values allow for more complex reasoning but may take longer."
+        title="最大迭代次数"
+        description="自主代理可以执行的最大推理迭代次数。较高的值允许更复杂的推理，但可能需要更长时间。"
         value={settings.autonomousAgentMaxIterations ?? 4}
         onChange={(value) => {
           updateSetting("autonomousAgentMaxIterations", value);
@@ -67,10 +67,8 @@ export const ToolSettingsSection: React.FC = () => {
       />
 
       <div className="tw-mt-4 tw-rounded-lg tw-bg-secondary tw-p-4">
-        <div className="tw-mb-2 tw-text-sm tw-font-medium">Agent Accessible Tools</div>
-        <div className="tw-mb-4 tw-text-xs tw-text-muted">
-          Toggle which tools the autonomous agent can use
-        </div>
+        <div className="tw-mb-2 tw-text-sm tw-font-medium">代理可访问的工具</div>
+        <div className="tw-mb-4 tw-text-xs tw-text-muted">切换自主代理可以使用的工具</div>
 
         <div className="tw-flex tw-flex-col tw-gap-2">{renderToolsByCategory()}</div>
       </div>

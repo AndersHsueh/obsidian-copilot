@@ -30,16 +30,16 @@ export const CopilotPlusSettings: React.FC = () => {
       <section className="tw-flex tw-flex-col tw-gap-4">
         <div className="tw-flex tw-items-center tw-py-4">
           <Badge variant="secondary" className="tw-text-accent">
-            Plus Required
+            需要 Plus
           </Badge>
         </div>
         <div className="tw-flex tw-flex-col tw-gap-4">
-          <div className="tw-pt-4 tw-text-xl tw-font-semibold">Autonomous Agent</div>
+          <div className="tw-pt-4 tw-text-xl tw-font-semibold">自主代理</div>
 
           <SettingItem
             type="switch"
-            title="Enable Autonomous Agent"
-            description="Enable autonomous agent mode in Plus chat. The AI will reason step-by-step and decide which tools to use automatically, improving response quality for complex queries."
+            title="启用自主代理"
+            description="在 Plus 聊天中启用自主代理模式。AI 将逐步推理并自动决定使用哪些工具，提高复杂查询的响应质量。"
             checked={settings.enableAutonomousAgent}
             onCheckedChange={(checked) => {
               updateSetting("enableAutonomousAgent", checked);
@@ -52,12 +52,12 @@ export const CopilotPlusSettings: React.FC = () => {
             </>
           )}
 
-          <div className="tw-pt-4 tw-text-xl tw-font-semibold">Memory (experimental)</div>
+          <div className="tw-pt-4 tw-text-xl tw-font-semibold">记忆功能 (实验性)</div>
 
           <SettingItem
             type="text"
-            title="Memory Folder Name"
-            description="Specify the folder where memory data is stored."
+            title="记忆文件夹名称"
+            description="指定存储记忆数据的文件夹。"
             value={settings.memoryFolderName}
             onChange={(value) => {
               updateSetting("memoryFolderName", value);
@@ -67,8 +67,8 @@ export const CopilotPlusSettings: React.FC = () => {
 
           <SettingItem
             type="switch"
-            title="Reference Recent Conversation"
-            description="When enabled, Copilot references your recent conversation history to provide more contextually relevant responses. All history data is stored locally in your vault."
+            title="引用最近对话"
+            description="启用后，Copilot 会引用您最近的对话历史，以提供更符合上下文的回复。所有历史数据都存储在您的知识库本地。"
             checked={settings.enableRecentConversations}
             onCheckedChange={(checked) => {
               updateSetting("enableRecentConversations", checked);
@@ -78,8 +78,8 @@ export const CopilotPlusSettings: React.FC = () => {
           {settings.enableRecentConversations && (
             <SettingItem
               type="slider"
-              title="Max Recent Conversations"
-              description="Number of recent conversations to remember for context. Higher values provide more context but may slow down responses."
+              title="最大最近对话数"
+              description="记忆的最近对话数量，用于上下文参考。数值越高提供的上下文越多，但可能会减慢响应速度。"
               min={10}
               max={50}
               step={1}
@@ -90,38 +90,37 @@ export const CopilotPlusSettings: React.FC = () => {
 
           <SettingItem
             type="switch"
-            title="Reference Saved Memories"
-            description="When enabled, Copilot can access memories that you explicitly asked it to remember. Use this to store important facts, preferences, or context for future conversations."
+            title="引用保存的记忆"
+            description="启用后，Copilot 可以访问您明确要求它记住的记忆。用于存储重要事实、偏好或未来对话的上下文。"
             checked={settings.enableSavedMemory}
             onCheckedChange={(checked) => {
               updateSetting("enableSavedMemory", checked);
             }}
           />
 
-          <div className="tw-pt-4 tw-text-xl tw-font-semibold">Self-Host Mode</div>
+          <div className="tw-pt-4 tw-text-xl tw-font-semibold">自托管模式</div>
 
           <SettingItem
             type="switch"
-            title="Enable Self-Host Mode"
+            title="启用自托管模式"
             description={
               <div className="tw-flex tw-items-center tw-gap-1.5">
                 <span className="tw-leading-none">
-                  Use your own infrastructure for LLMs, embeddings (and local document understanding
-                  soon with our upcoming desktop app).
+                  使用您自己的基础设施运行
+                  LLM、嵌入模型（以及即将推出的桌面应用中的本地文档理解功能）。
                 </span>
                 <HelpTooltip
                   content={
                     <div className="tw-flex tw-max-w-96 tw-flex-col tw-gap-2 tw-py-4">
                       <div className="tw-text-sm tw-font-medium tw-text-accent">
-                        Self-Host Mode (Believer/Supporter only)
+                        自托管模式（仅限 Believer/Supporter）
                       </div>
                       <div className="tw-text-xs tw-text-muted">
-                        Connect to your own self-hosted backend (e.g., Miyo) for complete control
-                        over your AI infrastructure. This allows offline usage and custom model
-                        deployments.
+                        连接到您自己的自托管后端（例如 Miyo），完全控制您的 AI 基础设施。
+                        这允许离线使用和自定义模型部署。
                       </div>
                       <div className="tw-text-xs tw-text-muted">
-                        Requires re-validation every 14 days when online.
+                        在线时需要每 14 天重新验证一次。
                       </div>
                     </div>
                   }

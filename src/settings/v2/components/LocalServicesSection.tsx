@@ -36,10 +36,7 @@ function normalizeBaseUrl(url: string): string {
 }
 
 /** Fetch models from a local service */
-async function fetchModelsFromService(
-  url: string,
-  kind: LocalServiceKind
-): Promise<LocalModel[]> {
+async function fetchModelsFromService(url: string, kind: LocalServiceKind): Promise<LocalModel[]> {
   const normalizedUrl = normalizeBaseUrl(url);
 
   if (kind === ChatModelProviders.OLLAMA) {
@@ -133,19 +130,19 @@ function LocalServiceItem({ service, expanded, onToggleExpand }: LocalServiceIte
       if (!exists) {
         updateSetting("activeModels", [...settings.activeModels, customModel]);
         if (verificationFailed) {
-          new Notice(`Model ${model.name} added (verification failed: ${verificationError})`, 5000);
+          new Notice(`模型 ${model.name} 已添加（验证失败：${verificationError}）`, 5000);
         } else {
-          new Notice(`Model ${model.name} added!`);
+          new Notice(`模型 ${model.name} 已添加！`);
         }
       } else {
         if (verificationFailed) {
-          new Notice(`Model ${model.name} already exists (verification failed: ${verificationError})`, 5000);
+          new Notice(`模型 ${model.name} 已存在（验证失败：${verificationError}）`, 5000);
         } else {
-          new Notice(`Model ${model.name} already exists.`);
+          new Notice(`模型 ${model.name} 已存在。`);
         }
       }
     } catch (err) {
-      new Notice(`Failed to add model: ${err2String(err)}`);
+      new Notice(`添加模型失败：${err2String(err)}`);
     } finally {
       setVerifying(false);
     }
@@ -176,7 +173,7 @@ function LocalServiceItem({ service, expanded, onToggleExpand }: LocalServiceIte
             variant="secondary"
             className="tw-flex tw-w-full tw-items-center tw-justify-center tw-gap-2 tw-whitespace-nowrap tw-px-4 tw-py-2"
           >
-            Add Model
+            添加模型
             {expanded ? (
               <ChevronUp className="tw-ml-1 tw-size-4" />
             ) : (
@@ -188,10 +185,7 @@ function LocalServiceItem({ service, expanded, onToggleExpand }: LocalServiceIte
 
       <Collapsible open={expanded} className="tw-mt-2">
         <CollapsibleContent className="tw-rounded-md tw-p-3">
-          <FormField
-            label="Model"
-            description="Add the currently selected model to model List."
-          >
+          <FormField label="模型" description="将当前选择的模型添加到模型列表。">
             <div>
               <div className="tw-flex tw-items-center tw-gap-2">
                 <div className="tw-flex-1">
@@ -205,7 +199,7 @@ function LocalServiceItem({ service, expanded, onToggleExpand }: LocalServiceIte
                     }
                     onChange={(e) => setSelectedModelId(e.target.value)}
                     value={selectedModelId}
-                    placeholder="Select Model"
+                    placeholder="选择模型"
                     disabled={loading || !!error}
                   />
                 </div>
@@ -217,19 +211,15 @@ function LocalServiceItem({ service, expanded, onToggleExpand }: LocalServiceIte
                     size="sm"
                     className="tw-w-full tw-whitespace-nowrap"
                   >
-                    {verifying ? (
-                      <Loader2 className="tw-size-4 tw-animate-spin" />
-                    ) : (
-                      "Add"
-                    )}
+                    {verifying ? <Loader2 className="tw-size-4 tw-animate-spin" /> : "添加"}
                   </Button>
                 </div>
               </div>
               <div className="tw-mt-1 tw-text-xs">
-                {loading && <div className="tw-p-1 tw-text-muted">Loading models...</div>}
-                {error && <div className="tw-p-1 tw-text-error">Failed: {error}</div>}
+                {loading && <div className="tw-p-1 tw-text-muted">正在加载模型...</div>}
+                {error && <div className="tw-p-1 tw-text-error">失败：{error}</div>}
                 {models && models.length === 0 && (
-                  <div className="tw-p-1 tw-text-muted">No models found.</div>
+                  <div className="tw-p-1 tw-text-muted">未找到模型。</div>
                 )}
               </div>
             </div>
@@ -246,24 +236,34 @@ export function LocalServicesSection() {
 
   // Fixed local providers
   const localProviders: LocalService[] = [
-    { id: "ollama", name: "Ollama", url: "http://localhost:11434", kind: ChatModelProviders.OLLAMA },
-    { id: "lm-studio", name: "LM Studio", url: "http://localhost:1234", kind: ChatModelProviders.LM_STUDIO },
+    {
+      id: "ollama",
+      name: "Ollama",
+      url: "http://localhost:11434",
+      kind: ChatModelProviders.OLLAMA,
+    },
+    {
+      id: "lm-studio",
+      name: "LM Studio",
+      url: "http://localhost:1234",
+      kind: ChatModelProviders.LM_STUDIO,
+    },
   ];
 
   return (
     <div className="tw-mt-6 tw-border-t tw-border-border tw-pt-4">
       {/* Header */}
       <div className="tw-mb-3">
-        <h3 className="tw-m-0 tw-text-base tw-font-bold">Local Services</h3>
+        <h3 className="tw-m-0 tw-text-base tw-font-bold">本地服务</h3>
         <div className="tw-mt-1 tw-text-xs tw-text-muted">
-          Need help?{" "}
+          需要帮助？{" "}
           <a
             href="https://github.com/logancyang/obsidian-copilot/blob/master/local_copilot.md"
             target="_blank"
             rel="noopener noreferrer"
             className="tw-text-accent hover:tw-text-accent-hover"
           >
-            Setup guide
+            设置指南
           </a>
         </div>
       </div>
@@ -284,4 +284,3 @@ export function LocalServicesSection() {
     </div>
   );
 }
-

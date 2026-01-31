@@ -49,10 +49,8 @@ function ApiKeyModalContent({ onClose, onGoToModelTab }: ApiKeyModalContentProps
   return (
     <div className="tw-p-4 sm:tw-max-w-[500px]">
       <div className="tw-mb-4">
-        <h2 className="tw-text-xl tw-font-bold">AI Provider Settings</h2>
-        <p className="tw-text-sm tw-text-muted">
-          Configure your AI providers by adding their API keys.
-        </p>
+        <h2 className="tw-text-xl tw-font-bold">AI 服务商设置</h2>
+        <p className="tw-text-sm tw-text-muted">通过添加 API 密钥来配置您的 AI 服务商。</p>
       </div>
 
       <div className="tw-space-y-6 tw-py-4">
@@ -86,7 +84,7 @@ function ApiKeyModalContent({ onClose, onGoToModelTab }: ApiKeyModalContentProps
                           variant="secondary"
                           className="tw-flex tw-w-full tw-items-center tw-justify-center tw-gap-2 tw-whitespace-nowrap tw-px-4 tw-py-2"
                         >
-                          Add Model
+                          添加模型
                           {isExpanded ? (
                             <ChevronUp className="tw-ml-1 tw-size-4" />
                           ) : (
@@ -104,7 +102,7 @@ function ApiKeyModalContent({ onClose, onGoToModelTab }: ApiKeyModalContentProps
                         rel="noopener noreferrer"
                         className="tw-text-[10px] tw-text-accent hover:tw-text-accent-hover sm:tw-text-xs"
                       >
-                        Get {getProviderLabel(item.provider)} Key
+                        获取 {getProviderLabel(item.provider)} 密钥
                       </a>
                     )}
                   </div>
@@ -142,11 +140,11 @@ function ApiKeyModalContent({ onClose, onGoToModelTab }: ApiKeyModalContentProps
                 </div>
                 <div className="tw-flex-1">
                   <h4 className="tw-mb-1 tw-text-sm tw-font-semibold">
-                    Looking for Azure OpenAI or Custom Providers?
+                    需要 Azure OpenAI 或自定义服务商？
                   </h4>
                   <p className="tw-mb-3 tw-text-xs tw-leading-relaxed tw-text-muted">
-                    Providers like Azure OpenAI, OpenAI Format, or Local LLMs require additional
-                    configuration (Base URL, Deployment Name, etc.).
+                    Azure OpenAI、OpenAI 格式或本地 LLM 等服务商需要额外配置（Base
+                    URL、部署名称等）。
                   </p>
                   <button
                     onClick={() => {
@@ -155,7 +153,7 @@ function ApiKeyModalContent({ onClose, onGoToModelTab }: ApiKeyModalContentProps
                     }}
                     className="tw-group tw-flex tw-items-center tw-gap-1 tw-text-sm tw-font-medium tw-text-accent hover:tw-text-accent-hover"
                   >
-                    Go to Model Settings
+                    前往模型设置
                     <ChevronRight className="tw-size-4 tw-transition-transform group-hover:tw-translate-x-0.5" />
                   </button>
                 </div>
@@ -166,7 +164,7 @@ function ApiKeyModalContent({ onClose, onGoToModelTab }: ApiKeyModalContentProps
       </div>
 
       <div className="tw-mt-4 tw-flex tw-justify-end">
-        <Button onClick={onClose}>Close</Button>
+        <Button onClick={onClose}>关闭</Button>
       </div>
     </div>
   );

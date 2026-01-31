@@ -67,25 +67,25 @@ const MobileCommandCard: React.FC<{
   const dropdownActions: MobileCardDropdownAction<CustomCommand>[] = [
     {
       icon: <PenLine className="tw-size-4" />,
-      label: "Edit",
+      label: "编辑",
       onClick: handleEdit,
     },
     {
       icon: <Copy className="tw-size-4" />,
-      label: "Copy",
+      label: "复制",
       onClick: onCopy,
     },
     {
       icon: <Trash2 className="tw-size-4" />,
-      label: "Delete",
+      label: "删除",
       onClick: (cmd) => {
         new ConfirmModal(
           app,
           () => onRemove(cmd),
-          `Are you sure you want to delete the command "${cmd.title}"? This will permanently remove the command file and cannot be undone.`,
-          "Delete Command",
-          "Delete",
-          "Cancel"
+          `确定要删除命令"${cmd.title}"吗？这将永久删除命令文件且无法撤销。`,
+          "删除命令",
+          "删除",
+          "取消"
         ).open();
       },
       variant: "destructive",
@@ -96,12 +96,11 @@ const MobileCommandCard: React.FC<{
     <div className="tw-flex tw-flex-wrap tw-justify-around">
       <div className="tw-flex tw-items-center tw-justify-between tw-gap-2">
         <div className="tw-flex tw-items-center tw-gap-1">
-          <span className="tw-text-sm tw-font-medium">In Menu</span>
+          <span className="tw-text-sm tw-font-medium">在菜单中</span>
           <HelpTooltip
             content={
               <div className="tw-max-w-xs tw-text-xs">
-                If enabled, the command will be available in the context menu when you right-click
-                in the editor.
+                启用后，当您在编辑器中右键点击时，该命令将在上下文菜单中可用。
               </div>
             }
           />
@@ -121,11 +120,11 @@ const MobileCommandCard: React.FC<{
       </div>
       <div className="tw-flex tw-items-center tw-justify-between  tw-gap-2">
         <div className="tw-flex tw-items-center tw-gap-1">
-          <span className="tw-text-sm tw-font-medium">In Slash</span>
+          <span className="tw-text-sm tw-font-medium">斜杠命令</span>
           <HelpTooltip
             content={
               <div className="tw-max-w-xs tw-text-xs">
-                If enabled, the command will be available as a slash command in the chat.
+                启用后，该命令将在聊天中作为斜杠命令可用。
               </div>
             }
           />
@@ -157,7 +156,7 @@ const MobileCommandCard: React.FC<{
       primaryAction={{
         icon: <PenLine className="tw-size-4" />,
         onClick: handleEdit,
-        tooltip: "Edit Command",
+        tooltip: "编辑命令",
       }}
       dropdownActions={dropdownActions}
       containerRef={containerRef}
@@ -310,10 +309,10 @@ export const CommandSettings: React.FC = () => {
     try {
       await CustomCommandManager.getInstance().deleteCommand(command);
 
-      new Notice(`Command "${command.title}" deleted successfully!`);
+      new Notice(`命令"${command.title}"已成功删除！`);
     } catch (error) {
       logError("Failed to delete command:", error);
-      new Notice("Failed to delete command. Please try again.");
+      new Notice("删除命令失败，请重试。");
       throw error;
     }
   };
@@ -333,7 +332,7 @@ export const CommandSettings: React.FC = () => {
       });
     } catch (error) {
       logError("Failed to copy command:", error);
-      new Notice("Failed to copy command. Please try again.");
+      new Notice("复制命令失败，请重试。");
     }
   };
 
@@ -370,7 +369,7 @@ export const CommandSettings: React.FC = () => {
           <div className="tw-space-y-2">
             {commands.length === 0 ? (
               <div className="tw-rounded-lg tw-border tw-border-border tw-bg-primary tw-p-8 tw-text-center tw-text-muted">
-                No custom prompt files found.
+                未找到自定义提示词文件。
               </div>
             ) : (
               commands.map((command) => (
@@ -395,18 +394,17 @@ export const CommandSettings: React.FC = () => {
     <div className="tw-space-y-4" ref={containerRef}>
       <section>
         <div className="tw-mb-4 tw-flex tw-flex-col tw-gap-2">
-          <div className="tw-text-xl tw-font-bold">Custom Commands</div>
+          <div className="tw-text-xl tw-font-bold">自定义命令</div>
           <div className="tw-text-sm tw-text-muted">
-            Custom commands are preset prompts that you can trigger in the editor by right-clicking
-            and selecting them from the context menu or by using a <code>/</code> command in the
-            chat to load them into your chat input.
+            自定义命令是预设的提示词，您可以在编辑器中通过右键点击从上下文菜单中选择来触发，
+            或者在聊天中使用 <code>/</code> 命令将它们加载到您的聊天输入中。
           </div>
         </div>
 
         <SettingItem
           type="text"
-          title="Custom Prompts Folder Name"
-          description="Folder where custom prompts are stored"
+          title="自定义提示词文件夹名称"
+          description="存储自定义提示词的文件夹"
           value={settings.customPromptsFolder}
           onChange={(value) => {
             updateSetting("customPromptsFolder", value);
@@ -416,8 +414,8 @@ export const CommandSettings: React.FC = () => {
         />
         <SettingItem
           type="switch"
-          title="Custom Prompt Templating"
-          description="Process variables like {activenote}, {foldername}, or {#tag} in prompts. Disable for raw prompts."
+          title="自定义提示词模板"
+          description="处理提示词中的变量，如 {activenote}、{foldername} 或 {#tag}。禁用可使用原始提示词。"
           checked={settings.enableCustomPromptTemplating}
           onCheckedChange={(checked) => {
             updateSetting("enableCustomPromptTemplating", checked);
@@ -425,23 +423,22 @@ export const CommandSettings: React.FC = () => {
         />
         <SettingItem
           type="select"
-          title="Custom Prompts Sort Strategy"
-          description="Sort order for slash command menu prompts"
+          title="自定义提示词排序策略"
+          description="斜杠命令菜单中提示词的排序方式"
           value={settings.promptSortStrategy}
           onChange={(value) => updateSetting("promptSortStrategy", value)}
           options={[
-            { label: "Recency", value: PromptSortStrategy.TIMESTAMP },
-            { label: "Alphabetical", value: PromptSortStrategy.ALPHABETICAL },
-            { label: "Manual", value: PromptSortStrategy.MANUAL },
+            { label: "最近使用", value: PromptSortStrategy.TIMESTAMP },
+            { label: "按字母顺序", value: PromptSortStrategy.ALPHABETICAL },
+            { label: "手动排序", value: PromptSortStrategy.MANUAL },
           ]}
         />
 
         <div className="tw-mb-4 tw-flex tw-items-start tw-gap-2 tw-rounded-md tw-border tw-border-solid tw-border-border tw-p-4 tw-text-muted">
           <Lightbulb className="tw-size-5" />{" "}
           <div>
-            Commands are automatically loaded from .md files in your custom prompts folder{" "}
-            <strong>{settings.customPromptsFolder}</strong>. Modifying the files will also update
-            the command settings.
+            命令会自动从您的自定义提示词文件夹 <strong>{settings.customPromptsFolder}</strong> 中的
+            .md 文件加载。修改这些文件也会更新命令设置。
           </div>
         </div>
 
@@ -454,12 +451,12 @@ export const CommandSettings: React.FC = () => {
                   new ConfirmModal(
                     app,
                     generateDefaultCommands,
-                    "This will add default commands to your custom prompts folder. Do you want to continue?",
-                    "Generate Default Commands"
+                    "这将向您的自定义提示词文件夹添加默认命令。是否继续？",
+                    "生成默认命令"
                   ).open()
                 }
               >
-                Generate Default
+                生成默认命令
               </Button>
             </div>
             <Button
@@ -481,7 +478,7 @@ export const CommandSettings: React.FC = () => {
               }}
             >
               <Plus className="tw-size-2 md:tw-size-4" />
-              Add Cmd
+              添加命令
             </Button>
           </div>
 
@@ -496,15 +493,14 @@ export const CommandSettings: React.FC = () => {
                 <TableHeader>
                   <TableRow>
                     <TableHead className="tw-w-10"></TableHead>
-                    <TableHead>Name</TableHead>
+                    <TableHead>名称</TableHead>
                     <TableHead className="tw-w-24 tw-text-center">
                       <div className="tw-flex tw-items-center tw-justify-center tw-gap-1">
-                        In Menu
+                        在菜单中
                         <HelpTooltip
                           content={
                             <div className="tw-max-w-xs tw-text-xs">
-                              If enabled, the command will be available in the context menu when you
-                              right-click in the editor.
+                              启用后，当您在编辑器中右键点击时，该命令将在上下文菜单中可用。
                             </div>
                           }
                         />
@@ -512,18 +508,17 @@ export const CommandSettings: React.FC = () => {
                     </TableHead>
                     <TableHead className="tw-w-28 tw-text-center">
                       <div className="tw-flex tw-items-center tw-justify-center tw-gap-1">
-                        Slash Cmd
+                        斜杠命令
                         <HelpTooltip
                           content={
                             <div className="tw-max-w-xs tw-text-xs">
-                              If enabled, the command will be available as a slash command in the
-                              chat.
+                              启用后，该命令将在聊天中作为斜杠命令可用。
                             </div>
                           }
                         />
                       </div>
                     </TableHead>
-                    <TableHead className="tw-w-32 tw-text-center">Actions</TableHead>
+                    <TableHead className="tw-w-32 tw-text-center">操作</TableHead>
                   </TableRow>
                 </TableHeader>
                 <SortableContext
@@ -534,7 +529,7 @@ export const CommandSettings: React.FC = () => {
                     {commands.length === 0 ? (
                       <TableRow>
                         <TableCell colSpan={5} className="tw-py-8 tw-text-center tw-text-muted">
-                          No custom prompt files found.
+                          未找到自定义提示词文件。
                         </TableCell>
                       </TableRow>
                     ) : (

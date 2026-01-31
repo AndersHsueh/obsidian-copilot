@@ -119,29 +119,30 @@ export const ModelEditModalContent: React.FC<ModelEditModalContentProps> = ({
     localModel.provider as SettingKeyProviders,
     localModel
   );
-  const showOtherParameters = !isEmbeddingModel && localModel.provider !== EmbeddingModelProviders.COPILOT_PLUS_JINA;
+  const showOtherParameters =
+    !isEmbeddingModel && localModel.provider !== EmbeddingModelProviders.COPILOT_PLUS_JINA;
 
   return (
     <div className="tw-space-y-3 tw-p-4">
       <div className="tw-space-y-3">
-        <FormField label="Model Name" required>
+        <FormField label="模型名称" required>
           <Input
             type="text"
             disabled={localModel.core}
             value={localModel.name}
             onChange={(e) => handleLocalUpdate("name", e.target.value)}
-            placeholder="Enter model name"
+            placeholder="输入模型名称"
           />
         </FormField>
 
         <FormField
           label={
             <div className="tw-flex tw-items-center tw-gap-1.5">
-              <span className="tw-leading-none">Display Name</span>
+              <span className="tw-leading-none">显示名称</span>
               <HelpTooltip
                 content={
                   <div className="tw-flex tw-flex-col tw-gap-0.5 tw-text-sm tw-text-muted">
-                    <div className="tw-text-[12px] tw-font-bold">Suggested format:</div>
+                    <div className="tw-text-[12px] tw-font-bold">建议格式：</div>
                     <div className="tw-text-accent">[Source]-[Payment]:[Pretty Model Name]</div>
                     <div className="tw-text-[12px]">
                       Example:
@@ -158,17 +159,17 @@ export const ModelEditModalContent: React.FC<ModelEditModalContentProps> = ({
         >
           <Input
             type="text"
-            placeholder="Custom display name (optional)"
+            placeholder="自定义显示名称（可选）"
             value={localModel.displayName || ""}
             onChange={(e) => handleLocalUpdate("displayName", e.target.value)}
           />
         </FormField>
 
-        <FormField label="Provider">
+        <FormField label="服务商">
           <Input type="text" value={getProviderLabel(localModel.provider)} disabled />
         </FormField>
 
-        <FormField label="Base URL" description="Leave it blank, unless you are using a proxy.">
+        <FormField label="Base URL" description="留空，除非您使用代理。">
           <Input
             type="text"
             placeholder={getPlaceholderUrl()}
@@ -179,8 +180,8 @@ export const ModelEditModalContent: React.FC<ModelEditModalContentProps> = ({
 
         {isBedrockProvider && (
           <FormField
-            label="Region (optional)"
-            description="Defaults to us-east-1 when left blank. With inference profiles (global., us., eu., apac.), region is auto-managed."
+            label="区域（可选）"
+            description="留空时默认为 us-east-1。使用推理配置文件（global.、us.、eu.、apac.）时，区域自动管理。"
           >
             <Input
               type="text"
@@ -191,7 +192,7 @@ export const ModelEditModalContent: React.FC<ModelEditModalContentProps> = ({
           </FormField>
         )}
 
-        <FormField label="API Key">
+        <FormField label="API 密钥">
           <PasswordInput
             placeholder={`Enter ${providerInfo.label || "Provider"} API Key`}
             value={displayApiKey}
@@ -200,7 +201,7 @@ export const ModelEditModalContent: React.FC<ModelEditModalContentProps> = ({
           {providerInfo.keyManagementURL && (
             <p className="tw-text-xs tw-text-muted">
               <a href={providerInfo.keyManagementURL} target="_blank" rel="noopener noreferrer">
-                Get {providerInfo.label} API Key
+                获取 {providerInfo.label} API 密钥
               </a>
             </p>
           )}
@@ -211,11 +212,11 @@ export const ModelEditModalContent: React.FC<ModelEditModalContentProps> = ({
             <FormField
               label={
                 <div className="tw-flex tw-items-center tw-gap-1.5">
-                  <span className="tw-leading-none">Model Capabilities</span>
+                  <span className="tw-leading-none">模型能力</span>
                   <HelpTooltip
                     content={
                       <div className="tw-text-sm tw-text-muted">
-                        Only used to display model capabilities, does not affect model functionality
+                        仅用于显示模型能力，不影响模型功能
                       </div>
                     }
                     contentClassName="tw-max-w-96"
@@ -261,7 +262,7 @@ export const ModelEditModalContent: React.FC<ModelEditModalContentProps> = ({
 
       <div className="tw-mt-6 tw-flex tw-justify-end tw-gap-2 tw-border-t tw-border-border tw-pt-4">
         <Button variant="secondary" onClick={onCancel}>
-          Close
+          关闭
         </Button>
       </div>
     </div>

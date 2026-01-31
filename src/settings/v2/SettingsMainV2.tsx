@@ -101,7 +101,7 @@ const SettingsMainV2: React.FC<SettingsMainV2Props> = ({ plugin }) => {
         <div className="tw-flex tw-flex-col tw-gap-2">
           <h1 className="tw-flex tw-flex-col tw-gap-2 sm:tw-flex-row sm:tw-items-center sm:tw-justify-between">
             <div className="tw-flex tw-items-center tw-gap-2">
-              <span>Copilot Settings</span>
+              <span>Copilot 设置</span>
               <div className="tw-flex tw-items-center tw-gap-1">
                 <span className="tw-text-xs tw-text-muted">v{plugin.manifest.version}</span>
                 {latestVersion && (
@@ -113,10 +113,10 @@ const SettingsMainV2: React.FC<SettingsMainV2Props> = ({ plugin }) => {
                         rel="noopener noreferrer"
                         className="tw-text-xs tw-text-accent hover:tw-underline"
                       >
-                        (Update to v{latestVersion})
+                        (更新到 v{latestVersion})
                       </a>
                     ) : (
-                      <span className="tw-text-xs tw-text-normal"> (up to date)</span>
+                      <span className="tw-text-xs tw-text-normal"> (已是最新)</span>
                     )}
                   </>
                 )}
@@ -124,7 +124,7 @@ const SettingsMainV2: React.FC<SettingsMainV2Props> = ({ plugin }) => {
             </div>
             <div className="tw-self-end sm:tw-self-auto">
               <Button variant="secondary" size="sm" onClick={handleReset}>
-                Reset Settings
+                重置设置
               </Button>
             </div>
           </h1>

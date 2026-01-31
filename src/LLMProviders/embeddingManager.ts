@@ -152,15 +152,8 @@ export default class EmbeddingManager {
       throw new CustomError("Plus-only model selected but user is not on Plus plan");
     }
 
-    // Check if model is believer-exclusive but user is not on believer plan
-    if (customModel.believerExclusive) {
-      const brevilabsClient = BrevilabsClient.getInstance();
-      const result = await brevilabsClient.validateLicenseKey();
-      if (!result.plan || result.plan.toLowerCase() !== "believer") {
-        new Notice("Believer-only model, please consider upgrading to Believer to access it.");
-        throw new CustomError("Believer-only model selected but user is not on Believer plan");
-      }
-    }
+    // Modified: believer-exclusive check disabled - all models accessible
+    // if (customModel.believerExclusive) { ... }
 
     const selectedModel = EmbeddingManager.modelMap[embeddingModelKey];
     if (!selectedModel.hasApiKey) {

@@ -43,12 +43,12 @@ export const AdvancedSettings: React.FC = () => {
     <div className="tw-space-y-4">
       {/* User System Prompt Section */}
       <section className="tw-space-y-4 tw-rounded-lg tw-border tw-p-4">
-        <h3 className="tw-text-lg tw-font-semibold">User System Prompt</h3>
+        <h3 className="tw-text-lg tw-font-semibold">用户系统提示词</h3>
 
         <SettingItem
           type="custom"
-          title="Default System Prompt"
-          description="Customize the system prompt for all messages, may result in unexpected behavior!"
+          title="默认系统提示词"
+          description="自定义所有消息的系统提示词，可能会导致意外行为！"
         >
           <div className="tw-flex tw-items-center tw-gap-2">
             <ObsidianNativeSelect
@@ -57,11 +57,11 @@ export const AdvancedSettings: React.FC = () => {
               options={prompts.map((prompt) => ({
                 label:
                   prompt.title === settings.defaultSystemPromptTitle
-                    ? `${prompt.title} (Default)`
+                    ? `${prompt.title} (默认)`
                     : prompt.title,
                 value: prompt.title,
               }))}
-              placeholder="Select system prompt"
+              placeholder="选择系统提示词"
               containerClassName="tw-flex-1"
             />
             <Button
@@ -69,12 +69,12 @@ export const AdvancedSettings: React.FC = () => {
               size="icon"
               onClick={handleOpenSourceFile}
               className="tw-size-5 tw-shrink-0 tw-p-0"
-              title="Open the source file"
+              title="打开源文件"
               disabled={!displayValue}
             >
               <ArrowUpRight className="tw-size-5" />
             </Button>
-            <Button variant="default" size="icon" onClick={handleAddPrompt} title="Add new prompt">
+            <Button variant="default" size="icon" onClick={handleAddPrompt} title="添加新提示词">
               <Plus className="tw-size-4" />
             </Button>
           </div>
@@ -82,8 +82,8 @@ export const AdvancedSettings: React.FC = () => {
 
         <SettingItem
           type="text"
-          title="System Prompts Folder Name"
-          description="Folder where system prompts are stored."
+          title="系统提示词文件夹名称"
+          description="存储系统提示词的文件夹。"
           value={settings.userSystemPromptsFolder}
           onChange={(value) => updateSetting("userSystemPromptsFolder", value)}
           placeholder="copilot/system-prompts"
@@ -92,12 +92,12 @@ export const AdvancedSettings: React.FC = () => {
 
       {/* Others Section */}
       <section className="tw-space-y-4 tw-rounded-lg tw-border tw-p-4">
-        <h3 className="tw-text-lg tw-font-semibold">Others</h3>
+        <h3 className="tw-text-lg tw-font-semibold">其他</h3>
 
         <SettingItem
           type="switch"
-          title="Enable Encryption"
-          description="Enable encryption for the API keys."
+          title="启用加密"
+          description="为 API 密钥启用加密。"
           checked={settings.enableEncryption}
           onCheckedChange={(checked) => {
             updateSetting("enableEncryption", checked);
@@ -106,8 +106,8 @@ export const AdvancedSettings: React.FC = () => {
 
         <SettingItem
           type="switch"
-          title="Debug Mode"
-          description="Debug mode will log some debug message to the console."
+          title="调试模式"
+          description="调试模式会将一些调试信息记录到控制台。"
           checked={settings.debug}
           onCheckedChange={(checked) => {
             updateSetting("debug", checked);
@@ -116,8 +116,8 @@ export const AdvancedSettings: React.FC = () => {
 
         <SettingItem
           type="custom"
-          title="Create Log File"
-          description={`Open the Copilot log file (${logFileManager.getLogPath()}) for easy sharing when reporting issues.`}
+          title="创建日志文件"
+          description={`打开 Copilot 日志文件 (${logFileManager.getLogPath()})，方便在报告问题时分享。`}
         >
           <Button
             variant="secondary"
@@ -128,7 +128,7 @@ export const AdvancedSettings: React.FC = () => {
               await logFileManager.openLogFile();
             }}
           >
-            Create Log File
+            创建日志文件
           </Button>
         </SettingItem>
       </section>

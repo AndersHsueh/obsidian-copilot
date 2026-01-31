@@ -83,7 +83,7 @@ export const ModelSettings: React.FC = () => {
       updatedModels[modelIndex] = updatedModel;
       updateSetting(settingField, updatedModels);
     } else {
-      new Notice("Could not find model to update");
+      new Notice("找不到要更新的模型");
       logError("Could not find model to update:", originalModel);
     }
   };
@@ -120,7 +120,7 @@ export const ModelSettings: React.FC = () => {
 
     // Update the settings
     updateSetting("activeModels", updatedModels);
-    new Notice("Chat models refreshed successfully");
+    new Notice("聊天模型刷新成功");
   };
 
   const handleRefreshEmbeddingModels = () => {
@@ -132,7 +132,7 @@ export const ModelSettings: React.FC = () => {
 
     // Update the settings
     updateSetting("activeEmbeddingModels", updatedModels);
-    new Notice("Embedding models refreshed successfully");
+    new Notice("嵌入模型刷新成功");
   };
 
   const handleEditModel = (model: CustomModel, isEmbeddingModel: boolean = false) => {
@@ -152,7 +152,7 @@ export const ModelSettings: React.FC = () => {
           onUpdateModel={handleTableUpdate}
           onReorderModels={(newModels) => handleModelReorder(newModels)}
           onRefresh={handleRefreshChatModels}
-          title="Chat Models"
+          title="聊天模型"
         />
 
         {/* model add dialog */}
@@ -171,8 +171,8 @@ export const ModelSettings: React.FC = () => {
         <div className="tw-space-y-4">
           <SettingItem
             type="slider"
-            title="Conversation turns in context"
-            description="The number of previous conversation turns to include in the context. Default is 15 turns, i.e. 30 messages."
+            title="上下文对话轮数"
+            description="要包含在上下文中的先前对话轮数。默认为 15 轮，即 30 条消息。"
             value={settings.contextTurns}
             onChange={(value) => updateSetting("contextTurns", value)}
             min={1}
@@ -181,8 +181,8 @@ export const ModelSettings: React.FC = () => {
           />
           <SettingItem
             type="slider"
-            title="Auto-compact threshold"
-            description="Automatically summarize context when it exceeds this token count. Set to maximum to make it less aggressive."
+            title="自动压缩阈值"
+            description="当上下文超过此 token 数量时自动总结。设置为最大值可使其不那么激进。"
             min={64000}
             max={1000000}
             step={64000}
@@ -202,7 +202,7 @@ export const ModelSettings: React.FC = () => {
           onUpdateModel={handleEmbeddingModelUpdate}
           onReorderModels={(newModels) => handleModelReorder(newModels, true)}
           onRefresh={handleRefreshEmbeddingModels}
-          title="Embedding Models"
+          title="嵌入模型"
         />
 
         {/* Embedding model add dialog */}

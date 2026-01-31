@@ -217,7 +217,7 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
 
   const handleAdd = () => {
     if (!validateFields()) {
-      new Notice("Please fill in all required fields");
+      new Notice("请填写所有必填字段");
       return;
     }
 
@@ -269,7 +269,7 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
 
   const handleVerify = async () => {
     if (!validateFields()) {
-      new Notice("Please fill in all required fields");
+      new Notice("请填写所有必填字段");
       return;
     }
 
@@ -279,12 +279,12 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
       const cleanedModel = getCleanedModel(model);
       await ping(cleanedModel);
       setVerifyStatus("success");
-      new Notice("Model verification successful!");
+      new Notice("模型验证成功！");
     } catch (err) {
       logError(err);
       const errStr = err2String(err);
       setVerifyStatus("failed");
-      new Notice("Model verification failed: " + errStr);
+      new Notice("模型验证失败：" + errStr);
     } finally {
       setIsVerifying(false);
     }
@@ -321,10 +321,7 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
       switch (model.provider) {
         case ChatModelProviders.OPENAI:
           return (
-            <FormField
-              label="OpenAI Organization ID"
-              description="Enter OpenAI Organization ID if applicable"
-            >
+            <FormField label="OpenAI 组织 ID" description="如适用，请输入 OpenAI 组织 ID">
               <Input
                 type="text"
                 placeholder="Enter OpenAI Organization ID if applicable"
@@ -337,10 +334,10 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
           return (
             <>
               <FormField
-                label="Instance Name"
+                label="实例名称"
                 required
                 error={errors.instanceName}
-                errorMessage="Instance name is required"
+                errorMessage="实例名称为必填项"
               >
                 <Input
                   type="text"
@@ -355,11 +352,11 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
 
               {!isEmbeddingModel ? (
                 <FormField
-                  label="Deployment Name"
+                  label="部署名称"
                   required
                   error={errors.deploymentName}
-                  errorMessage="Deployment name is required"
-                  description="This is your actual model, no need to pass a model name separately."
+                  errorMessage="部署名称为必填项"
+                  description="这是您的实际模型，无需单独传递模型名称。"
                 >
                   <Input
                     type="text"
@@ -373,10 +370,10 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
                 </FormField>
               ) : (
                 <FormField
-                  label="Embedding Deployment Name"
+                  label="嵌入部署名称"
                   required
                   error={errors.embeddingDeploymentName}
-                  errorMessage="Embedding deployment name is required"
+                  errorMessage="嵌入部署名称为必填项"
                 >
                   <Input
                     type="text"
@@ -393,10 +390,10 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
               )}
 
               <FormField
-                label="API Version"
+                label="API 版本"
                 required
                 error={errors.apiVersion}
-                errorMessage="API version is required"
+                errorMessage="API 版本为必填项"
               >
                 <Input
                   type="text"
@@ -413,8 +410,8 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
         case ChatModelProviders.AMAZON_BEDROCK:
           return (
             <FormField
-              label="Region (optional)"
-              description="Defaults to us-east-1 when left blank. With inference profiles (global., us., eu., apac.), region is auto-managed."
+              label="区域（可选）"
+              description="留空时默认为 us-east-1。使用推理配置文件（global.、us.、eu.、apac.）时，区域会自动管理。"
             >
               <div className="tw-flex tw-gap-2">
                 <Input
@@ -434,7 +431,7 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
                   }}
                 >
                   <SelectTrigger className="tw-w-[140px]">
-                    <SelectValue placeholder="Presets" />
+                    <SelectValue placeholder="预设" />
                   </SelectTrigger>
                   <SelectContent container={dialogElement}>
                     {[
@@ -473,7 +470,7 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
             className="tw-flex tw-w-full tw-cursor-pointer tw-items-center tw-justify-between tw-rounded-lg tw-p-3 tw-text-left hover:tw-bg-modifier-hover"
           >
             <span className="tw-text-sm tw-font-medium">
-              Additional {getProviderLabel(model.provider)} Settings
+              额外的 {getProviderLabel(model.provider)} 设置
             </span>
             <ChevronDown
               className={`tw-size-4 tw-text-muted tw-transition-transform tw-duration-200 ${isOpen ? "tw-rotate-180" : ""}`}
@@ -514,19 +511,19 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
         ref={(el) => setDialogElement(el)}
       >
         <DialogHeader>
-          <DialogTitle>Add Custom {isEmbeddingModel ? "Embedding" : "Chat"} Model</DialogTitle>
-          <DialogDescription>Add a new model to your collection.</DialogDescription>
+          <DialogTitle>添加自定义{isEmbeddingModel ? "嵌入" : "聊天"}模型</DialogTitle>
+          <DialogDescription>向您的集合添加新模型。</DialogDescription>
         </DialogHeader>
 
         <div className="tw-space-y-3">
           <FormField
-            label="Model Name"
+            label="模型名称"
             required
             error={errors.name}
-            errorMessage="Model name is required"
+            errorMessage="模型名称为必填项"
             description={
               model.provider === ChatModelProviders.AMAZON_BEDROCK && !isEmbeddingModel
-                ? "For Bedrock, use cross-region inference profile IDs (global., us., eu., or apac. prefix) for better reliability. Regional IDs without prefixes may fail."
+                ? "对于 Bedrock，请使用跨区域推理配置文件 ID（global.、us.、eu. 或 apac. 前缀）以获得更好的可靠性。不带前缀的区域 ID 可能会失败。"
                 : undefined
             }
           >
@@ -550,14 +547,14 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
           <FormField
             label={
               <div className="tw-flex tw-items-center tw-gap-1.5">
-                <span className="tw-leading-none">Display Name</span>
+                <span className="tw-leading-none">显示名称</span>
                 <HelpTooltip
                   content={
                     <div className="tw-flex tw-flex-col tw-gap-0.5 tw-text-sm tw-text-muted">
-                      <div className="tw-text-[12px] tw-font-bold">Suggested format:</div>
+                      <div className="tw-text-[12px] tw-font-bold">建议格式：</div>
                       <div className="tw-text-accent">[Source]-[Payment]:[Pretty Model Name]</div>
                       <div className="tw-text-[12px]">
-                        Example:
+                        示例：
                         <li>Direct-Paid:Ds-r1</li>
                         <li>OpenRouter-Paid:Ds-r1</li>
                         <li>Perplexity-Paid:lg</li>
@@ -571,7 +568,7 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
           >
             <Input
               type="text"
-              placeholder="Custom display name (optional)"
+              placeholder="自定义显示名称（可选）"
               value={model.displayName || ""}
               onChange={(e) => {
                 setModel({ ...model, displayName: e.target.value });
@@ -579,10 +576,10 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
             />
           </FormField>
 
-          <FormField label="Provider">
+          <FormField label="服务商">
             <Select value={model.provider} onValueChange={handleProviderChange}>
               <SelectTrigger>
-                <SelectValue placeholder="Select provider" />
+                <SelectValue placeholder="选择服务商" />
               </SelectTrigger>
               <SelectContent container={dialogElement}>
                 {Object.values(
@@ -598,7 +595,7 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
             </Select>
           </FormField>
 
-          <FormField label="Base URL" description="Leave it blank, unless you are using a proxy.">
+          <FormField label="Base URL" description="留空，除非您使用代理。">
             <Input
               type="text"
               placeholder={getPlaceholderUrl() || "https://api.example.com/v1"}
@@ -607,7 +604,7 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
             />
           </FormField>
 
-          <FormField label="API Key">
+          <FormField label="API 密钥">
             <PasswordInput
               placeholder={`Enter ${providerInfo.label} API Key`}
               value={model.apiKey || ""}
@@ -616,7 +613,7 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
             {providerInfo.keyManagementURL && (
               <p className="tw-text-xs tw-text-muted">
                 <a href={providerInfo.keyManagementURL} target="_blank" rel="noopener noreferrer">
-                  Get {providerInfo.label} API Key
+                  获取 {providerInfo.label} API 密钥
                 </a>
               </p>
             )}
@@ -626,11 +623,11 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
             <FormField
               label={
                 <div className="tw-flex tw-items-center tw-gap-1.5">
-                  <span className="tw-leading-none">Model Capabilities</span>
+                  <span className="tw-leading-none">模型能力</span>
                   <HelpTooltip
                     content={
                       <div className="tw-text-sm tw-text-muted">
-                        Only used to display model capabilities, does not affect model functionality
+                        仅用于显示模型能力，不影响模型功能
                       </div>
                     }
                     contentClassName="tw-max-w-96"
@@ -682,9 +679,7 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
                   <span className="tw-text-sm">CORS</span>
                   <HelpTooltip
                     content={
-                      <div className="tw-text-sm tw-text-muted">
-                        Only check this option when prompted that CORS is needed
-                      </div>
+                      <div className="tw-text-sm tw-text-muted">仅在提示需要 CORS 时勾选此选项</div>
                     }
                     contentClassName="tw-max-w-96"
                   />
@@ -705,7 +700,7 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Copy curl command for testing</p>
+                  <p>复制用于测试的 curl 命令</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
@@ -728,20 +723,20 @@ export const ModelAddDialog: React.FC<ModelAddDialogProps> = ({
                     {isVerifying ? (
                       <>
                         <Loader2 className="tw-mr-1.5 tw-size-3.5 tw-animate-spin" />
-                        Test
+                        测试
                       </>
                     ) : (
-                      "Test"
+                      "测试"
                     )}
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Optional: test API call</p>
+                  <p>可选：测试 API 调用</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
             <Button variant="default" size="sm" onClick={handleAdd} disabled={isButtonDisabled()}>
-              Add Model
+              添加模型
             </Button>
           </div>
         </div>
