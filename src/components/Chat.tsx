@@ -315,7 +315,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
       }
     } catch (error) {
       logError("Error sending message:", error);
-      new Notice("Failed to send message. Please try again.");
+      new Notice("发送消息失败，请重试。");
     } finally {
       safeSet.setLoading(false);
       safeSet.setLoadingMessage(LOADING_MESSAGES.DEFAULT);
@@ -334,7 +334,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
       await chatUIState.saveChat(currentModelKey);
     } catch (error) {
       logError("Error saving chat as note:", err2String(error));
-      new Notice("Failed to save chat as note. Check console for details.");
+      new Notice("保存聊天为笔记失败，请检查控制台详细信息。");
     }
   }, [app, chatUIState, currentModelKey]);
 
@@ -367,13 +367,13 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
   const handleRegenerate = useCallback(
     async (messageIndex: number) => {
       if (messageIndex <= 0) {
-        new Notice("Cannot regenerate the first message.");
+        new Notice("无法重新生成第一条消息。");
         return;
       }
 
       const messageToRegenerate = chatHistory[messageIndex];
       if (!messageToRegenerate) {
-        new Notice("Message not found.");
+        new Notice("未找到消息。");
         return;
       }
 
@@ -389,7 +389,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
         );
 
         if (!success) {
-          new Notice("Failed to regenerate message. Please try again.");
+          new Notice("重新生成消息失败，请重试。");
         } else if (settings.debug) {
           console.log("Message regenerated successfully");
         }
@@ -400,7 +400,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
         }
       } catch (error) {
         logError("Error regenerating message:", error);
-        new Notice("Failed to regenerate message. Please try again.");
+        new Notice("重新生成消息失败，请重试。");
       } finally {
         safeSet.setLoading(false);
         streamingMessageIdRef.current = null;
@@ -433,7 +433,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
         );
 
         if (!success) {
-          new Notice("Failed to edit message. Please try again.");
+          new Notice("编辑消息失败，请重试。");
           return;
         }
 
@@ -463,7 +463,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
               }
             } catch (error) {
               logError("Error regenerating AI response:", error);
-              new Notice("Failed to regenerate AI response. Please try again.");
+              new Notice("重新生成AI回复失败，请重试。");
             } finally {
               safeSet.setLoading(false);
               streamingMessageIdRef.current = null;
@@ -477,7 +477,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
         }
       } catch (error) {
         logError("Error editing message:", error);
-        new Notice("Failed to edit message. Please try again.");
+        new Notice("编辑消息失败，请重试。");
       }
     },
     [
@@ -523,7 +523,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
             new Notice(`${project.name} added and context loaded`);
           })
           .catch((error: Error) => {
-            logError("Error loading project context:", error);
+            logError("加载项目上下文时出错：", error);
             new Notice(`${project.name} added but context loading failed`);
           });
       } else {
@@ -558,7 +558,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
             new Notice(`${originP.name} updated and context reloaded`);
           })
           .catch((error: Error) => {
-            logError("Error reloading project context:", error);
+            logError("重新加载项目上下文时出错：", error);
             new Notice(`${originP.name} updated but context reload failed`);
           });
       } else {
@@ -598,7 +598,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
     async (messageIndex: number) => {
       const messageToDelete = chatHistory[messageIndex];
       if (!messageToDelete) {
-        new Notice("Message not found.");
+        new Notice("未找到消息。");
         return;
       }
 
@@ -679,7 +679,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
       setChatHistoryItems(historyItems);
     } catch (error) {
       logError("Error loading chat history:", error);
-      new Notice("Failed to load chat history.");
+      new Notice("加载聊天历史失败。");
     }
   }, [plugin]);
 
@@ -690,7 +690,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
         await handleLoadChatHistory(); // Refresh the list
       } catch (error) {
         logError("Error updating chat title:", error);
-        new Notice("Failed to update chat title.");
+        new Notice("更新聊天标题失败。");
         throw error; // Re-throw to let the popover handle the error state
       }
     },
@@ -704,7 +704,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
         await handleLoadChatHistory(); // Refresh the list
       } catch (error) {
         logError("Error deleting chat:", error);
-        new Notice("Failed to delete chat.");
+        new Notice("删除聊天失败。");
         throw error; // Re-throw to let the popover handle the error state
       }
     },
@@ -719,7 +719,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
         resetSessionSystemPromptSettings();
       } catch (error) {
         logError("Error loading chat:", error);
-        new Notice("Failed to load chat.");
+        new Notice("加载聊天失败。");
       }
     },
     [plugin]
@@ -731,7 +731,7 @@ const ChatInternal: React.FC<ChatProps & { chatInput: ReturnType<typeof useChatI
         await plugin.openChatSourceFile(id);
       } catch (error) {
         logError("Error opening source file:", error);
-        new Notice("Failed to open source file.");
+        new Notice("打开源文件失败。");
       }
     },
     [plugin]

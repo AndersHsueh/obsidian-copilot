@@ -205,7 +205,7 @@ export class YoutubeTranscriptModal extends Modal {
     super(app);
     // https://docs.obsidian.md/Reference/TypeScript+API/Modal/setTitle
     // @ts-ignore
-    this.setTitle("Download YouTube Script (plus)");
+    this.setTitle("下载 YouTube 字幕（Plus）");
   }
 
   onOpen() {

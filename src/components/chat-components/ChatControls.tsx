@@ -103,7 +103,7 @@ export async function reloadCurrentProject() {
       throw new Error("Copilot plugin or ProjectManager not available.");
     }
   } catch (error) {
-    logError("Error reloading project context:", error);
+    logError("重新加载项目上下文时出错：", error);
 
     // Check if this is a rate limit error and let the FileParserManager notice handle it
     if (!isRateLimitError(error)) {

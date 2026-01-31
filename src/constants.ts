@@ -123,10 +123,10 @@ export const MAX_CHARS_FOR_LOCAL_SEARCH_CONTEXT = 448000;
 export const LLM_TIMEOUT_MS = 30000; // 30 seconds timeout for LLM operations
 export const LOADING_MESSAGES = {
   DEFAULT: "",
-  READING_FILES: "Reading files",
-  SEARCHING_WEB: "Searching the web",
-  READING_FILE_TREE: "Reading file tree",
-  COMPACTING: "Compacting",
+  READING_FILES: "正在读取文件",
+  SEARCHING_WEB: "正在搜索网络",
+  READING_FILE_TREE: "正在读取文件树",
+  COMPACTING: "正在压缩",
 };
 export const PLUS_UTM_MEDIUMS = {
   SETTINGS: "settings",
@@ -220,9 +220,9 @@ export enum ModelCapability {
 }
 
 export const MODEL_CAPABILITIES: Record<ModelCapability, string> = {
-  reasoning: "This model supports general reasoning tasks.",
-  vision: "This model supports image inputs.",
-  websearch: "This model can access the internet.",
+  reasoning: "该模型支持通用推理任务。",
+  vision: "该模型支持图像输入。",
+  websearch: "该模型可以访问互联网。",
 };
 
 export const BUILTIN_CHAT_MODELS: CustomModel[] = [
@@ -751,40 +751,40 @@ export const COMMAND_IDS = {
 } as const;
 
 export const COMMAND_NAMES: Record<CommandId, string> = {
-  [COMMAND_IDS.TRIGGER_QUICK_COMMAND]: "Trigger quick command",
-  [COMMAND_IDS.CLEAR_LOCAL_COPILOT_INDEX]: "Clear local Copilot index",
-  [COMMAND_IDS.CLEAR_COPILOT_CACHE]: "Clear Copilot cache",
-  [COMMAND_IDS.COUNT_TOTAL_VAULT_TOKENS]: "Count total tokens in your vault",
-  [COMMAND_IDS.COUNT_WORD_AND_TOKENS_SELECTION]: "Count words and tokens in selection",
-  [COMMAND_IDS.DEBUG_WORD_COMPLETION]: "Word completion: Debug",
-  [COMMAND_IDS.FORCE_REINDEX_VAULT_TO_COPILOT_INDEX]: "Force reindex vault",
+  [COMMAND_IDS.TRIGGER_QUICK_COMMAND]: "触发快速命令",
+  [COMMAND_IDS.CLEAR_LOCAL_COPILOT_INDEX]: "清除本地 Copilot 索引",
+  [COMMAND_IDS.CLEAR_COPILOT_CACHE]: "清除 Copilot 缓存",
+  [COMMAND_IDS.COUNT_TOTAL_VAULT_TOKENS]: "计算知识库中的总令牌数",
+  [COMMAND_IDS.COUNT_WORD_AND_TOKENS_SELECTION]: "计算所选内容的词数和令牌数",
+  [COMMAND_IDS.DEBUG_WORD_COMPLETION]: "单词补全：调试",
+  [COMMAND_IDS.FORCE_REINDEX_VAULT_TO_COPILOT_INDEX]: "强制重新索引知识库",
   [COMMAND_IDS.GARBAGE_COLLECT_COPILOT_INDEX]:
-    "Garbage collect Copilot index (remove files that no longer exist in vault)",
-  [COMMAND_IDS.INDEX_VAULT_TO_COPILOT_INDEX]: "Index (refresh) vault",
-  [COMMAND_IDS.INSPECT_COPILOT_INDEX_BY_NOTE_PATHS]: "Inspect Copilot index by note paths (debug)",
-  [COMMAND_IDS.LIST_INDEXED_FILES]: "List all indexed files (debug)",
-  [COMMAND_IDS.LOAD_COPILOT_CHAT_CONVERSATION]: "Load Copilot chat conversation",
-  [COMMAND_IDS.NEW_CHAT]: "New Copilot Chat",
-  [COMMAND_IDS.OPEN_COPILOT_CHAT_WINDOW]: "Open Copilot Chat Window",
-  [COMMAND_IDS.REMOVE_FILES_FROM_COPILOT_INDEX]: "Remove files from Copilot index (debug)",
-  [COMMAND_IDS.SEARCH_ORAMA_DB]: "Search semantic index (debug)",
-  [COMMAND_IDS.TOGGLE_COPILOT_CHAT_WINDOW]: "Toggle Copilot Chat Window",
-  [COMMAND_IDS.ADD_SELECTION_TO_CHAT_CONTEXT]: "Add selection to chat context",
-  [COMMAND_IDS.ADD_WEB_SELECTION_TO_CHAT_CONTEXT]: "Add web selection to chat context",
-  [COMMAND_IDS.ADD_CUSTOM_COMMAND]: "Add new custom command",
-  [COMMAND_IDS.APPLY_CUSTOM_COMMAND]: "Apply custom command",
-  [COMMAND_IDS.OPEN_LOG_FILE]: "Create log file",
-  [COMMAND_IDS.CLEAR_LOG_FILE]: "Clear log file",
-  [COMMAND_IDS.DOWNLOAD_YOUTUBE_SCRIPT]: "Download YouTube Script (plus)",
+    "垃圾回收 Copilot 索引（移除知识库中已不存在的文件）",
+  [COMMAND_IDS.INDEX_VAULT_TO_COPILOT_INDEX]: "索引（刷新）知识库",
+  [COMMAND_IDS.INSPECT_COPILOT_INDEX_BY_NOTE_PATHS]: "按笔记路径检查 Copilot 索引（调试）",
+  [COMMAND_IDS.LIST_INDEXED_FILES]: "列出所有已索引的文件（调试）",
+  [COMMAND_IDS.LOAD_COPILOT_CHAT_CONVERSATION]: "加载 Copilot 聊天对话",
+  [COMMAND_IDS.NEW_CHAT]: "新建 Copilot 聊天",
+  [COMMAND_IDS.OPEN_COPILOT_CHAT_WINDOW]: "打开 Copilot 聊天窗口",
+  [COMMAND_IDS.REMOVE_FILES_FROM_COPILOT_INDEX]: "从 Copilot 索引中移除文件（调试）",
+  [COMMAND_IDS.SEARCH_ORAMA_DB]: "搜索语义索引（调试）",
+  [COMMAND_IDS.TOGGLE_COPILOT_CHAT_WINDOW]: "切换 Copilot 聊天窗口",
+  [COMMAND_IDS.ADD_SELECTION_TO_CHAT_CONTEXT]: "将所选内容添加到聊天上下文",
+  [COMMAND_IDS.ADD_WEB_SELECTION_TO_CHAT_CONTEXT]: "将网页所选内容添加到聊天上下文",
+  [COMMAND_IDS.ADD_CUSTOM_COMMAND]: "添加新的自定义命令",
+  [COMMAND_IDS.APPLY_CUSTOM_COMMAND]: "应用自定义命令",
+  [COMMAND_IDS.OPEN_LOG_FILE]: "创建日志文件",
+  [COMMAND_IDS.CLEAR_LOG_FILE]: "清除日志文件",
+  [COMMAND_IDS.DOWNLOAD_YOUTUBE_SCRIPT]: "下载 YouTube 字幕（Plus）",
 };
 
 export type CommandId = (typeof COMMAND_IDS)[keyof typeof COMMAND_IDS];
 
 export const RESTRICTION_MESSAGES = {
   NON_MARKDOWN_FILES_RESTRICTED:
-    "Non-markdown files are only available in Copilot Plus mode. Please upgrade to access this file type.",
+    "非 Markdown 文件仅在 Copilot Plus 模式下可用。请升级以访问此文件类型。",
   URL_PROCESSING_RESTRICTED:
-    "URL processing is only available in Copilot Plus mode. URLs will not be processed for context.",
+    "URL 处理仅在 Copilot Plus 模式下可用。URL 将不会被处理为上下文。",
   UNSUPPORTED_FILE_TYPE: (extension: string) =>
     `${extension.toUpperCase()} files are not supported in the current mode.`,
 } as const;
