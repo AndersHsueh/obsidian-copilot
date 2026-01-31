@@ -146,11 +146,8 @@ export default class EmbeddingManager {
 
     const customModel = this.getCustomModel(embeddingModelKey);
 
-    // Check if model is plus-exclusive but user is not a plus user
-    if (customModel.plusExclusive && !getSettings().isPlusUser) {
-      new Notice("Plus-only model, please consider upgrading to Plus to access it.");
-      throw new CustomError("Plus-only model selected but user is not on Plus plan");
-    }
+    // Modified: Plus-exclusive check disabled - all models accessible
+    // if (customModel.plusExclusive && !getSettings().isPlusUser) { ... }
 
     // Modified: believer-exclusive check disabled - all models accessible
     // if (customModel.believerExclusive) { ... }

@@ -330,7 +330,7 @@ export function ChatControls({
             >
               <div className="tw-flex tw-items-center tw-gap-2">
                 <Sparkles className="tw-size-4" />
-                Suggested Prompt
+                建议提示
               </div>
               <SettingSwitch checked={settings.showSuggestedPrompts} />
             </DropdownMenuItem>
@@ -343,7 +343,7 @@ export function ChatControls({
             >
               <div className="tw-flex tw-items-center tw-gap-2">
                 <FileText className="tw-size-4" />
-                Relevant Note
+                相关笔记
               </div>
               <SettingSwitch checked={settings.showRelevantNotes} />
             </DropdownMenuItem>
@@ -356,7 +356,7 @@ export function ChatControls({
             >
               <div className="tw-flex tw-items-center tw-gap-2">
                 <CheckCircle className="tw-size-4" />
-                Auto-accept Edits
+                自动接受编辑
               </div>
               <SettingSwitch checked={settings.autoAcceptEdits} />
             </DropdownMenuItem>
@@ -367,14 +367,14 @@ export function ChatControls({
                   onSelect={() => reloadCurrentProject()}
                 >
                   <RefreshCw className="tw-size-4" />
-                  Reload Current Project
+                  重新加载当前项目
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   className="tw-flex tw-items-center tw-gap-2"
                   onSelect={() => forceRebuildCurrentProjectContext()}
                 >
                   <AlertTriangle className="tw-size-4" />
-                  Force Rebuild Context
+                  强制重建上下文
                 </DropdownMenuItem>
               </>
             ) : (
@@ -384,7 +384,7 @@ export function ChatControls({
                   onSelect={() => refreshVaultIndex()}
                 >
                   <RefreshCw className="tw-size-4" />
-                  Refresh Vault Index
+                  刷新知识库索引
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   className="tw-flex tw-items-center tw-gap-2"
@@ -392,14 +392,14 @@ export function ChatControls({
                     const modal = new ConfirmModal(
                       app,
                       () => forceReindexVault(),
-                      "This will delete and rebuild your entire vault index from scratch. This operation cannot be undone. Are you sure you want to proceed?",
-                      "Force Reindex Vault"
+                      "这将从头删除并重建您的整个知识库索引。此操作无法撤销。您确定要继续吗？",
+                      "强制重建知识库索引"
                     );
                     modal.open();
                   }}
                 >
                   <AlertTriangle className="tw-size-4" />
-                  Force Reindex Vault
+                  强制重建知识库索引
                 </DropdownMenuItem>
               </>
             )}

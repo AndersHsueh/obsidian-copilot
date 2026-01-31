@@ -10,17 +10,17 @@ export async function getStandaloneQuestion(
   question: string,
   chatHistory: ChatHistoryEntry[]
 ): Promise<string> {
-  const condenseQuestionTemplate = `Given the following conversation and a follow up question,
-    summarize the conversation as context and keep the follow up question unchanged, in its original language.
-    If the follow up question is unrelated to its preceding messages, return this follow up question directly.
-    If it is related, then combine the summary and the follow up question to construct a standalone question.
-    Make sure to keep any [[]] wrapped note titles in the question unchanged.
-    If there's nothing in the chat history, just return the follow up question.
+  const condenseQuestionTemplate = `根据以下对话和后续问题，
+    将对话总结为上下文，并保持后续问题不变、使用其原始语言。
+    若后续问题与前述消息无关，则直接返回该后续问题。
+    若相关，则将摘要与后续问题结合，构成一个独立问题。
+    确保问题中所有 [[]] 包裹的笔记标题保持不变。
+    若聊天记录为空，则直接返回后续问题。
 
-    Chat History:
+    聊天记录：
     {chat_history}
-    Follow Up Input: {question}
-    Standalone question:`;
+    后续输入：{question}
+    独立问题：`;
 
   const formattedChatHistory = chatHistory
     .map(({ role, content }) => `${role}: ${content}`)

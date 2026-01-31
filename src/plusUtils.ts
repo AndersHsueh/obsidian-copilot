@@ -47,12 +47,8 @@ export function isPlusModel(modelKey: string): boolean {
  * Use this for synchronous checks (e.g., model validation, UI state).
  */
 export function isPlusEnabled(): boolean {
-  const settings = getSettings();
-  // Self-host mode with valid plan validation bypasses Plus requirements
-  if (isSelfHostModeValid()) {
-    return true;
-  }
-  return settings.isPlusUser === true;
+  // Modified: Always return true - no license verification
+  return true;
 }
 
 /**

@@ -37,11 +37,21 @@ const components: Record<TabId, React.FC> = {
   advanced: () => <AdvancedSettings />,
 };
 
+// tab labels (Chinese)
+const labels: Record<TabId, string> = {
+  basic: "基础",
+  model: "模型",
+  QA: "问答",
+  command: "命令",
+  plus: "Plus",
+  advanced: "高级",
+};
+
 // tabs
 const tabs: TabItemType[] = TAB_IDS.map((id) => ({
   id,
   icon: icons[id],
-  label: id.charAt(0).toUpperCase() + id.slice(1),
+  label: labels[id],
 }));
 
 const SettingsContent: React.FC = () => {

@@ -17,22 +17,22 @@ export const DEFAULT_CUSTOM_PROMPTS_FOLDER = `${COPILOT_FOLDER_ROOT}/copilot-cus
 export const DEFAULT_MEMORY_FOLDER = `${COPILOT_FOLDER_ROOT}/memory`;
 export const DEFAULT_SYSTEM_PROMPTS_FOLDER = `${COPILOT_FOLDER_ROOT}/system-prompts`;
 export const DEFAULT_QA_EXCLUSIONS_SETTING = COPILOT_FOLDER_ROOT;
-export const DEFAULT_SYSTEM_PROMPT = `You are Obsidian Copilot, a helpful assistant that integrates AI to Obsidian note-taking.
-  1. Never mention that you do not have access to something. Always rely on the user provided context.
-  2. Always answer to the best of your knowledge. If you are unsure about something, say so and ask the user to provide more context.
-  3. If the user mentions "note", it most likely means an Obsidian note in the vault, not the generic meaning of a note.
-  4. If the user mentions "@vault", it means the user wants you to search the Obsidian vault for information relevant to the query. The search results will be provided to you in the context along with the user query, read it carefully and answer the question based on the information provided. If there's no relevant information in the vault, just say so.
-  5. If the user mentions any other tool with the @ symbol, check the context for their results. If nothing is found, just ignore the @ symbol in the query.
-  6. Always use $'s instead of \\[ etc. for LaTeX equations.
-  7. When showing note titles, use [[title]] format and do not wrap them in \` \`.
-  8. When showing **Obsidian internal** image links, use ![[link]] format and do not wrap them in \` \`.
-  9. When showing **web** image links, use ![link](url) format and do not wrap them in \` \`.
-  10. When generating a table, format as github markdown tables, however, for table headings, immediately add ' |' after the table heading.
-  11. Always respond in the language of the user's query.
-  12. Do NOT mention the additional context provided such as getCurrentTime and getTimeRangeMs if it's irrelevant to the user message.
-  13. If the user mentions "tags", it most likely means tags in Obsidian note properties.
-  14. YouTube URLs: If the user provides YouTube URLs in their message, transcriptions will be automatically fetched and provided to you. You don't need to do anything special - just use the transcription content if available.
-  15. For markdown lists, always use '- ' (hyphen followed by exactly one space) for bullet points, with no leading spaces before the hyphen. Never use '*' (asterisk) for bullets.`;
+export const DEFAULT_SYSTEM_PROMPT = `你是 Obsidian Copilot，一个将 AI 集成到 Obsidian 笔记中的智能助手。
+  1. 永远不要提及你无法访问某些内容。始终依赖用户提供的上下文。
+  2. 始终尽你所能回答问题。如果你对某事不确定，请说明并要求用户提供更多上下文。
+  3. 如果用户提到"笔记"，通常指的是知识库中的 Obsidian 笔记，而不是笔记的通用含义。
+  4. 如果用户提到"@vault"，表示用户希望你在 Obsidian 知识库中搜索与查询相关的信息。搜索结果将与用户查询一起在上下文中提供给你，请仔细阅读并根据提供的信息回答问题。如果知识库中没有相关信息，请直接说明。
+  5. 如果用户使用 @ 符号提到任何其他工具，请检查上下文中的结果。如果没有找到任何内容，请忽略查询中的 @ 符号。
+  6. LaTeX 公式始终使用 $ 符号，而不是 \\[ 等格式。
+  7. 显示笔记标题时，使用 [[标题]] 格式，不要用反引号包裹。
+  8. 显示 **Obsidian 内部** 图片链接时，使用 ![[链接]] 格式，不要用反引号包裹。
+  9. 显示 **网络** 图片链接时，使用 ![链接](url) 格式，不要用反引号包裹。
+  10. 生成表格时，使用 GitHub Markdown 表格格式，但对于表头，在表头后立即添加 ' |'。
+  11. 始终使用用户查询所用的语言进行回复。
+  12. 如果与用户消息无关，不要提及提供的额外上下文（如 getCurrentTime 和 getTimeRangeMs）。
+  13. 如果用户提到"标签"，通常指的是 Obsidian 笔记属性中的标签。
+  14. YouTube 链接：如果用户在消息中提供 YouTube 链接，转录内容将自动获取并提供给你。你不需要做任何特殊处理——只需使用可用的转录内容即可。
+  15. 对于 Markdown 列表，始终使用 '- '（连字符后跟一个空格）作为项目符号，连字符前不要有前导空格。永远不要使用 '*'（星号）作为项目符号。`;
 
 export const COMPOSER_OUTPUT_INSTRUCTIONS = `Return the new note content or canvas JSON in <writeToFile> tags.
 
@@ -227,176 +227,12 @@ export const MODEL_CAPABILITIES: Record<ModelCapability, string> = {
 
 export const BUILTIN_CHAT_MODELS: CustomModel[] = [
   {
-    name: ChatModels.COPILOT_PLUS_FLASH,
-    provider: ChatModelProviders.COPILOT_PLUS,
-    enabled: true,
-    isBuiltIn: true,
-    core: true,
-    plusExclusive: true,
-    projectEnabled: false,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.OPENROUTER_GEMINI_2_5_FLASH_LITE,
-    provider: ChatModelProviders.OPENROUTERAI,
-    enabled: true,
-    isBuiltIn: true,
-    core: true,
-    projectEnabled: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.OPENROUTER_GEMINI_2_5_FLASH,
-    provider: ChatModelProviders.OPENROUTERAI,
-    enabled: true,
-    isBuiltIn: true,
-    core: true,
-    projectEnabled: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.OPENROUTER_GEMINI_2_5_PRO,
-    provider: ChatModelProviders.OPENROUTERAI,
-    enabled: true,
-    isBuiltIn: true,
-    core: true,
-    projectEnabled: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.OPENROUTER_GPT_41,
-    provider: ChatModelProviders.OPENROUTERAI,
-    enabled: true,
-    isBuiltIn: true,
-    core: false,
-    projectEnabled: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.OPENROUTER_GPT_41_MINI,
-    provider: ChatModelProviders.OPENROUTERAI,
-    enabled: true,
-    isBuiltIn: true,
-    core: false,
-    projectEnabled: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.GROK_4_FAST,
-    provider: ChatModelProviders.XAI,
-    enabled: true,
-    isBuiltIn: true,
-    core: false,
-    projectEnabled: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.OPENROUTER_GROK_4_FAST,
-    provider: ChatModelProviders.OPENROUTERAI,
-    enabled: true,
-    isBuiltIn: true,
-    core: false,
-    projectEnabled: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
     name: ChatModels.GPT_5,
     provider: ChatModelProviders.OPENAI,
     enabled: true,
     isBuiltIn: true,
     core: true,
     capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.GPT_5_mini,
-    provider: ChatModelProviders.OPENAI,
-    enabled: true,
-    isBuiltIn: true,
-    core: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.GPT_41,
-    provider: ChatModelProviders.OPENAI,
-    enabled: true,
-    isBuiltIn: true,
-    core: true,
-    projectEnabled: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.GPT_41_mini,
-    provider: ChatModelProviders.OPENAI,
-    enabled: true,
-    isBuiltIn: true,
-    core: true,
-    projectEnabled: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.CLAUDE_4_SONNET,
-    provider: ChatModelProviders.ANTHROPIC,
-    enabled: true,
-    isBuiltIn: true,
-    capabilities: [ModelCapability.VISION, ModelCapability.REASONING],
-  },
-  {
-    name: ChatModels.GEMINI_FLASH,
-    provider: ChatModelProviders.GOOGLE,
-    enabled: true,
-    isBuiltIn: true,
-    projectEnabled: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.GEMINI_FLASH_LITE,
-    provider: ChatModelProviders.GOOGLE,
-    enabled: true,
-    isBuiltIn: true,
-    projectEnabled: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.GEMINI_PRO,
-    provider: ChatModelProviders.GOOGLE,
-    enabled: true,
-    isBuiltIn: true,
-    projectEnabled: true,
-    capabilities: [ModelCapability.VISION],
-  },
-  {
-    name: ChatModels.AZURE_OPENAI,
-    provider: ChatModelProviders.AZURE_OPENAI,
-    enabled: true,
-    isBuiltIn: true,
-  },
-  {
-    name: ChatModels.DEEPSEEK_CHAT,
-    provider: ChatModelProviders.DEEPSEEK,
-    enabled: true,
-    isBuiltIn: true,
-  },
-  {
-    name: ChatModels.DEEPSEEK_REASONER,
-    provider: ChatModelProviders.DEEPSEEK,
-    enabled: true,
-    isBuiltIn: true,
-    capabilities: [ModelCapability.REASONING],
-  },
-  {
-    name: ChatModels.SILICONFLOW_DEEPSEEK_V3,
-    provider: ChatModelProviders.SILICONFLOW,
-    enabled: false,
-    isBuiltIn: false,
-    baseUrl: "https://api.siliconflow.com/v1",
-  },
-  {
-    name: ChatModels.SILICONFLOW_DEEPSEEK_R1,
-    provider: ChatModelProviders.SILICONFLOW,
-    enabled: false,
-    isBuiltIn: false,
-    baseUrl: "https://api.siliconflow.com/v1",
-    capabilities: [ModelCapability.REASONING],
   },
 ];
 
@@ -430,87 +266,12 @@ export enum EmbeddingModels {
 
 export const BUILTIN_EMBEDDING_MODELS: CustomModel[] = [
   {
-    name: EmbeddingModels.COPILOT_PLUS_SMALL,
-    provider: EmbeddingModelProviders.COPILOT_PLUS,
-    enabled: true,
-    isBuiltIn: true,
-    isEmbeddingModel: true,
-    core: true,
-    plusExclusive: true,
-  },
-  {
-    name: EmbeddingModels.COPILOT_PLUS_LARGE,
-    provider: EmbeddingModelProviders.COPILOT_PLUS_JINA,
-    enabled: true,
-    isBuiltIn: true,
-    isEmbeddingModel: true,
-    core: true,
-    plusExclusive: true,
-    believerExclusive: true,
-    dimensions: 1024,
-  },
-  {
-    name: EmbeddingModels.COPILOT_PLUS_MULTILINGUAL,
-    provider: EmbeddingModelProviders.COPILOT_PLUS_JINA,
-    enabled: true,
-    isBuiltIn: true,
-    isEmbeddingModel: true,
-    core: true,
-    plusExclusive: true,
-    dimensions: 512,
-  },
-  {
     name: EmbeddingModels.OPENAI_EMBEDDING_SMALL,
     provider: EmbeddingModelProviders.OPENAI,
     enabled: true,
     isBuiltIn: true,
     isEmbeddingModel: true,
     core: true,
-  },
-  {
-    name: EmbeddingModels.OPENAI_EMBEDDING_LARGE,
-    provider: EmbeddingModelProviders.OPENAI,
-    enabled: true,
-    isBuiltIn: true,
-    isEmbeddingModel: true,
-  },
-  {
-    name: EmbeddingModels.COHEREAI_EMBED_MULTILINGUAL_LIGHT_V3_0,
-    provider: EmbeddingModelProviders.COHEREAI,
-    enabled: true,
-    isBuiltIn: true,
-    isEmbeddingModel: true,
-  },
-  {
-    name: EmbeddingModels.GOOGLE_ENG,
-    provider: EmbeddingModelProviders.GOOGLE,
-    enabled: true,
-    isBuiltIn: true,
-    isEmbeddingModel: true,
-  },
-  {
-    name: EmbeddingModels.GOOGLE_GEMINI_EMBEDDING,
-    provider: EmbeddingModelProviders.GOOGLE,
-    enabled: true,
-    isBuiltIn: true,
-    isEmbeddingModel: true,
-    core: true,
-  },
-  {
-    name: EmbeddingModels.AZURE_OPENAI,
-    provider: EmbeddingModelProviders.AZURE_OPENAI,
-    enabled: true,
-    isBuiltIn: true,
-    isEmbeddingModel: true,
-  },
-  {
-    name: EmbeddingModels.SILICONFLOW_QWEN3_EMBEDDING_0_6B,
-    provider: EmbeddingModelProviders.SILICONFLOW,
-    enabled: true,
-    isBuiltIn: true,
-    isEmbeddingModel: true,
-    core: true,
-    baseUrl: "https://api.siliconflow.com/v1",
   },
 ];
 
@@ -816,7 +577,7 @@ export const DEFAULT_SETTINGS: CopilotSettings = {
   githubCopilotToken: "",
   githubCopilotTokenExpiresAt: 0,
   defaultChainType: ChainType.LLM_CHAIN,
-  defaultModelKey: ChatModels.OPENROUTER_GEMINI_2_5_FLASH + "|" + ChatModelProviders.OPENROUTERAI,
+  defaultModelKey: ChatModels.GPT_5 + "|" + ChatModelProviders.OPENAI,
   embeddingModelKey: EmbeddingModels.OPENAI_EMBEDDING_SMALL + "|" + EmbeddingModelProviders.OPENAI,
   temperature: DEFAULT_MODEL_SETTING.TEMPERATURE,
   maxTokens: DEFAULT_MODEL_SETTING.MAX_TOKENS,

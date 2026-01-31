@@ -10,7 +10,7 @@
 
 ## 项目说明
 
-这是 [Obsidian Copilot](https://github.com/logancyang/obsidian-copilot) 的中文修改版本，主要修改内容：
+这是 [Obsidian Copilot](https://github.com/AndersHsueh/obsidian-copilot) 的中文修改版本，主要修改内容：
 
 1. **完整中文界面** - 设置界面、对话控件等全部汉化
 2. **移除授权验证** - 所有 Plus/Believer 功能无需许可证即可使用

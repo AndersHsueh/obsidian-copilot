@@ -6,12 +6,14 @@ This file provides guidance to any coding agent when working with code in this r
 
 Copilot for Obsidian is an AI-powered assistant plugin that integrates various LLM providers (OpenAI, Anthropic, Google, etc.) with Obsidian. It provides chat interfaces, autocomplete, semantic search, and various AI-powered commands for note-taking and knowledge management.
 
+This repository is a fork: **ax-Copilot** (基于 Obsidian Copilot 的中文修改版). Package: `ax-Copilot`, see `package.json` for version and scripts.
+
 ## Development Commands
 
 ### Build & Development
 
 - **NEVER RUN `npm run dev`** - The user will handle all builds manually
-- `npm run build` - Production build (TypeScript check + minified output)
+- `npm run build` - Production build: runs `build:tailwind` (Tailwind CSS) then `build:esbuild` (TypeScript check + esbuild). Use `npm run build` after editing CSS to regenerate `styles.css`.
 
 ### Code Quality
 
@@ -23,9 +25,9 @@ Copilot for Obsidian is an AI-powered assistant plugin that integrates various L
 
 ### Testing
 
-- `npm run test` - Run unit tests (excludes integration tests)
-- `npm run test:integration` - Run integration tests (requires API keys)
-- Run single test: `npm test -- -t "test name"`
+- `npm run test` - Run unit tests (excludes `src/integration_tests/`)
+- `npm run test:integration` - Run integration tests (`jest src/integration_tests/`, requires API keys in `.env.test`)
+- Run single test: `npx jest -t "test name"` or `npm run test -- -t "test name"`
 
 ## High-Level Architecture
 
@@ -38,21 +40,24 @@ Copilot for Obsidian is an AI-powered assistant plugin that integrates various L
    - Stream-based responses with error handling and rate limiting
    - Custom model configuration support
 
-2. **Chain Factory Pattern** (`src/chainFactory.ts`)
+2. **Chain Runner** (`src/LLMProviders/chainRunner/`)
 
-   - Different chain types for various AI operations (chat, copilot, adhoc prompts)
-   - LangChain integration for complex workflows
-   - Memory management for conversation context
-   - Tool integration (search, file operations, time queries)
+   - Primary system for chat/agent execution and tool calling. See [`src/LLMProviders/chainRunner/README.md`](./src/LLMProviders/chainRunner/README.md).
+   - Runners: CopilotPlusChainRunner, AutonomousAgentChainRunner, LLMChainRunner, VaultQAChainRunner, ProjectChainRunner.
+   - LangChain tool calling with ReAct pattern; model adapters; tool execution in `utils/`.
 
-3. **Vector Store & Search** (`src/search/`)
+3. **Chain Factory** (`src/chainFactory.ts`) — legacy/deprecated
+
+   - Chain types (e.g. `ChainType`) still used for compatibility; execution has moved to chain runners. File is deprecated; prefer chain runner when adding behavior.
+
+4. **Vector Store & Search** (`src/search/`)
 
    - `VectorStoreManager` manages embeddings and semantic search
    - `ChunkedStorage` for efficient large document handling
    - Event-driven index updates via `IndexManager`
    - Multiple embedding providers support
 
-4. **UI Component System** (`src/components/`)
+5. **UI Component System** (`src/components/`)
 
    - React functional components with Radix UI primitives
    - Tailwind CSS with class variance authority (CVA)
@@ -60,7 +65,7 @@ Copilot for Obsidian is an AI-powered assistant plugin that integrates various L
    - Chat interface with streaming support
    - Settings UI with versioned components
 
-5. **Message Management Architecture** (`src/core/`, `src/state/`)
+6. **Message Management Architecture** (`src/core/`, `src/state/`)
 
    - **MessageRepository** (`src/core/MessageRepository.ts`): Single source of truth for all messages
      - Stores each message once with both `displayText` and `processedText`
@@ -82,12 +87,12 @@ Copilot for Obsidian is an AI-powered assistant plugin that integrates various L
      - Processes message context (notes, URLs, selected text)
      - Reprocesses context when messages are edited
 
-6. **Settings Management**
+7. **Settings Management**
 
    - Jotai for atomic settings state management
    - React contexts for feature-specific state
 
-7. **Plugin Integration**
+8. **Plugin Integration**
    - Main entry: `src/main.ts` extends Obsidian Plugin
    - Command registration system
    - Event handling for Obsidian lifecycle
@@ -192,6 +197,15 @@ For detailed architecture diagrams and documentation, see [`MESSAGE_ARCHITECTURE
   - `logError()` for errors
 - Import from logger: `import { logInfo, logWarn, logError } from "@/logger"`
 
+### CSS & Styling
+
+- **NEVER edit `styles.css` directly** - This is a generated file
+- **Source file**: `src/styles/tailwind.css` - Edit this file for custom CSS
+- **Build process**: `npm run build:tailwind` compiles `src/styles/tailwind.css` → `styles.css`
+- **Tailwind classes**: Use Tailwind utility classes in components (see `tailwind.config.js` for available classes)
+- **Custom CSS**: Add custom styles to `src/styles/tailwind.css` after the `@import` statements
+- After editing CSS, always run `npm run build` to regenerate `styles.css`
+
 ## Testing Guidelines
 
 - Unit tests use Jest with TypeScript support
@@ -261,6 +275,25 @@ The TODO.md should be:
 - For technical debt and known issues, see [`TECHDEBT.md`](./docs/TECHDEBT.md)
 - For current development session planning, see [`TODO.md`](./TODO.md)
 
+### AWS Bedrock Usage
+
+**IMPORTANT**: When using AWS Bedrock, always use **cross-region inference profile IDs** for better reliability and availability:
+
+- **Global** (recommended): `global.anthropic.claude-sonnet-4-5-20250929-v1:0`
+  - Routes to any commercial AWS region automatically
+  - Best for reliability and performance
+- **US**: `us.anthropic.claude-sonnet-4-5-20250929-v1:0`
+- **EU**: `eu.anthropic.claude-sonnet-4-5-20250929-v1:0`
+- **APAC**: `apac.anthropic.claude-sonnet-4-5-20250929-v1:0`
+
+❌ **Avoid regional model IDs** (without prefix): `anthropic.claude-sonnet-4-5-20250929-v1:0`
+- These only work in specific regions and often fail
+- Not recommended for production use
+
+**References:**
+- [AWS Bedrock Cross-Region Inference](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html)
+- [Supported Inference Profiles](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html)
+
 ### Obsidian Plugin Environment
 
 - **Global `app` variable**: In Obsidian plugins, `app` is a globally available variable that provides access to the Obsidian API. It's automatically available in all files without needing to import or declare it.
@@ -278,3 +311,4 @@ The TODO.md should be:
   - Non-project chats stored in default repository
   - Backwards compatible - loads existing messages from ProjectManager cache
   - Zero configuration required - works automatically
+- Check @tailwind.config.js to understand what tailwind css classnames are available

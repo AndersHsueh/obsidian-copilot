@@ -45,9 +45,9 @@ interface APIError extends Error {
 // Error message constants
 export const ERROR_MESSAGES = {
   INVALID_LICENSE_KEY_USER:
-    "Invalid Copilot Plus license key. Please check your license key in settings.",
-  UNKNOWN_ERROR: "An unknown error occurred",
-  REQUEST_FAILED: (status: number) => `Request failed, status ${status}`,
+    "Copilot Plus 许可证密钥无效。请在设置中检查您的许可证密钥。",
+  UNKNOWN_ERROR: "发生未知错误",
+  REQUEST_FAILED: (status: number) => `请求失败，状态码 ${status}`,
 } as const;
 
 // Error handling utilities

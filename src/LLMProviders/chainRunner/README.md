@@ -1,98 +1,98 @@
-# Chain Runner Architecture & Tool Calling System
+# Chain Runner 架构与工具调用系统
 
-This directory contains the refactored chain runner system for Obsidian Copilot, providing multiple chain execution strategies with different tool calling approaches.
+本目录包含 Obsidian Copilot 重构后的链运行器系统，提供多种链执行策略及不同的工具调用方式。
 
-## Overview
+## 概述
 
-The chain runner system provides two distinct tool calling approaches:
+链运行器系统提供两种工具调用方式：
 
-1. **Copilot Plus** (CopilotPlusChainRunner) - Uses native tool calling for intent analysis
-2. **Autonomous Agent** (AutonomousAgentChainRunner) - Uses native LangChain tool calling with ReAct pattern
+1. **Copilot Plus**（CopilotPlusChainRunner）— 使用原生工具调用进行意图分析
+2. **自主智能体**（AutonomousAgentChainRunner）— 使用 LangChain 原生工具调用与 ReAct 模式
 
-## Architecture
+## 架构
 
 ```
 chainRunner/
-├── BaseChainRunner.ts                 # Abstract base class with shared functionality
-├── LLMChainRunner.ts                  # Basic LLM interaction (no tools)
-├── VaultQAChainRunner.ts              # Vault-only Q&A with retrieval
-├── CopilotPlusChainRunner.ts          # Legacy tool calling system
-├── ProjectChainRunner.ts              # Project-aware extension of Plus
-├── AutonomousAgentChainRunner.ts   # Native tool calling with ReAct agent loop
-├── index.ts                           # Main exports
+├── BaseChainRunner.ts                 # 抽象基类，共享通用逻辑
+├── LLMChainRunner.ts                  # 基础 LLM 交互（无工具）
+├── VaultQAChainRunner.ts              # 仅知识库问答与检索
+├── CopilotPlusChainRunner.ts          # 旧版工具调用系统
+├── ProjectChainRunner.ts              # 基于 Plus 的项目感知扩展
+├── AutonomousAgentChainRunner.ts      # 使用 ReAct 智能体循环的原生工具调用
+├── index.ts                           # 主入口导出
 └── utils/
-    ├── ThinkBlockStreamer.ts          # Handles thinking content from models
-    ├── xmlParsing.ts                  # XML escape/unescape utilities (for context envelope)
-    ├── toolExecution.ts               # Tool execution helpers
-    └── modelAdapter.ts                # Model-specific adaptations
+    ├── ThinkBlockStreamer.ts          # 处理模型的思考内容
+    ├── xmlParsing.ts                  # XML 转义/反转义（用于上下文信封）
+    ├── toolExecution.ts               # 工具执行辅助
+    └── modelAdapter.ts                # 模型相关适配
 ```
 
-## Tool Calling Systems Comparison
+## 工具调用系统对比
 
-### 1. Model-Based Tool Planning (CopilotPlusChainRunner)
+### 1. 基于模型的工具规划（CopilotPlusChainRunner）
 
-**How it works:**
+**工作方式：**
 
-- Uses chat model with `bindTools()` to plan which tools to call
-- Model outputs tool calls via native `tool_calls` property on AIMessage
-- Executes tools synchronously before sending to LLM for final response
-- Enhances user message with tool outputs as context
-- Supports `@` commands for explicit tool invocation (`@vault`, `@websearch`, `@memory`)
+- 使用带 `bindTools()` 的聊天模型规划要调用的工具
+- 模型通过 AIMessage 上的原生 `tool_calls` 属性输出工具调用
+- 在发送给 LLM 生成最终回复前同步执行工具
+- 用工具输出增强用户消息作为上下文
+- 支持通过 `@` 命令显式调用工具（`@vault`、`@websearch`、`@memory`）
 
-**Flow:**
+**流程：**
 
 ```
-User Message → Model Planning → Tool Execution → Enhanced Prompt → LLM Response
+用户消息 → 模型规划 → 工具执行 → 增强提示 → LLM 回复
 ```
 
-**Example:**
+**示例：**
 
 ```typescript
-// 1. Plan tools using model
+// 1. 用模型规划工具
 const { toolCalls, salientTerms } = await this.planToolCalls(message, chatModel);
 
-// 2. Process @commands (add localSearch, webSearch, etc. if needed)
+// 2. 处理 @ 命令（按需添加 localSearch、webSearch 等）
 toolCalls = await this.processAtCommands(message, toolCalls, { salientTerms });
 
-// 3. Execute tools
+// 3. 执行工具
 const toolOutputs = await this.executeToolCalls(toolCalls);
 
-// 4. Send to LLM
+// 4. 发送给 LLM
 const response = await this.streamMultimodalResponse(message, toolOutputs, ...);
 ```
 
-**Tools Available:**
+**可用工具：**
 
-- `localSearch` - Search vault content
-- `webSearch` - Search the web
-- `getCurrentTime` - Get current time
-- `getFileTree` - Get file structure
-- `pomodoroTool` - Pomodoro timer
-- `youtubeTranscription` - YouTube video transcription
+- `localSearch` — 搜索知识库内容
+- `webSearch` — 网络搜索
+- `getCurrentTime` — 获取当前时间
+- `getFileTree` — 获取文件结构
+- `pomodoroTool` — 番茄钟计时
+- `youtubeTranscription` — YouTube 视频转录
 
-### 2. Autonomous Agent (AutonomousAgentChainRunner)
+### 2. 自主智能体（AutonomousAgentChainRunner）
 
-**How it works:**
+**工作方式：**
 
-- Uses native LangChain tool calling via `bindTools()` with ReAct pattern
-- AI decides autonomously which tools to use via structured `tool_calls`
-- Iterative loop where AI can call multiple tools in sequence
-- Each tool result informs the next decision via `ToolMessage`
+- 通过 `bindTools()` 使用 LangChain 原生工具调用与 ReAct 模式
+- AI 通过结构化的 `tool_calls` 自主决定使用哪些工具
+- 迭代循环中 AI 可依次调用多个工具
+- 每次工具结果通过 `ToolMessage` 参与下一轮决策
 
-**Flow:**
+**流程：**
 
 ```
-User Message → AI Reasoning → tool_calls → Tool Execution →
-ToolMessage → AI Analysis → More Tools? → Final Response
+用户消息 → AI 推理 → tool_calls → 工具执行 →
+ToolMessage → AI 分析 → 是否继续调用工具？ → 最终回复
 ```
 
-**Native Tool Call Format:**
+**原生工具调用格式：**
 
 ```typescript
-// AIMessage.tool_calls contains structured tool calls
-const toolCalls = response.tool_calls; // Array of { name, args, id }
+// AIMessage.tool_calls 包含结构化工具调用
+const toolCalls = response.tool_calls; // 数组元素为 { name, args, id }
 
-// Example tool call:
+// 示例工具调用：
 {
   name: "localSearch",
   args: {
@@ -103,24 +103,24 @@ const toolCalls = response.tool_calls; // Array of { name, args, id }
 }
 ```
 
-**ReAct Loop:**
+**ReAct 循环：**
 
 ```typescript
-// Bind tools to model for native tool calling
+// 将工具绑定到模型以支持原生工具调用
 const boundModel = chatModel.bindTools(availableTools);
 
 while (iteration < maxIterations) {
-  // 1. Get AI response with potential tool calls
+  // 1. 获取可能包含工具调用的 AI 回复
   const response = await boundModel.invoke(messages);
   messages.push(response);
 
-  // 2. Check for tool calls in structured format
+  // 2. 检查结构化格式中的工具调用
   if (!response.tool_calls || response.tool_calls.length === 0) {
-    // No tools needed - final response
+    // 无需工具 — 最终回复
     break;
   }
 
-  // 3. Execute each tool and add ToolMessage
+  // 3. 执行每个工具并添加 ToolMessage
   for (const toolCall of response.tool_calls) {
     const result = await executeSequentialToolCall(toolCall, availableTools);
     messages.push(
@@ -132,28 +132,28 @@ while (iteration < maxIterations) {
     );
   }
 
-  // 4. Continue loop - AI sees tool results via ToolMessage
+  // 4. 继续循环 — AI 通过 ToolMessage 看到工具结果
 }
 ```
 
-### ReAct Prompting Flow
+### ReAct 提示流程
 
-Each iteration sends the following message structure to the LLM:
+每次迭代向 LLM 发送的消息结构如下：
 
-**Iteration 1 (Initial):**
+**第 1 轮（初始）：**
 
 ```
 messages = [
-  SystemMessage: "You are a helpful assistant... [tool descriptions via bindTools]"
+  SystemMessage: "You are a helpful assistant... [通过 bindTools 提供的工具描述]"
   HumanMessage: "What did I write about machine learning last week?"
 ]
 ```
 
-**Iteration 1 Response:**
+**第 1 轮回复：**
 
 ```
 AIMessage: {
-  content: "",  // May be empty or contain reasoning
+  content: "",  // 可为空或包含推理内容
   tool_calls: [{
     id: "call_abc123",
     name: "getTimeRangeMs",
@@ -162,7 +162,7 @@ AIMessage: {
 }
 ```
 
-**Iteration 2 (After Tool Execution):**
+**第 2 轮（工具执行后）：**
 
 ```
 messages = [
@@ -173,7 +173,7 @@ messages = [
 ]
 ```
 
-**Iteration 2 Response:**
+**第 2 轮回复：**
 
 ```
 AIMessage: {
@@ -190,7 +190,7 @@ AIMessage: {
 }
 ```
 
-**Iteration 3 (After Second Tool):**
+**第 3 轮（第二次工具调用后）：**
 
 ```
 messages = [
@@ -203,42 +203,42 @@ messages = [
 ]
 ```
 
-**Final Response (No tool_calls):**
+**最终回复（无 tool_calls）：**
 
 ```
 AIMessage: {
   content: "Based on your notes from last week, you wrote about...",
-  tool_calls: []  // Empty = final response, exit loop
+  tool_calls: []  // 为空表示最终回复，退出循环
 }
 ```
 
-### Key Points
+### 要点
 
-1. **Tool schemas** are provided via `bindTools()` - the LLM sees them in its context
-2. **AIMessage with tool_calls** triggers tool execution; **AIMessage without tool_calls** is final response
-3. **ToolMessage** correlates with AIMessage via `tool_call_id`
-4. **Conversation history grows** - each iteration sees all previous messages
-5. **Max 4 iterations** to prevent infinite loops
+1. **工具 schema** 通过 `bindTools()` 提供 — LLM 在上下文中可见
+2. **带 tool_calls 的 AIMessage** 触发工具执行；**不带 tool_calls 的 AIMessage** 视为最终回复
+3. **ToolMessage** 通过 `tool_call_id` 与 AIMessage 对应
+4. **对话历史递增** — 每轮迭代都能看到此前全部消息
+5. **最多 4 轮迭代** 以防无限循环
 
-## Key Differences
+## 主要差异
 
-| Aspect             | Copilot Plus                    | Autonomous Agent                      |
-| ------------------ | ------------------------------- | ------------------------------------- |
-| **Tool Decision**  | Model-based intent planning     | AI decides autonomously (ReAct)       |
-| **Tool Execution** | Pre-LLM, synchronous            | During conversation, iterative        |
-| **Tool Format**    | Native tool calling (bindTools) | Native tool calling (bindTools)       |
-| **Reasoning**      | Intent analysis → tools         | AI reasoning → tools → more reasoning |
-| **Iterations**     | Single pass                     | Up to 4 iterations                    |
-| **Tool Chaining**  | Limited                         | Full chaining support                 |
+| 方面             | Copilot Plus                | 自主智能体                      |
+| ---------------- | ---------------------------- | ------------------------------- |
+| **工具决策**     | 基于模型的意图规划           | AI 自主决策（ReAct）            |
+| **工具执行**     | LLM 前、同步                 | 对话中、迭代                    |
+| **工具格式**     | 原生工具调用（bindTools）    | 原生工具调用（bindTools）       |
+| **推理**         | 意图分析 → 工具              | AI 推理 → 工具 → 继续推理       |
+| **迭代**         | 单轮                         | 最多 4 轮                       |
+| **工具链**       | 有限                         | 完整链式支持                    |
 
-## LangChain Tool Interface
+## LangChain 工具接口
 
-### Overview
+### 概述
 
-Tools are created using native LangChain's `tool()` function via the `createLangChainTool` helper, with Zod schema validation. Tool metadata (execution control, display info) is stored separately in `ToolRegistry`.
+工具通过 `createLangChainTool` 辅助函数，使用 LangChain 原生的 `tool()` 创建，并配合 Zod schema 校验。工具元数据（执行控制、展示信息）单独存放在 `ToolRegistry`。
 
 ```typescript
-// Tool creation returns a LangChain StructuredTool
+// 工具创建返回 LangChain StructuredTool
 const myTool = createLangChainTool({
   name: string;
   description: string;
@@ -246,7 +246,7 @@ const myTool = createLangChainTool({
   func: (args) => Promise<string | object>;
 });
 
-// Tool metadata stored in ToolRegistry
+// 工具元数据存放在 ToolRegistry
 interface ToolMetadata {
   id: string;
   displayName: string;
@@ -259,24 +259,24 @@ interface ToolMetadata {
 }
 ```
 
-### Creating Tools
+### 创建工具
 
-All tools are created using `createLangChainTool` with Zod schemas:
+所有工具均使用带 Zod schema 的 `createLangChainTool` 创建：
 
-#### Tool with No Parameters
+#### 无参数工具
 
 ```typescript
 const indexTool = createLangChainTool({
   name: "indexVault",
   description: "Index the vault to the Copilot index",
-  schema: z.object({}), // Empty object for no parameters
+  schema: z.object({}), // 无参数时使用空对象
   func: async () => {
-    // Tool implementation
+    // 工具实现
     return { status: "complete" };
   },
 });
 
-// Register with metadata
+// 注册并附带元数据
 registry.register({
   tool: indexTool,
   metadata: {
@@ -289,10 +289,10 @@ registry.register({
 });
 ```
 
-#### Tool with Parameters
+#### 带参数工具
 
 ```typescript
-// Define schema with validation rules
+// 定义带校验规则的 schema
 const searchSchema = z.object({
   query: z.string().min(1).describe("The search query"),
   salientTerms: z.array(z.string()).min(1).describe("Key terms extracted from query"),
@@ -305,18 +305,18 @@ const searchSchema = z.object({
     .describe("Time range for search"),
 });
 
-// Create tool with automatic validation
+// 创建带自动校验的工具
 const searchTool = createLangChainTool({
   name: "localSearch",
   description: "Search for notes based on query and time range",
   schema: searchSchema,
   func: async ({ query, salientTerms, timeRange }) => {
-    // Handler receives fully typed and validated arguments
+    // 处理函数收到完整类型与校验后的参数
     return performSearch(query, salientTerms, timeRange);
   },
 });
 
-// Register with metadata
+// 注册并附带元数据
 registry.register({
   tool: searchTool,
   metadata: {
@@ -328,18 +328,18 @@ registry.register({
 });
 ```
 
-### Benefits of LangChain Native Tools
+### LangChain 原生工具的优势
 
-1. **Type Safety**: Full TypeScript type inference from Zod schemas
-2. **Runtime Validation**: All inputs validated before reaching handler
-3. **Native LangChain Integration**: Compatible with `bindTools()` and LangChain tooling ecosystem
-4. **Better Error Messages**: Zod provides detailed validation errors
-5. **Separation of Concerns**: Tool implementation separate from execution metadata
-6. **Future-Proof**: Ready for native tool calling when models support it
+1. **类型安全**：从 Zod schema 得到完整 TypeScript 类型推断
+2. **运行时校验**：所有输入在到达处理函数前完成校验
+3. **原生 LangChain 集成**：与 `bindTools()` 及 LangChain 工具生态兼容
+4. **更好错误信息**：Zod 提供详细校验错误
+5. **职责分离**：工具实现与执行元数据分离
+6. **面向未来**：模型支持时即可使用原生工具调用
 
-### Advanced Zod Patterns
+### 进阶 Zod 用法
 
-#### Complex Validation
+#### 复杂校验
 
 ```typescript
 const emailToolSchema = z.object({
@@ -350,7 +350,7 @@ const emailToolSchema = z.object({
 });
 ```
 
-#### Union Types for Actions
+#### 动作的联合类型
 
 ```typescript
 const actionSchema = z.discriminatedUnion("type", [
@@ -374,7 +374,7 @@ const actionTool = createLangChainTool({
   description: "Perform various actions",
   schema: actionSchema,
   func: async (action) => {
-    // TypeScript knows exactly which type based on discriminator
+    // TypeScript 可根据判别字段确定具体类型
     switch (action.type) {
       case "search":
         return search(action.query);
@@ -387,7 +387,7 @@ const actionTool = createLangChainTool({
 });
 ```
 
-#### Custom Validation
+#### 自定义校验
 
 ```typescript
 const filePathSchema = z
@@ -399,7 +399,7 @@ const filePathSchema = z
   .describe("Path to markdown or canvas file");
 ```
 
-#### Transformations
+#### 转换
 
 ```typescript
 const dateToolSchema = z.object({
@@ -411,10 +411,10 @@ const dateToolSchema = z.object({
 });
 ```
 
-### Schema Composition
+### Schema 组合
 
 ```typescript
-// Base schemas that can be reused
+// 可复用的基础 schema
 const timeRangeSchema = z
   .object({
     startTime: z.date(),
@@ -429,7 +429,7 @@ const paginationSchema = z.object({
   pageSize: z.number().int().positive().max(100).default(20),
 });
 
-// Compose into larger schemas
+// 组合成更大 schema
 const searchWithPaginationSchema = z.object({
   query: z.string().min(1).describe("Search query"),
   filters: z.record(z.string()).optional().describe("Additional filters"),
@@ -438,7 +438,7 @@ const searchWithPaginationSchema = z.object({
 });
 ```
 
-### Default Values
+### 默认值
 
 ```typescript
 const configSchema = z.object({
@@ -447,25 +447,25 @@ const configSchema = z.object({
   model: z.enum(["gpt-4", "gpt-3.5-turbo"]).default("gpt-4"),
 });
 
-// Handler receives object with defaults applied
+// 处理函数收到已应用默认值的对象
 const configTool = createLangChainTool({
   name: "updateConfig",
   schema: configSchema,
   func: async (config) => {
-    // config.temperature is always defined (0.7 if not provided)
-    // config.maxTokens is always defined (1000 if not provided)
-    // config.model is always defined ("gpt-4" if not provided)
+    // config.temperature 始终有值（未提供时为 0.7）
+    // config.maxTokens 始终有值（未提供时为 1000）
+    // config.model 始终有值（未提供时为 "gpt-4"）
     return updateConfiguration(config);
   },
 });
 ```
 
-### Handling Validation Errors with Retry
+### 校验错误与重试
 
-When AI-generated parameters fail Zod validation, the tool execution will return a formatted error. The autonomous agent automatically handles this through its iterative loop:
+当 AI 生成的参数未通过 Zod 校验时，工具执行会返回格式化错误。自主智能体通过迭代循环自动处理：
 
 ```typescript
-// Example tool with strict validation
+// 带严格校验的示例工具
 const searchToolWithValidation = createLangChainTool({
   name: "searchNotes",
   description: "Search notes with specific criteria",
@@ -479,72 +479,72 @@ const searchToolWithValidation = createLangChainTool({
   },
 });
 
-// When the AI provides invalid parameters:
-// Input: { query: "a", limit: 200, sortBy: "random" }
+// 当 AI 提供无效参数时：
+// 输入: { query: "a", limit: 200, sortBy: "random" }
 //
-// The flow:
-// 1. Tool execution catches Zod validation error
-// 2. Returns: "Tool searchNotes validation failed: query: Query must be at least 2 characters,
-//             limit: Number must be less than or equal to 100, sortBy: Invalid enum value"
-// 3. This error is added to the conversation as a user message
-// 4. The AI sees the error in the next iteration and can retry with corrected parameters
-// 5. The autonomous agent continues up to 4 iterations, allowing multiple retry attempts
+// 流程：
+// 1. 工具执行捕获 Zod 校验错误
+// 2. 返回: "Tool searchNotes validation failed: query: Query must be at least 2 characters,
+//            limit: Number must be less than or equal to 100, sortBy: Invalid enum value"
+// 3. 该错误作为用户消息加入对话
+// 4. AI 在下一轮看到错误并可用修正后的参数重试
+// 5. 自主智能体最多进行 4 轮迭代，允许多次重试
 
-// Example conversation flow:
-// Iteration 1: AI calls tool with invalid params → receives error
-// Iteration 2: AI understands error and retries with { query: "search term", limit: 50, sortBy: "date" } → success
+// 示例对话流程：
+// 第 1 轮：AI 用无效参数调用工具 → 收到错误
+// 第 2 轮：AI 理解错误并用 { query: "search term", limit: 50, sortBy: "date" } 重试 → 成功
 ```
 
-The validation errors are automatically formatted to be clear and actionable, helping the AI self-correct. The autonomous agent's iterative design naturally provides retry capability with the AI learning from each error.
+校验错误会被自动格式化为清晰、可操作的说明，便于 AI 自我修正。自主智能体的迭代设计天然支持重试，AI 可从每次错误中学习。
 
-## Native Tool Calling Details
+## 原生工具调用细节
 
-### Tool Execution (`toolExecution.ts`)
+### 工具执行（`toolExecution.ts`）
 
 ```typescript
-// Execute individual tool with timeout and error handling
+// 带超时与错误处理的单次工具执行
 async function executeSequentialToolCall(
   toolCall: ToolCall,
   availableTools: any[]
 ): Promise<ToolExecutionResult> {
-  // 30-second timeout per tool
-  // Error handling and validation
-  // Result formatting
+  // 每个工具 30 秒超时
+  // 错误处理与校验
+  // 结果格式化
 }
 
-// ToolCall interface (from native tool calling)
+// ToolCall 接口（来自原生工具调用）
 interface ToolCall {
   name: string;
   args: Record<string, unknown>;
-  id?: string; // Used for ToolMessage correlation
+  id?: string; // 用于与 ToolMessage 关联
 }
 ```
 
-### Available Tools in Agent Mode
+### 智能体模式下的可用工具
 
-All tools from the Copilot Plus system plus autonomous decision-making:
+在 Copilot Plus 系统全部工具基础上，增加自主决策能力：
 
-- **localSearch** - Vault content search with salient terms and query expansion
-- **webSearch** - Web search with chat history context
-- **getFileTree** - File structure exploration
-- **getCurrentTime** / **getTimeRangeMs** - Time-based queries
-- **pomodoroTool** - Productivity timer
-- **indexTool** - Vault indexing operations
-- **youtubeTranscription** - Video content analysis
+- **localSearch** — 带 salient terms 与查询扩展的知识库内容搜索
+- **webSearch** — 结合聊天历史的网络搜索
+- **getFileTree** — 文件结构浏览
+- **getCurrentTime** / **getTimeRangeMs** — 时间相关查询
+- **pomodoroTool** — 番茄钟
+- **indexTool** — 知识库索引操作
+- **youtubeTranscription** — 视频内容分析
 
-### System Prompt Engineering
+### 系统提示设计
 
-The Autonomous Agent mode uses a comprehensive system prompt that:
+自主智能体模式使用系统提示，用于：
 
-1. **Describes available tools** - Tool schemas are provided via `bindTools()`
-2. **Provides behavioral guidance** - When to use each tool, how to chain them
-3. **Sets expectations** for reasoning and tool chaining
-4. **Includes critical requirements** (e.g., salientTerms for localSearch)
+1. **描述可用工具** — 工具 schema 通过 `bindTools()` 提供
+2. **提供行为指引** — 何时用哪个工具、如何链式调用
+3. **设定推理与工具链的预期**
+4. **包含关键要求**（如 localSearch 的 salientTerms）
 
-Tool descriptions are provided automatically via Zod schemas. Model adapters add behavioral guidance:
+工具描述由 Zod schema 自动提供。模型适配器负责补充行为指引：
 
 ```typescript
-// Example: Model adapter adds tool usage guidance
+// 示例：模型适配器添加工具使用指引
 enhanceSystemPrompt(basePrompt: string): string {
   return basePrompt + `
 
@@ -554,72 +554,72 @@ Use getTimeRangeMs before localSearch for time-based queries.
 }
 ```
 
-## Benefits of Autonomous Agent
+## 自主智能体的优势
 
-1. **Autonomous Tool Selection** - AI decides what tools to use without pre-analysis
-2. **Tool Chaining** - Can use results from one tool to inform the next
-3. **Complex Workflows** - Multi-step reasoning with tool support
-4. **Model Agnostic** - Works with any LLM that supports native tool calling
-5. **No External Dependencies** - No Brevilabs API required
-6. **Transparency** - User can see the AI's reasoning process via Agent Reasoning Block
-7. **Native Integration** - Uses LangChain's `bindTools()` for proper tool calling support
+1. **自主工具选择** — AI 无需预先分析即可决定使用哪些工具
+2. **工具链** — 可将前一个工具结果用于下一个工具
+3. **复杂工作流** — 多步推理与工具配合
+4. **模型无关** — 适用于任何支持原生工具调用的 LLM
+5. **无外部依赖** — 不需要 Brevilabs API
+6. **可观测** — 用户可通过「智能体推理块」看到 AI 的推理过程
+7. **原生集成** — 使用 LangChain 的 `bindTools()` 获得正确的工具调用支持
 
-## Usage
+## 使用方式
 
-### Enable Autonomous Agent
+### 启用自主智能体
 
 ```typescript
-// In settings
+// 在设置中
 settings.enableAutonomousAgent = true;
 
-// ChainManager automatically selects the appropriate runner
-const runner = chainManager.getChainRunner(); // Returns AutonomousAgentChainRunner
+// ChainManager 自动选择对应运行器
+const runner = chainManager.getChainRunner(); // 返回 AutonomousAgentChainRunner
 ```
 
-### Example Query Flow
+### 示例查询流程
 
-**User Input:** "Find my notes about machine learning and research current best practices"
+**用户输入：** "Find my notes about machine learning and research current best practices"
 
-**Autonomous Agent Process:**
+**自主智能体流程：**
 
-1. **Iteration 1**: AI reasons about the task → calls `localSearch` for ML notes
-2. **Iteration 2**: Analyzes vault results → calls `webSearch` for current practices
-3. **Iteration 3**: Synthesizes both sources → provides comprehensive response
+1. **第 1 轮**：AI 分析任务 → 调用 `localSearch` 查 ML 笔记
+2. **第 2 轮**：分析知识库结果 → 调用 `webSearch` 查当前实践
+3. **第 3 轮**：综合两路来源 → 给出完整回复
 
-**Legacy Process:**
+**旧版流程：**
 
-1. Intent analysis determines both tools needed
-2. Executes both tools
-3. Single LLM call with all context
+1. 意图分析确定需要的工具
+2. 执行全部工具
+3. 单次 LLM 调用并带入所有上下文
 
-## Error Handling & Fallbacks
+## 错误处理与回退
 
-### Autonomous Agent Fallbacks
+### 自主智能体回退
 
 ```typescript
 try {
-  // Sequential thinking execution
+  // 顺序思考与执行
 } catch (error) {
-  // Automatic fallback to CopilotPlusChainRunner
+  // 自动回退到 CopilotPlusChainRunner
   const fallbackRunner = new CopilotPlusChainRunner(this.chainManager);
-  return await fallbackRunner.run(/* same parameters */);
+  return await fallbackRunner.run(/* 相同参数 */);
 }
 ```
 
-### Tool Execution Safeguards
+### 工具执行保护
 
-- 30-second timeout per tool
-- Graceful error handling with descriptive messages
-- Tool availability validation
-- Result validation and formatting
+- 每个工具 30 秒超时
+- 带描述信息的优雅错误处理
+- 工具可用性校验
+- 结果校验与格式化
 
-## Model Adapter Pattern
+## 模型适配器模式
 
-### Overview
+### 概述
 
-The Model Adapter pattern handles model-specific quirks and requirements cleanly, keeping the core logic model-agnostic.
+模型适配器模式用于干净地处理模型特有的差异与要求，使核心逻辑与具体模型解耦。
 
-### Architecture
+### 架构
 
 ```typescript
 interface ModelAdapter {
@@ -629,80 +629,80 @@ interface ModelAdapter {
 }
 ```
 
-> **Note:** With native tool calling via `bindTools()`, tool calls are returned in structured `response.tool_calls` format. Model adapters now focus on behavioral guidance rather than parsing or response sanitization.
+> **说明：** 使用 `bindTools()` 的原生工具调用时，工具调用以结构化的 `response.tool_calls` 返回。模型适配器现在主要提供行为指引，而非解析或响应清洗。
 
-### Current Adapters
+### 当前适配器
 
-1. **BaseModelAdapter** - Default behavior for well-behaved models
-2. **GPTModelAdapter** - Aggressive prompting for GPT models that often skip tool calls
-3. **ClaudeModelAdapter** - Specialized handling for Claude thinking models (3.7 Sonnet, Claude 4)
-4. **GeminiModelAdapter** - Ready for Gemini-specific handling
+1. **BaseModelAdapter** — 行为良好模型的默认行为
+2. **GPTModelAdapter** — 对常跳过工具调用的 GPT 模型加强提示
+3. **ClaudeModelAdapter** — 针对 Claude 思考模型（3.7 Sonnet、Claude 4）的特殊处理
+4. **GeminiModelAdapter** — 预留 Gemini 专用处理
 
-### Adding a New Model
+### 添加新模型
 
 ```typescript
 class NewModelAdapter extends BaseModelAdapter {
   enhanceSystemPrompt(basePrompt: string, toolDescriptions: string): string {
     const base = super.enhanceSystemPrompt(basePrompt, toolDescriptions);
-    return base + "\n\n[Model-specific instructions here]";
+    return base + "\n\n[此处填写模型专用说明]";
   }
 
   enhanceUserMessage(message: string, requiresTools: boolean): string {
-    // Add model-specific hints if needed
-    return requiresTools ? `${message}\n[Model-specific hint]` : message;
+    // 如需可添加模型专用提示
+    return requiresTools ? `${message}\n[模型专用提示]` : message;
   }
 }
 
-// Register in ModelAdapterFactory
+// 在 ModelAdapterFactory 中注册
 if (modelName.includes("newmodel")) {
   return new NewModelAdapter(modelName);
 }
 ```
 
-### Claude Model Adapter Features
+### Claude 模型适配器特性
 
-The `ClaudeModelAdapter` includes specialized handling for Claude thinking models:
+`ClaudeModelAdapter` 为 Claude 思考模型提供专门处理：
 
-#### Thinking Model Support
+#### 思考模型支持
 
-- **Claude 3.7 Sonnet** and **Claude 4** - Automatic thinking mode configuration
-- **Think Block Preservation** - Maintains valuable reasoning context in responses
-- **Temperature Control** - Disables temperature for thinking models (as required by API)
+- **Claude 3.7 Sonnet** 与 **Claude 4** — 自动配置思考模式
+- **思考块保留** — 在回复中保留有价值的推理上下文
+- **温度控制** — 对思考模型关闭 temperature（按 API 要求）
 
-> **Note:** With native tool calling, tool calls are returned in structured `response.tool_calls` format. Intermediate tool calls are hidden from users and displayed via the Agent Reasoning Block. Only final responses are streamed to the UI.
+> **说明：** 使用原生工具调用时，工具调用以结构化的 `response.tool_calls` 返回。中间工具调用对用户不可见，通过「智能体推理块」展示；仅最终回复流式输出到 UI。
 
-#### Agent Reasoning Block
+#### 智能体推理块
 
-The reasoning process is now displayed via the Agent Reasoning Block component, which shows:
+推理过程通过「智能体推理块」组件展示，例如：
 
 ```
-⏱️ 2.3s elapsed
-├─ Searching notes for "piano", "learning", "practice"...
-├─ Found 5 notes: Piano Practice.md, Learning Music.md...
-└─ Generating response...
+⏱️ 2.3s 已用
+├─ 正在为 "piano", "learning", "practice" 搜索笔记...
+├─ 找到 5 条笔记：Piano Practice.md, Learning Music.md...
+└─ 正在生成回复...
 ```
 
-### Benefits
+### 优势
 
-1. **Separation of Concerns** - Model quirks isolated from core logic
-2. **Maintainability** - Easy to find and update model-specific code
-3. **Extensibility** - Simple to add support for new models
-4. **Testing** - Model adapters can be unit tested independently
-5. **Clean Core** - Autonomous agent logic remains model-agnostic
-6. **Hallucination Prevention** - Specialized handling for problematic models
-7. **Streaming Protection** - Prevents bad content from reaching users
-8. **Generalizable Solutions** - Uses threshold-based detection over regex patterns
+1. **职责分离** — 模型差异与核心逻辑隔离
+2. **可维护** — 模型相关代码集中、易更新
+3. **可扩展** — 新增模型支持简单
+4. **可测试** — 模型适配器可单独单元测试
+5. **核心简洁** — 自主智能体逻辑保持模型无关
+6. **减少幻觉** — 对问题模型做专门处理
+7. **流式保护** — 避免不良内容到达用户
+8. **通用方案** — 使用基于阈值的检测而非正则匹配
 
-## Future Considerations
+## 后续考虑
 
-1. **Tool Discovery** - Dynamic tool registration
-2. **Custom Tools** - User-defined tool capabilities
-3. **Parallel Execution** - Multiple tools simultaneously
-4. **Tool Result Caching** - Avoid redundant calls
-5. **Advanced Reasoning** - More sophisticated decision trees
-6. **Tool Permissions** - User control over tool access (human-in-the-loop approval)
-7. **Deep Search** - Iterative search refinement for complex queries
-8. **Response Validation** - Adapters could validate model outputs
-9. **Model-Specific Optimizations** - Expand adapter capabilities for emerging models
+1. **工具发现** — 动态工具注册
+2. **自定义工具** — 用户定义的工具能力
+3. **并行执行** — 多工具同时执行
+4. **工具结果缓存** — 避免重复调用
+5. **进阶推理** — 更复杂的决策树
+6. **工具权限** — 用户对工具访问的控制（人在回路审批）
+7. **深度搜索** — 复杂查询的迭代搜索优化
+8. **回复校验** — 适配器可校验模型输出
+9. **模型专项优化** — 为新模型扩展适配器能力
 
-The autonomous agent approach using native tool calling represents a significant evolution from traditional tool calling, enabling more sophisticated AI reasoning and autonomous task completion.
+基于原生工具调用的自主智能体方案，相较传统工具调用是一次明显演进，支持更复杂的 AI 推理与自主任务完成。

@@ -286,7 +286,7 @@ export const RelevantNotes = memo(
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
           <div className="tw-flex tw-items-center tw-justify-between tw-pb-2 tw-pl-1">
             <div className="tw-flex tw-flex-1 tw-items-center tw-gap-2">
-              <span className="tw-font-semibold tw-text-normal">Relevant Notes</span>
+              <span className="tw-font-semibold tw-text-normal">相关笔记</span>
               <HelpTooltip
                 content="Relevance is a combination of semantic similarity and links."
                 contentClassName="tw-w-64"
@@ -325,7 +325,7 @@ export const RelevantNotes = memo(
             <div className="tw-flex tw-max-h-12 tw-flex-wrap tw-gap-x-2 tw-gap-y-1 tw-overflow-y-hidden tw-px-1">
               <span className="tw-text-xs tw-text-muted">
                 {!hasIndex
-                  ? "No index available. Click refresh to build index."
+                  ? "索引不可用。点击刷新以构建索引。"
                   : "No relevant notes found"}
               </span>
             </div>

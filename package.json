@@ -1,7 +1,7 @@
 {
-  "name": "obsidian-copilot",
-  "version": "3.1.5",
-  "description": "Your AI Copilot: Chat with Your Second Brain, Learn Faster, Work Smarter.",
+  "name": "ax-Copilot",
+  "version": "3.1.5-ax1",
+  "description": "基于 Obsidian Copilot 的中文修改版",
   "main": "main.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
@@ -21,7 +21,7 @@
     "prompt:debug": "node scripts/printPromptDebug.js"
   },
   "keywords": [],
-  "author": "Logan Yang",
+  "author": "Anders Hsueh",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"

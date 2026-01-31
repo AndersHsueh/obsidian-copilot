@@ -216,17 +216,17 @@ export function ChatSettingsPopover() {
             </Button>
           </PopoverTrigger>
         </TooltipTrigger>
-        <TooltipContent>Chat Settings</TooltipContent>
+        <TooltipContent>聊天设置</TooltipContent>
       </Tooltip>
       <PopoverContent className="tw-w-80 tw-rounded-md tw-p-0" align="end">
         <div className="tw-flex tw-max-h-[500px] tw-flex-col">
           {/* Header with Reset - Fixed */}
           <div className="tw-shrink-0 tw-border-b tw-px-4">
             <div className="tw-flex tw-items-center tw-justify-between">
-              <h3 className="tw-font-semibold">Chat Settings</h3>
+              <h3 className="tw-font-semibold">聊天设置</h3>
               <Button variant="ghost" size="sm" onClick={handleReset} className="tw-h-8 tw-text-xs">
                 <RotateCcw className="tw-mr-1 tw-size-3" />
-                Reset
+                重置
               </Button>
             </div>
           </div>
@@ -240,7 +240,7 @@ export function ChatSettingsPopover() {
               <div className="tw-space-y-2">
                 <div className="tw-flex tw-flex-col tw-gap-2 sm:tw-flex-row sm:tw-items-center sm:tw-justify-between">
                   <Label htmlFor="system-prompt" className="tw-text-sm sm:tw-min-w-fit">
-                    System Prompt
+                    系统提示词
                   </Label>
                   <div className="tw-flex tw-min-w-0 tw-items-center tw-gap-2 sm:tw-flex-1">
                     <ObsidianNativeSelect
@@ -255,11 +255,11 @@ export function ChatSettingsPopover() {
                       options={prompts.map((prompt) => ({
                         label:
                           prompt.title === globalDefault
-                            ? `${prompt.title} (Default)`
+                            ? `${prompt.title} (默认)`
                             : prompt.title,
                         value: prompt.title,
                       }))}
-                      placeholder="Select system prompt"
+                      placeholder="选择系统提示词"
                       containerClassName="tw-flex-1"
                     />
                     <Button
@@ -267,7 +267,7 @@ export function ChatSettingsPopover() {
                       size="icon"
                       onClick={handleOpenSourceFile}
                       className="tw-size-5 tw-shrink-0 tw-p-0"
-                      title="Open the source file"
+                      title="打开源文件"
                       disabled={!displayValue}
                     >
                       <ArrowUpRight className="tw-size-5" />
@@ -292,7 +292,7 @@ export function ChatSettingsPopover() {
                 <div className="tw-space-y-1.5">
                   <div className="tw-flex tw-items-center tw-justify-between">
                     <Label htmlFor="disable-builtin" className="tw-text-sm tw-font-medium">
-                      Disable Builtin System Prompt
+                      禁用内置系统提示词
                     </Label>
                     <SettingSwitch
                       checked={disableBuiltin}
@@ -301,9 +301,9 @@ export function ChatSettingsPopover() {
                     />
                   </div>
                   <div className="tw-pr-12 tw-text-xs tw-leading-relaxed tw-text-muted">
-                    Disables the builtin system prompt and only uses your custom system prompt.{" "}
+                    禁用内置系统提示词，仅使用您的自定义系统提示词。{" "}
                     <span className="tw-text-xs tw-text-error">
-                      WARNING: This may break expected functionality.
+                      警告：这可能会导致某些功能无法正常工作。
                     </span>
                   </div>
                 </div>
@@ -318,15 +318,14 @@ export function ChatSettingsPopover() {
                       <div className="tw-flex-1 tw-space-y-2">
                         <div className="tw-space-y-1">
                           <div className="tw-text-xs tw-font-semibold tw-text-error">
-                            Copilot Plus Features Will Become Unavailable
+                            Copilot Plus 功能将变得不可用
                           </div>
                           <div className="tw-flex tw-flex-col  tw-items-center tw-gap-2 tw-text-xs tw-leading-relaxed tw-text-muted">
                             <div>
-                              When enabled, advanced features such as vault search, web search, and
-                              agent mode will become unavailable.{" "}
+                              启用后，知识库搜索、网页搜索和代理模式等高级功能将变得不可用。{" "}
                             </div>
                             <div className="tw-italic">
-                              Only your custom system prompt (configured in Settings) will be used.
+                              仅使用您的自定义系统提示词（在设置中配置）。
                             </div>
                           </div>
                         </div>
@@ -339,7 +338,7 @@ export function ChatSettingsPopover() {
                               onClick={confirmDisableBuiltin}
                               className="tw-h-7 tw-text-xs"
                             >
-                              Disable Builtin
+                              禁用内置
                             </Button>
                             <Button
                               size="sm"
@@ -347,7 +346,7 @@ export function ChatSettingsPopover() {
                               onClick={cancelDisableBuiltin}
                               className="tw-h-7 tw-bg-transparent tw-text-xs"
                             >
-                              Cancel
+                              取消
                             </Button>
                           </div>
                         )}
@@ -365,10 +364,10 @@ export function ChatSettingsPopover() {
           <div className="tw-shrink-0 tw-rounded-md tw-bg-primary tw-px-4 tw-py-1">
             <div className="tw-flex tw-flex-row tw-flex-wrap">
               <span className="tw-text-xs tw-text-normal">
-                <span className=" tw-italic">System Prompt and Disable Builtin System Prompt</span>{" "}
-                <strong>apply to this chat session only</strong>;
+                <span className=" tw-italic">系统提示词和禁用内置系统提示词</span>{" "}
+                <strong>仅适用于当前聊天会话</strong>；
                 <br />
-                other settings are <strong>bound to the current model</strong>.
+                其他设置<strong>绑定到当前模型</strong>。
               </span>
             </div>
           </div>
